@@ -33,5 +33,11 @@ int usage(int exit_value, char *binary_name);
 bool does_kill_prog(assets_t *assets);
 int my_world(assets_t *assets);
 int bootstrap(assets_t *assets);
+my_world_t *get_my_world(void);
+void my_world_destroy(my_world_t *my_world);
+sfVector2f project_iso_point(int x, int y, int z);
+sfVector2f **create_2d_map(int **three_d_map);
+sfVertexArray *create_line(sfVector2f *point1, sfVector2f *point2);
+int draw_2d_map(sfRenderWindow *window, sfVector2f **map);
 
 #endif

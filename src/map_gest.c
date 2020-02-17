@@ -10,12 +10,12 @@
 #include "graph.h"
 #include "my_world.h"
 
-
-sfVector2f project_iso_point(int x, int y, int z) {
+sfVector2f project_iso_point(int x, int y, int z)
+{
     sfVector2f my_2d_vector = {0};
 
-    my_2d_vector.x = cos(ANGLE_X) * x - cos(ANGLE_X) * y + WINDOW_WIDTH / 2;
-    my_2d_vector.y = sin(ANGLE_Y) * y + sin(ANGLE_Y) * x - z + WINDOW_HEIGHT / 4;
+    my_2d_vector.x = cos(ANGLE_X) * x - cos(ANGLE_X) * y;
+    my_2d_vector.y = sin(ANGLE_Y) * y + sin(ANGLE_Y) * x - z;
     return my_2d_vector;
 }
 
@@ -64,33 +64,5 @@ int draw_2d_map(sfRenderWindow *window, sfVector2f **map)
             sfVertexArray_destroy(vertexarray);
         }
     }
-    return EXIT_SUCCESS;
-}
-
-int bootstrap(assets_t *assets)
-{
-    int **map = malloc(sizeof(int *) * (MAP_Y + 1));
-    sfVector2f **my_map;
-
-    map[MAP_Y] = NULL;
-    for (int y = 0; y < MAP_Y; y++) {
-        map[y] = malloc(sizeof(int) * MAP_X);
-        for (int x = 0; x < MAP_X; x++)
-            map[y][x] = 0;
-    }
-    for (int x = 0; x < MAP_X; x++)
-            map[3][x] = -100;
-    my_map = create_2d_map(map);
-    if (!my_map)
-        return EXIT_ERROR;
-    draw_2d_map(assets->window, my_map);
-    refresh_screen(assets);
-    while (!does_kill_prog(assets));
-    for (int y = 0; y < MAP_Y; y++)
-        free(my_map[y]);
-    free(my_map);
-    for (int i = 0; map[i]; i++)
-        free(map[i]);
-    free(map);
     return EXIT_SUCCESS;
 }

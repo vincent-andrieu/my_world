@@ -12,5 +12,19 @@
 
 int my_world(assets_t *assets)
 {
-    return bootstrap(assets);
+    sfVector2f **my_map;
+    my_world_t *my_world = get_my_world();
+
+    while (!does_kill_prog(assets)) {
+        my_map = create_2d_map(my_world->map);
+        if (!my_map)
+            return EXIT_ERROR;
+        draw_2d_map(assets->window, my_map);
+        refresh_screen(assets);
+        for (int i = 0; my_map[i]; i++)
+            free(my_map[i]);
+        free(my_map);
+    }
+    my_world_destroy(my_world);
+    return EXIT_SUCCESS;
 }
