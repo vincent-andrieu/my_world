@@ -25,6 +25,7 @@
 #define MOUSE_ACC 20
 #define EDIT_SPEED 2
 #define MOVE_SPEED 50
+#define MOUSE_SENSI 10.f
 
 typedef struct my_world_s {
     int **map;

@@ -12,6 +12,27 @@
 #include "graph.h"
 #include "my_world.h"
 
+static void event_manage(sfEvent event, my_world_t *my_world)
+{
+    if (event.type == sfEvtKeyPressed) {
+        my_world->pres_pos = my_world->pos;
+        if (event.key.code == sfKeyUp)
+            my_world->pos.y = my_world->pos.y - MOVE_SPEED;
+        if (event.key.code == sfKeyDown)
+            my_world->pos.y = my_world->pos.y + MOVE_SPEED;
+        if (event.key.code == sfKeyLeft)
+            my_world->pos.x = my_world->pos.x - MOVE_SPEED;
+        if (event.key.code == sfKeyRight)
+            my_world->pos.x = my_world->pos.x + MOVE_SPEED;
+    }
+    if (event.type == sfEvtMouseWheelScrolled) {
+        my_world->zoom += event.mouseWheelScroll.delta / 10.f;
+        if (my_world->zoom < 0) {
+            my_world->zoom -= event.mouseWheelScroll.delta / 10.f;
+        }
+    }
+}
+
 bool does_kill_prog(assets_t *assets, my_world_t *my_world)
 {
     sfEvent event;
@@ -22,7 +43,7 @@ bool does_kill_prog(assets_t *assets, my_world_t *my_world)
             sfRenderWindow_close(assets->window);
             return true;
         }
-        if (event.type == sfEvtKeyPressed) {
+        /*if (event.type == sfEvtKeyPressed) {
             my_world->pres_pos = my_world->pos;
             if (event.key.code == sfKeyUp)
                 my_world->pos.y = my_world->pos.y - MOVE_SPEED;
@@ -38,7 +59,8 @@ bool does_kill_prog(assets_t *assets, my_world_t *my_world)
             if (my_world->zoom < 0) {
                 my_world->zoom -= event.mouseWheelScroll.delta / 10.f;
             }
-        }
+        }*/
+        event_manage(event, my_world);
     }
     return false;
 }
