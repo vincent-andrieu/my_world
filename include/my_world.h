@@ -16,6 +16,9 @@
 #define EXIT_INVALID_ARG_NBR 84
 #define EXIT_ERROR 84
 
+#define ANGLE_X 0.785398
+#define ANGLE_Y 0.610865
+
 int usage(int exit_value, char *binary_name);
 bool does_kill_prog(assets_t *assets);
 int my_world(assets_t *assets);
