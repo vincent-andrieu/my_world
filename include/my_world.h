@@ -49,5 +49,6 @@ void edit_map(sfRenderWindow *window,
             my_world_t *my_world, sfVector2f **coords_map);
 sfMusic *start_song(void);
 void song_destroy(sfMusic *song);
+void reset_map(my_world_t *my_world);
 
 #endif

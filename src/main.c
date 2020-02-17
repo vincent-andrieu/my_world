@@ -24,6 +24,8 @@ static void event_manage(sfEvent event, my_world_t *my_world)
             my_world->pos.x = my_world->pos.x - MOVE_SPEED;
         if (event.key.code == sfKeyRight)
             my_world->pos.x = my_world->pos.x + MOVE_SPEED;
+        if (event.key.code == sfKeyR)
+            reset_map(my_world);
     }
     if (event.type == sfEvtMouseWheelScrolled) {
         my_world->zoom += event.mouseWheelScroll.delta / MOUSE_SENSI;
