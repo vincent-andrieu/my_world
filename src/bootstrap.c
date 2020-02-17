@@ -11,17 +11,17 @@
 #include "my_world.h"
 
 
-#define MAP_X 6
-#define MAP_Y 6
+#define MAP_X 10
+#define MAP_Y 10
 
-#define DISPLAY_X 10
-#define DISPLAY_Y 10
+#define DISPLAY_X 32
+#define DISPLAY_Y 32
 
 sfVector2f project_iso_point(int x, int y, int z) {
     sfVector2f my_2d_vector = {0};
 
-    my_2d_vector.x = cos(ANGLE_X) * x - cos(ANGLE_X) * y;
-    my_2d_vector.y = sin(ANGLE_Y) * y + sin(ANGLE_Y) * x - z;
+    my_2d_vector.x = cos(ANGLE_X) * x - cos(ANGLE_X) * y + WINDOW_WIDTH / 2;
+    my_2d_vector.y = sin(ANGLE_Y) * y + sin(ANGLE_Y) * x - z + WINDOW_HEIGHT / 4;
     return my_2d_vector;
 }
 
@@ -39,7 +39,7 @@ sfVector2f **create_2d_map(int **three_d_map)
     }
     for (int y = 0; y < MAP_Y; y++) {
         for (int x = 0; x < MAP_X; x++)
-            my_map[y][x] = project_iso_point(x, y, three_d_map[y][x]);
+            my_map[y][x] = project_iso_point(x * DISPLAY_X, y * DISPLAY_Y, three_d_map[y][x]);
     }
     return my_map;
 }
@@ -81,7 +81,8 @@ int bootstrap(assets_t *assets)
         for (int x = 0; x < MAP_X; x++)
             map[y][x] = 0;
     }
-
+    for (int x = 0; x < MAP_X; x++)
+            map[3][x] = 100;
     sfVector2f **my_map = create_2d_map(map);
     draw_2d_map(assets->window, my_map);
     for (int y = 0; y < MAP_Y; y++) {
