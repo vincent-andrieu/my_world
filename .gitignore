@@ -1,0 +1,14 @@
+*.o
+a.out
+*~
+\#*#
+libmy.a
+libgraph.a
+*.gcda
+*.gcno
+vgcore.*
+test.c
+test
+*.sublime-*
+unit_tests
+my_world
