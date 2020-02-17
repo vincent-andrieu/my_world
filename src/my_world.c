@@ -10,21 +10,33 @@
 #include "graph.h"
 #include "my_world.h"
 
+static void free_my_map(sfVector2f **map)
+{
+    if (map == NULL)
+        return;
+    for (int i = 0; map[i]; i++)
+        free(map[i]);
+    free(map);
+}
+
 int my_world(assets_t *assets)
 {
-    sfVector2f **my_map;
     my_world_t *my_world = get_my_world();
+    sfVector2f **my_map = my_world == NULL ? NULL :
+                        create_twod_map(my_world->map, my_world->pos);
 
-    while (!does_kill_prog(assets)) {
-        my_map = create_twod_map(my_world->map);
+    if (!my_map)
+        return EXIT_ERROR;
+    while (!does_kill_prog(assets, my_world)) {
+        map_stay_in_window(my_world);
+        free_my_map(my_map);
+        my_map = create_twod_map(my_world->map, my_world->pos);
         if (!my_map)
             return EXIT_ERROR;
-        draw_twod_map(assets->window, my_map);
-        refresh_screen(assets);
-        for (int i = 0; my_map[i]; i++)
-            free(my_map[i]);
-        free(my_map);
+        edit_map(assets->window, my_world, my_map);
+        draw_twod_map(assets, my_map);
     }
+    free_my_map(my_map);
     my_world_destroy(my_world);
     return EXIT_SUCCESS;
 }

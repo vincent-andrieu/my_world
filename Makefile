@@ -10,6 +10,8 @@ SRC	=	src/main.c 	\
 		src/my_world.c 	\
 		src/print_map.c 	\
 		src/struct_init.c 	\
+		src/edit_map.c 	\
+		src/move_map.c
 
 OBJ	=	$(SRC:.c=.o)
 

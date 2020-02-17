@@ -50,17 +50,19 @@ static sfVertexArray *create_line(sfVector2f *point1, sfVector2f *point2)
     return(vertex_array);
 }
 
-void draw_twod_map(sfRenderWindow *window, sfVector2f **map)
+void draw_twod_map(assets_t *assets, sfVector2f **map)
 {
     sfVertexArray *vertexarray;
 
     for (int y = 0; y < MAP_Y - 1; y++)
         for (int x = 0; x < MAP_X - 1; x++) {
             vertexarray = create_line (&map[y][x], &map[y][x + 1]);
-            sfRenderWindow_drawVertexArray(window, vertexarray, NULL);
+            sfRenderWindow_drawVertexArray(assets->window, vertexarray, NULL);
             sfVertexArray_destroy(vertexarray);
             vertexarray = create_line (&map[y + 1][x], &map[y][x]);
-            sfRenderWindow_drawVertexArray(window, vertexarray, NULL);
+            sfRenderWindow_drawVertexArray(assets->window, vertexarray, NULL);
             sfVertexArray_destroy(vertexarray);
         }
+    refresh_screen(assets);
+    sfRenderWindow_clear(assets->window, sfBlack);
 }
