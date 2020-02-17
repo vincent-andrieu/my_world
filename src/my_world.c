@@ -23,6 +23,7 @@ int my_world(assets_t *assets)
 {
     my_world_t *my_world = get_my_world();
     sfVector2f **my_map;
+    sfMusic *song = start_song();
 
     if (!my_world)
         return EXIT_ERROR;
@@ -35,6 +36,7 @@ int my_world(assets_t *assets)
         edit_map(assets->window, my_world, my_map);
         draw_twod_map(assets, my_map);
     }
+    song_destroy(song);
     free_my_map(my_map);
     my_world_destroy(my_world);
     return EXIT_SUCCESS;

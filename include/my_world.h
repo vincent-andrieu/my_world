@@ -7,6 +7,8 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <SFML/Audio.h>
+#include <SFML/System/InputStream.h>
 #include "graph.h"
 
 #ifndef MY_WORLD_H_
@@ -45,5 +47,7 @@ void draw_twod_map(assets_t *assets, sfVector2f **map);
 void map_stay_in_window(my_world_t *my_world);
 void edit_map(sfRenderWindow *window,
             my_world_t *my_world, sfVector2f **coords_map);
+sfMusic *start_song(void);
+void song_destroy(sfMusic *song);
 
 #endif

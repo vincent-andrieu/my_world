@@ -9,6 +9,7 @@ SRC	=	src/main.c 	\
 		src/usage.c 	\
 		src/my_world.c 	\
 		src/print_map.c 	\
+		src/song_manage.c 	\
 		src/struct_init.c 	\
 		src/edit_map.c 	\
 		src/move_map.c
@@ -20,7 +21,7 @@ NAME	=	my_world
 CFLAGS	+=	-I include -Wall -Wextra
 LDFLAGS +=	-L lib/my -lmy -L lib/graph -lgraph -lm
 
-CC	=	gcc -l csfml-graphics -l csfml-system -l csfml-window
+CC	=	gcc -l csfml-graphics -l csfml-system -l csfml-audio -l csfml-window
 
 all:	$(NAME)
 
