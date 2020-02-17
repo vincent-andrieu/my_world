@@ -39,7 +39,8 @@ sfVector2f **create_2d_map(int **three_d_map)
     }
     for (int y = 0; y < MAP_Y; y++) {
         for (int x = 0; x < MAP_X; x++)
-            my_map[y][x] = project_iso_point(x * DISPLAY_X, y * DISPLAY_Y, three_d_map[y][x]);
+            my_map[y][x] = project_iso_point(x * DISPLAY_X, y * DISPLAY_Y,
+                three_d_map[y][x]);
     }
     return my_map;
 }
@@ -69,12 +70,14 @@ int draw_2d_map(sfRenderWindow *window, sfVector2f **map)
             sfVertexArray_destroy(vertexarray);
         }
     }
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 int bootstrap(assets_t *assets)
 {
     int **map = malloc(sizeof(int *) * (MAP_Y + 1));
+    sfVector2f **my_map;
+
     map[MAP_Y] = NULL;
     for (int y = 0; y < MAP_Y; y++) {
         map[y] = malloc(sizeof(int) * MAP_X);
@@ -82,16 +85,15 @@ int bootstrap(assets_t *assets)
             map[y][x] = 0;
     }
     for (int x = 0; x < MAP_X; x++)
-            map[3][x] = 100;
-    sfVector2f **my_map = create_2d_map(map);
+            map[3][x] = -100;
+    my_map = create_2d_map(map);
+    if (!my_map)
+        return EXIT_ERROR;
     draw_2d_map(assets->window, my_map);
-    for (int y = 0; y < MAP_Y; y++) {
-        for (int x = 0; x < MAP_X; x++)
-            printf("x: %f|y: %f\n", my_map[y][x].x, my_map[y][x].y);
-        free(my_map[y]);
-    }
     refresh_screen(assets);
     while (!does_kill_prog(assets));
+    for (int y = 0; y < MAP_Y; y++)
+        free(my_map[y]);
     free(my_map);
     for (int i = 0; map[i]; i++)
         free(map[i]);
