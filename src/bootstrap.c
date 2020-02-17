@@ -59,8 +59,8 @@ int draw_2d_map(sfRenderWindow *window, sfVector2f **map)
 {
     sfVertexArray *vertexarray;
 
-    for (int y = 0; y < MAP_Y; y++) {
-        for (int x = 0; x < MAP_X; x++) {
+    for (int y = 0; y < MAP_Y - 1; y++) {
+        for (int x = 0; x < MAP_X - 1; x++) {
             vertexarray = create_line (&map[y][x], &map[y][x + 1]);
             sfRenderWindow_drawVertexArray(window, vertexarray, NULL);
             sfVertexArray_destroy(vertexarray);
@@ -89,6 +89,8 @@ int bootstrap(assets_t *assets)
             printf("x: %f|y: %f\n", my_map[y][x].x, my_map[y][x].y);
         free(my_map[y]);
     }
+    refresh_screen(assets);
+    while (!does_kill_prog(assets));
     free(my_map);
     for (int i = 0; map[i]; i++)
         free(map[i]);
