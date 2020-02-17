@@ -10,16 +10,16 @@
 #include "graph.h"
 #include "my_world.h"
 
-static sfVector2f project_iso_point(int x, int y, int z)
+static sfVector2f project_iso_point(int x, int y, int z, sfVector2i pos)
 {
     sfVector2f my_2d_vector = {0};
 
-    my_2d_vector.x = cos(ANGLE_X) * x - cos(ANGLE_X) * y;
-    my_2d_vector.y = sin(ANGLE_Y) * y + sin(ANGLE_Y) * x - z;
+    my_2d_vector.x = cos(ANGLE_X) * x - cos(ANGLE_X) * y + pos.x;
+    my_2d_vector.y = sin(ANGLE_Y) * y + sin(ANGLE_Y) * x - z + pos.y;
     return my_2d_vector;
 }
 
-sfVector2f **create_twod_map(int **three_d_map)
+sfVector2f **create_twod_map(int **three_d_map, sfVector2i pos)
 {
     sfVector2f **my_map = malloc(sizeof(sfVector2f *) * (MAP_Y + 1));
 
@@ -34,7 +34,7 @@ sfVector2f **create_twod_map(int **three_d_map)
     for (int y = 0; y < MAP_Y; y++)
         for (int x = 0; x < MAP_X; x++)
             my_map[y][x] = project_iso_point(x * DISPLAY_X, y * DISPLAY_Y,
-                three_d_map[y][x]);
+                three_d_map[y][x], pos);
     return my_map;
 }
 
