@@ -71,7 +71,7 @@ static int prepare_window(sfVideoMode mde, assets_t *assets)
 
 int main(int argc, char **argv)
 {
-    if (!my_strcmp(argv[1], "-h"))
+    if (argc == 2 && !my_strcmp(argv[1], "-h"))
         return usage(EXIT_SUCCESS, argv[0]);
     if (argc != 1) {
         my_put_error_str(MSG_INVALID_ARG_NBR);
