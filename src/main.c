@@ -12,7 +12,7 @@
 #include "graph.h"
 #include "my_world.h"
 
-bool does_kill_prog(assets_t *assets)
+bool does_kill_prog(assets_t *assets, my_world_t *my_world)
 {
     sfEvent event;
 
@@ -21,6 +21,17 @@ bool does_kill_prog(assets_t *assets)
         && event.key.code == sfKeyEscape)) {
             sfRenderWindow_close(assets->window);
             return true;
+        }
+        if (event.type == sfEvtKeyPressed) {
+            my_world->pres_pos = my_world->pos;
+            if (event.key.code == sfKeyUp)
+                my_world->pos.y = my_world->pos.y - MOVE_SPEED;
+            if (event.key.code == sfKeyDown)
+                my_world->pos.y = my_world->pos.y + MOVE_SPEED;
+            if (event.key.code == sfKeyLeft)
+                my_world->pos.x = my_world->pos.x - MOVE_SPEED;
+            if (event.key.code == sfKeyRight)
+                my_world->pos.x = my_world->pos.x + MOVE_SPEED;
         }
     }
     return false;
