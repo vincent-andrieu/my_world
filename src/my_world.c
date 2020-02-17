@@ -10,7 +10,7 @@
 #include "graph.h"
 #include "my_world.h"
 
-int my_radar(assets_t *assets)
+int my_world(assets_t *assets)
 {
     return bootstrap(assets);
 }

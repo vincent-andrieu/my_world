@@ -5,16 +5,14 @@
 ** display an image in a window
 */
 
-#include <stdlib.h>
-#include <stdbool.h>
 #include <SFML/Graphics.h>
 #include <fcntl.h>
 #include <time.h>
 #include "my.h"
 #include "graph.h"
-#include "my_radar.h"
+#include "my_world.h"
 
-bool does_kill_prog(assets_t *assets, entities_t *entities)
+bool does_kill_prog(assets_t *assets)
 {
     sfEvent event;
 
@@ -24,10 +22,6 @@ bool does_kill_prog(assets_t *assets, entities_t *entities)
             sfRenderWindow_close(assets->window);
             return true;
         }
-        if (event.type == sfEvtKeyReleased && event.key.code == sfKeyL)
-            toggle_hitboxes(entities->planes);
-        if (event.type == sfEvtKeyReleased && event.key.code == sfKeyS)
-            toggle_sprites(entities->planes, entities->towers);
     }
     return false;
 }

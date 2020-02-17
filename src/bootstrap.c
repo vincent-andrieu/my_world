@@ -7,8 +7,9 @@
 
 #include "my.h"
 #include "graph.h"
+#include "my_world.h"
 
-int bootstrap(assert_t *assert)
+int bootstrap(assets_t *assets)
 {
     return EXIT_SUCCESS;
 }

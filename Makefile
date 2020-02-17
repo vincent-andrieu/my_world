@@ -5,7 +5,10 @@
 ## project makefile
 ##
 
-SRC	=	src/main.c
+SRC	=	src/main.c 	\
+		src/usage.c 	\
+		src/my_world.c 	\
+		src/bootstrap.c
 
 OBJ	=	$(SRC:.c=.o)
 
