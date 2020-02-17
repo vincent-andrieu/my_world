@@ -8,7 +8,7 @@
 SRC	=	src/main.c 	\
 		src/usage.c 	\
 		src/my_world.c 	\
-		src/map_gest.c 	\
+		src/print_map.c 	\
 		src/struct_init.c 	\
 
 OBJ	=	$(SRC:.c=.o)
