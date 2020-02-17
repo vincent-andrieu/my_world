@@ -33,6 +33,12 @@ bool does_kill_prog(assets_t *assets, my_world_t *my_world)
             if (event.key.code == sfKeyRight)
                 my_world->pos.x = my_world->pos.x + MOVE_SPEED;
         }
+        if (event.type == sfEvtMouseWheelScrolled) {
+            my_world->zoom += event.mouseWheelScroll.delta / 10.f;
+            if (my_world->zoom < 0) {
+                my_world->zoom -= event.mouseWheelScroll.delta / 10.f;
+            }
+        }
     }
     return false;
 }

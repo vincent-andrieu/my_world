@@ -22,15 +22,14 @@ static void free_my_map(sfVector2f **map)
 int my_world(assets_t *assets)
 {
     my_world_t *my_world = get_my_world();
-    sfVector2f **my_map = my_world == NULL ? NULL :
-                        create_twod_map(my_world->map, my_world->pos);
+    sfVector2f **my_map;
 
-    if (!my_map)
+    if (!my_world)
         return EXIT_ERROR;
+    my_world->zoom = 1;
     while (!does_kill_prog(assets, my_world)) {
         map_stay_in_window(my_world);
-        free_my_map(my_map);
-        my_map = create_twod_map(my_world->map, my_world->pos);
+        my_map = create_twod_map(my_world->map, my_world);
         if (!my_map)
             return EXIT_ERROR;
         edit_map(assets->window, my_world, my_map);

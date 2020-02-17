@@ -35,7 +35,7 @@ static sfVector2f get_min_in_map(my_world_t *my_world, sfVector2f **my_map)
 
 void map_stay_in_window(my_world_t *my_world)
 {
-    sfVector2f **my_map = create_twod_map(my_world->map, my_world->pos);
+    sfVector2f **my_map = create_twod_map(my_world->map, my_world);
     sfVector2f min;
     sfVector2f max;
 

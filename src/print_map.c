@@ -19,7 +19,7 @@ static sfVector2f project_iso_point(int x, int y, int z, sfVector2i pos)
     return my_2d_vector;
 }
 
-sfVector2f **create_twod_map(int **three_d_map, sfVector2i pos)
+sfVector2f **create_twod_map(int **three_d_map, my_world_t *my_world)
 {
     sfVector2f **my_map = malloc(sizeof(sfVector2f *) * (MAP_Y + 1));
 
@@ -33,8 +33,8 @@ sfVector2f **create_twod_map(int **three_d_map, sfVector2i pos)
     }
     for (int y = 0; y < MAP_Y; y++)
         for (int x = 0; x < MAP_X; x++)
-            my_map[y][x] = project_iso_point(x * DISPLAY_X, y * DISPLAY_Y,
-                three_d_map[y][x], pos);
+            my_map[y][x] = project_iso_point(x * DISPLAY_X * my_world->zoom,
+            y * DISPLAY_Y * my_world->zoom, three_d_map[y][x], my_world->pos);
     return my_map;
 }
 
