@@ -26,9 +26,9 @@ static void event_manage(sfEvent event, my_world_t *my_world)
             my_world->pos.x = my_world->pos.x + MOVE_SPEED;
     }
     if (event.type == sfEvtMouseWheelScrolled) {
-        my_world->zoom += event.mouseWheelScroll.delta / 10.f;
+        my_world->zoom += event.mouseWheelScroll.delta / MOUSE_SENSI;
         if (my_world->zoom < 0) {
-            my_world->zoom -= event.mouseWheelScroll.delta / 10.f;
+            my_world->zoom -= event.mouseWheelScroll.delta / MOUSE_SENSI;
         }
     }
 }
@@ -43,23 +43,6 @@ bool does_kill_prog(assets_t *assets, my_world_t *my_world)
             sfRenderWindow_close(assets->window);
             return true;
         }
-        /*if (event.type == sfEvtKeyPressed) {
-            my_world->pres_pos = my_world->pos;
-            if (event.key.code == sfKeyUp)
-                my_world->pos.y = my_world->pos.y - MOVE_SPEED;
-            if (event.key.code == sfKeyDown)
-                my_world->pos.y = my_world->pos.y + MOVE_SPEED;
-            if (event.key.code == sfKeyLeft)
-                my_world->pos.x = my_world->pos.x - MOVE_SPEED;
-            if (event.key.code == sfKeyRight)
-                my_world->pos.x = my_world->pos.x + MOVE_SPEED;
-        }
-        if (event.type == sfEvtMouseWheelScrolled) {
-            my_world->zoom += event.mouseWheelScroll.delta / 10.f;
-            if (my_world->zoom < 0) {
-                my_world->zoom -= event.mouseWheelScroll.delta / 10.f;
-            }
-        }*/
         event_manage(event, my_world);
     }
     return false;
