@@ -26,7 +26,7 @@
 typedef struct my_world_s {
     int **map;
     sfVector2f scale;
-    sfVector2f pos;
+    sfVector2i pos;
 } my_world_t;
 
 int usage(int exit_value, char *binary_name);
@@ -35,7 +35,7 @@ int my_world(assets_t *assets);
 int bootstrap(assets_t *assets);
 my_world_t *get_my_world(void);
 void my_world_destroy(my_world_t *my_world);
-sfVector2f **create_twod_map(int **three_d_map);
+sfVector2f **create_twod_map(int **three_d_map, sfVector2i pos);
 int draw_twod_map(sfRenderWindow *window, sfVector2f **map);
 
 #endif
