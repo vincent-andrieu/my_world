@@ -7,13 +7,6 @@
 
 #include "my_world.h"
 
-void reset_map(my_world_t *my_world)
-{
-    for (int y = 0; y < my_world->scale.y; y++)
-        for (int x = 0; x < my_world->scale.x; x++)
-            my_world->map[y][x] = 0;
-}
-
 static void travel_map(sfVector2i mouse,
                         my_world_t *my_world, sfVector2f **coords_map, bool up)
 {
@@ -35,4 +28,11 @@ void edit_map(sfRenderWindow *window,
     else if (sfMouse_isButtonPressed(sfMouseRight))
         travel_map(sfMouse_getPositionRenderWindow(window),
             my_world, coords_map, false);
+}
+
+void reset_map(my_world_t *my_world)
+{
+    for (int y = 0; y < my_world->scale.y; y++)
+        for (int x = 0; x < my_world->scale.x; x++)
+            my_world->map[y][x] = 0;
 }
