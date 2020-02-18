@@ -26,15 +26,15 @@ sfVector2f **create_twod_map(int **three_d_map, my_world_t *my_world)
     if (!my_map)
         return NULL;
     my_map[MAP_Y] = NULL;
-    for (int i = 0; i < MAP_Y; i++) {
-        my_map[i] = malloc(sizeof(sfVector2f) * MAP_X);
-        if (!my_map[i])
+    for (int y = 0; y < MAP_Y; y++) {
+        my_map[y] = malloc(sizeof(sfVector2f) * MAP_X);
+        if (!my_map[y])
             return NULL;
-    }
-    for (int y = 0; y < MAP_Y; y++)
         for (int x = 0; x < MAP_X; x++)
             my_map[y][x] = project_iso_point(x * DISPLAY_X * my_world->zoom,
-                y * DISPLAY_Y * my_world->zoom, three_d_map[y][x] * my_world->zoom, my_world->pos);
+                y * DISPLAY_Y * my_world->zoom,
+                three_d_map[y][x] * my_world->zoom, my_world->pos);
+    }
     return my_map;
 }
 
