@@ -35,10 +35,10 @@ int my_world(assets_t *assets)
         if (!my_map)
             return EXIT_ERROR;
         edit_map(assets->window, my_world, my_map);
-        draw_twod_map(assets, my_map);
+        draw_twod_map(assets, my_map, my_world);
+        free_my_map(my_map);
     }
     song_destroy(song);
-    free_my_map(my_map);
     my_world_destroy(my_world);
     return EXIT_SUCCESS;
 }

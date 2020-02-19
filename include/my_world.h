@@ -43,12 +43,13 @@ int my_world(assets_t *assets);
 my_world_t *get_my_world(void);
 void my_world_destroy(my_world_t *my_world);
 sfVector2f **create_twod_map(int **three_d_map, my_world_t *my_world);
-void draw_twod_map(assets_t *assets, sfVector2f **map);
+void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world);
 void map_stay_in_window(my_world_t *my_world);
 void edit_map(sfRenderWindow *window,
             my_world_t *my_world, sfVector2f **coords_map);
 sfMusic *start_song(void);
 void song_destroy(sfMusic *song);
 void reset_map(my_world_t *my_world);
+int get_resize_map(my_world_t *my_world, int size_x, int size_y);
 
 #endif
