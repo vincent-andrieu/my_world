@@ -9,7 +9,7 @@
 
 sfMusic *start_song(void)
 {
-    sfMusic *song = sfMusic_createFromFile("./src/other/song.ogg");
+    sfMusic *song = sfMusic_createFromFile("./ressources/song.ogg");
 
     sfMusic_setVolume(song, 80);
     sfMusic_setLoop(song, sfTrue);

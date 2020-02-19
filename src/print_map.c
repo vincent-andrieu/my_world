@@ -70,7 +70,7 @@ void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world)
     sfVertexArray *line;
     sfRenderStates states = {0};
 
-    states.texture = sfTexture_createFromFile("./src/other/grass.png", NULL);
+    states.texture = sfTexture_createFromFile("./ressources/grass.png", NULL);
     states.blendMode = sfBlendAlpha;
     states.transform = sfTransform_Identity;
     states.shader = NULL;
