@@ -26,15 +26,15 @@ sfVector2f **create_twod_map(int **three_d_map, my_world_t *my_world)
     if (!my_map)
         return NULL;
     my_map[(int) my_world->scale.y] = NULL;
-    for (int i = 0; i < my_world->scale.y; i++) {
-        my_map[i] = malloc(sizeof(sfVector2f) * my_world->scale.x);
-        if (!my_map[i])
+    for (int y = 0; y < my_world->scale.y; y++) {
+        my_map[y] = malloc(sizeof(sfVector2f) * MAP_X);
+        if (!my_map[y])
             return NULL;
-    }
-    for (int y = 0; y < my_world->scale.y; y++)
         for (int x = 0; x < my_world->scale.x; x++)
             my_map[y][x] = project_iso_point(x * DISPLAY_X * my_world->zoom,
-                y * DISPLAY_Y * my_world->zoom, three_d_map[y][x] * my_world->zoom, my_world->pos);
+                y * DISPLAY_Y * my_world->zoom,
+                three_d_map[y][x] * my_world->zoom, my_world->pos);
+    }
     return my_map;
 }
 
@@ -50,7 +50,7 @@ static sfVertexArray *display_texture(sfVector2f *point1, sfVector2f *point2,
     sfVertexArray_append(vertex_array, vertex2);
     sfVertexArray_append(vertex_array, vertex3);
     sfVertexArray_setPrimitiveType(vertex_array , sfTriangleStrip);
-    return(vertex_array);
+    return vertex_array;
 }
 
 static sfVertexArray *create_line(sfVector2f *point1, sfVector2f *point2)
@@ -62,7 +62,7 @@ static sfVertexArray *create_line(sfVector2f *point1, sfVector2f *point2)
     sfVertexArray_append(vertex_array, vertex1);
     sfVertexArray_append(vertex_array, vertex2);
     sfVertexArray_setPrimitiveType(vertex_array , sfLinesStrip);
-    return(vertex_array);
+    return vertex_array;
 }
 
 void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world)
