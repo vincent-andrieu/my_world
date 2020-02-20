@@ -20,6 +20,13 @@ static void free_my_map(sfVector2f **map)
     free(map);
 }
 
+static int end_of_world(sfMusic *song, my_world_t *my_world)
+{
+    song_destroy(song);
+    my_world_destroy(my_world);
+    return EXIT_SUCCESS;
+}
+
 int my_world(assets_t *assets)
 {
     my_world_t *my_world = get_my_world();
@@ -37,7 +44,5 @@ int my_world(assets_t *assets)
         draw_twod_map(assets, my_map, my_world);
         free_my_map(my_map);
     }
-    song_destroy(song);
-    my_world_destroy(my_world);
-    return EXIT_SUCCESS;
+    return end_of_world(song, my_world);
 }
