@@ -33,8 +33,9 @@ my_world_t *get_my_world(void)
         return NULL;
     my_world->scale = (sfVector2f) {MAP_X, MAP_Y};
     my_world->pos = (sfVector2i) {WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4};
-    my_world->map = malloc(sizeof(int *) * (MAP_Y + 1));
     my_world->textures = get_textures();
+    my_world->zoom = 1;
+    my_world->map = malloc(sizeof(int *) * (MAP_Y + 1));
     if (!my_world->map)
         return NULL;
     my_world->map[MAP_Y] = NULL;
@@ -50,9 +51,15 @@ my_world_t *get_my_world(void)
 
 void my_world_destroy(my_world_t *my_world)
 {
+    if (my_world == NULL || my_world->map == NULL)
+        return;
     for (int i = 0; my_world->map[i]; i++)
         free(my_world->map[i]);
     free(my_world->map);
+    sfTexture_destroy((sfTexture *) my_world->textures.grass.texture);
+    sfTexture_destroy((sfTexture *) my_world->textures.dirt.texture);
+    sfTexture_destroy((sfTexture *) my_world->textures.stone.texture);
+    sfTexture_destroy((sfTexture *) my_world->textures.snow.texture);
+    sfTexture_destroy((sfTexture *) my_world->textures.water.texture);
     free(my_world);
 }
-

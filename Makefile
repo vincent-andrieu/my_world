@@ -11,6 +11,7 @@ SRC	=	src/button/my_button.c 	\
 		src/usage.c 	\
 		src/my_world.c 	\
 		src/print_map.c 	\
+		src/textures.c 	\
 		src/song_manage.c 	\
 		src/struct_init.c 	\
 		src/edit_map.c 	\
