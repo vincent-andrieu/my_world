@@ -9,13 +9,13 @@
 
 static int **dup_map(my_world_t *my_world, int size_x, int size_y)
 {
-    int **temp = malloc(sizeof(int *) * (my_world->scale.y + size_y + 1));
+    int **temp = malloc(sizeof(int *) * ((int) my_world->scale.y + size_y + 1));
 
     if (!temp)
         return NULL;
     temp[(int) my_world->scale.y + size_y] = NULL;
     for (int i = 0; i < my_world->scale.y + size_y; i++) {
-        temp[i] = malloc(sizeof(int) * (my_world->scale.x + size_x));
+        temp[i] = malloc(sizeof(int) * ((int) my_world->scale.x + size_x));
         if (!temp[i])
             return NULL;
         if (i < my_world->scale.y)

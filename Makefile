@@ -8,6 +8,7 @@
 SRC	=	src/button/shape_button.c 	\
 		src/button/button_manage.c 	\
 		src/button/button_init.c 	\
+		src/button/button_action.c 	\
 		src/main.c 	\
 		src/usage.c 	\
 		src/my_world.c 	\

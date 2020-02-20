@@ -41,6 +41,7 @@ int my_world(assets_t *assets)
     while (!does_kill_prog(assets, my_world)) {
         refresh_struct(button, assets);
         display_struct(button, assets);
+        button_effect(my_world, button, assets);
         map_stay_in_window(my_world);
         my_map = create_twod_map(my_world->map, my_world);
         if (!my_map)
