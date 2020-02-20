@@ -38,21 +38,6 @@ sfVector2f **create_twod_map(int **three_d_map, my_world_t *my_world)
     return my_map;
 }
 
-static sfVertexArray *display_texture(sfVector2f *point1, sfVector2f *point2,
-    sfVector2f *point3)
-{
-    sfVertexArray *vertex_array = sfVertexArray_create();
-    sfVertex vertex1 = {.position = *point1, .color = sfWhite};
-    sfVertex vertex2 = {.position = *point2, .color = sfWhite};
-    sfVertex vertex3 = {.position = *point3, .color = sfWhite};
-
-    sfVertexArray_append(vertex_array, vertex1);
-    sfVertexArray_append(vertex_array, vertex2);
-    sfVertexArray_append(vertex_array, vertex3);
-    sfVertexArray_setPrimitiveType(vertex_array , sfTriangleStrip);
-    return vertex_array;
-}
-
 static sfVertexArray *create_line(sfVector2f *point1, sfVector2f *point2)
 {
     sfVertexArray *vertex_array = sfVertexArray_create();
@@ -68,20 +53,15 @@ static sfVertexArray *create_line(sfVector2f *point1, sfVector2f *point2)
 void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world)
 {
     sfVertexArray *line;
-    sfRenderStates states = {0};
 
-    states.texture = sfTexture_createFromFile("./ressources/grass.png", NULL);
-    states.blendMode = sfBlendAlpha;
-    states.transform = sfTransform_Identity;
-    states.shader = NULL;
     for (int y = 0; y < my_world->scale.y; y++) {
         for (int x = 0; x < my_world->scale.x; x++) {
             if (y < my_world->scale.y - 1 && x < my_world->scale.x - 1) {
                 line = display_texture(&map[y][x], &map[y + 1][x], &map[y][x + 1]);
-                sfRenderWindow_drawVertexArray(assets->window, line, &states);
+                sfRenderWindow_drawVertexArray(assets->window, line, get_map_texture(my_world->map[y][x], &my_world->textures));
                 sfVertexArray_destroy(line);
                 line = display_texture(&map[y + 1][x + 1], &map[y + 1][x], &map[y][x + 1]);
-                sfRenderWindow_drawVertexArray(assets->window, line, &states);
+                sfRenderWindow_drawVertexArray(assets->window, line, get_map_texture(my_world->map[y][x], &my_world->textures));
                 sfVertexArray_destroy(line);
             }
             if (y < my_world->scale.y - 1) {

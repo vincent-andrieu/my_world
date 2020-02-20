@@ -44,6 +44,9 @@ my_world_t *get_my_world(void);
 void my_world_destroy(my_world_t *my_world);
 sfVector2f **create_twod_map(int **three_d_map, my_world_t *my_world);
 void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world);
+sfVertexArray *display_texture(sfVector2f *point1, sfVector2f *point2,
+    sfVector2f *point3);
+sfRenderStates *get_map_texture(int level, textures_t *textures);
 void map_stay_in_window(my_world_t *my_world);
 void edit_map(sfRenderWindow *window,
             my_world_t *my_world, sfVector2f **coords_map);
