@@ -13,31 +13,28 @@
 #ifndef MY_BUTTON_H
 #define MY_BUTTON_H
 
-typedef struct my_button_s {
-    int tooggle;
+#define NB_TEXTURE 3
+#define HIT_X 216
+#define HIT_Y 90
+
+typedef struct my_button_shape_s {
+    int toggle;
     char *name;
-    sfVector2f scale;
     sfVector2f pos;
-    sfRectangleShape *button;
-    sfRectangleShape *button_in;
-    sfRectangleShape *button_ispressed;
+    sfVector2f scale;
     sfText *text;
     sfFont *font;
-} my_button_t;
+    sfTexture **texture;
+} my_button_shape_t;
 
-my_button_t *get_button(sfVector2f scale, sfVector2f pos);
-void button_detroy(my_button_t *my_button);
-void set_button_ispressed(my_button_t *my_button, sfColor back, sfColor front,
-    float line_front_size);
-void set_button_in(my_button_t *my_button, sfColor back, sfColor front,
-    float line_front_size);
-void set_button(my_button_t *my_button, sfColor back, sfColor front,
-    float line_front_size);
-void set_button_id(my_button_t *my_button, char *str, char *font_path,
+my_button_shape_t *get_button_shape(sfVector2f pos, sfVector2f scale);
+int set_texture_button(my_button_shape_t *my_button, char *path_one,
+    char *path_two, char *path_three);
+void button_shape_destroy(my_button_shape_t *my_button);
+void button_refresh_stat(my_button_shape_t *my_button, sfRenderWindow *window);
+void button_display(my_button_shape_t *my_button, sfRenderWindow *window);
+bool button_ispressed(my_button_shape_t *my_button);
+void set_button_id(my_button_shape_t *my_button, char *str, char *font_path,
     float size_char);
-void button_refresh_stat(my_button_t *my_button, sfRenderWindow* window);
-void button_display(my_button_t *my_button, sfRenderWindow *window);
-bool button_ispressed(my_button_t *my_button);
-void set_text_position_in_button(my_button_t *my_button, sfVector2f pos);
 
 #endif

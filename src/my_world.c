@@ -32,10 +32,13 @@ int my_world(assets_t *assets)
     my_world_t *my_world = get_my_world();
     sfVector2f **my_map;
     sfMusic *song = start_song();
+    button_manage_t *button = get_button_manage();
 
     if (!my_world)
         return EXIT_ERROR;
     while (!does_kill_prog(assets, my_world)) {
+        refresh_struct(button, assets);
+        display_struct(button, assets);
         map_stay_in_window(my_world);
         my_map = create_twod_map(my_world->map, my_world);
         if (!my_map)
@@ -44,5 +47,6 @@ int my_world(assets_t *assets)
         draw_twod_map(assets, my_map, my_world);
         free_my_map(my_map);
     }
+    destroy_struct(button);
     return end_of_world(song, my_world);
 }

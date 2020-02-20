@@ -5,8 +5,9 @@
 ## project makefile
 ##
 
-SRC	=	src/button/my_button.c 	\
-		src/button/set_button_design.c 	\
+SRC	=	src/button/shape_button.c 	\
+		src/button/button_manage.c 	\
+		src/button/button_init.c 	\
 		src/main.c 	\
 		src/usage.c 	\
 		src/my_world.c 	\

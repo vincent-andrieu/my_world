@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <SFML/Audio.h>
 #include <SFML/System/InputStream.h>
+#include "my_button.h"
 #include "graph.h"
 
 #ifndef MY_WORLD_H_
@@ -69,5 +70,30 @@ sfMusic *start_song(void);
 void song_destroy(sfMusic *song);
 void reset_map(my_world_t *my_world);
 int get_resize_map(my_world_t *my_world, int size_x, int size_y);
+
+#define TOOLS_X 1700
+#define FONT_PATH "./ressources/ChunkfiveEx.ttf"
+#define SIZE_CHAR 10
+
+typedef struct button_manage_s
+{
+    my_button_shape_t *exit;
+    my_button_shape_t *restart;
+    my_button_shape_t *zoom_in;
+    my_button_shape_t *zoom_out;
+    my_button_shape_t *size_x_plus;
+    my_button_shape_t *size_x_min;
+    my_button_shape_t *size_y_plus;
+    my_button_shape_t *size_y_min;
+    my_button_shape_t *up;
+    my_button_shape_t *down;
+    my_button_shape_t *left;
+    my_button_shape_t *right;
+} button_manage_t;
+
+button_manage_t *get_button_manage(void);
+void refresh_struct(button_manage_t *button, assets_t *assets);
+void destroy_struct(button_manage_t *button);
+void display_struct(button_manage_t *button, assets_t *assets);
 
 #endif
