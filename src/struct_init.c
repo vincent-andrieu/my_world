@@ -7,17 +7,34 @@
 
 #include "my_world.h"
 
+static textures_t get_textures(void)
+{
+    textures_t textures;
+    sfRenderStates *states[5] = {&textures.grass, &textures.dirt, &textures.stone,
+                        &textures.snow, &textures.water};
+    char const *paths[5] = {"./ressources/grass.png", "./ressources/dirt.png",
+                            "./ressources/stone.png", "./ressources/snow.png",
+                            "./ressources/water.png"};
+
+    for (int i = 0; i < 5; i++) {
+        states[i]->texture = sfTexture_createFromFile(paths[i], NULL);
+        states[i]->blendMode = sfBlendAlpha;
+        states[i]->transform = sfTransform_Identity;
+        states[i]->shader = NULL;
+    }
+    return textures;
+}
+
 my_world_t *get_my_world(void)
 {
     my_world_t *my_world = malloc(sizeof(my_world_t));
 
     if (!my_world)
         return NULL;
-    my_world->scale.x = MAP_X;
-    my_world->scale.y = MAP_Y;
-    my_world->pos.x = WINDOW_WIDTH / 2;
-    my_world->pos.y = WINDOW_HEIGHT / 4;
+    my_world->scale = (sfVector2f) {MAP_X, MAP_Y};
+    my_world->pos = (sfVector2i) {WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4};
     my_world->map = malloc(sizeof(int *) * (MAP_Y + 1));
+    my_world->textures = get_textures();
     if (!my_world->map)
         return NULL;
     my_world->map[MAP_Y] = NULL;

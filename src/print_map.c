@@ -96,7 +96,6 @@ void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world)
             }
         }
     }
-    sfTexture_destroy(states.texture);
     refresh_screen(assets);
     sfRenderWindow_clear(assets->window, sfBlack);
 }
