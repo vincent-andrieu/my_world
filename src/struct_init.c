@@ -7,16 +7,22 @@
 
 #include "my_world.h"
 
+static void set_val(my_world_t *my_world)
+{
+    my_world->scale.x = MAP_X;
+    my_world->scale.y = MAP_Y;
+    my_world->pos.x = WINDOW_WIDTH / 2;
+    my_world->pos.y = WINDOW_HEIGHT / 4;
+    my_world->zoom = 1;
+}
+
 my_world_t *get_my_world(void)
 {
     my_world_t *my_world = malloc(sizeof(my_world_t));
 
     if (!my_world)
         return NULL;
-    my_world->scale.x = MAP_X;
-    my_world->scale.y = MAP_Y;
-    my_world->pos.x = WINDOW_WIDTH / 2;
-    my_world->pos.y = WINDOW_HEIGHT / 4;
+    set_val(my_world);
     my_world->map = malloc(sizeof(int *) * (MAP_Y + 1));
     if (!my_world->map)
         return NULL;

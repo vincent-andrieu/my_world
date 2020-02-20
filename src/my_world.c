@@ -28,7 +28,6 @@ int my_world(assets_t *assets)
 
     if (!my_world)
         return EXIT_ERROR;
-    my_world->zoom = 1;
     while (!does_kill_prog(assets, my_world)) {
         map_stay_in_window(my_world);
         my_map = create_twod_map(my_world->map, my_world);
