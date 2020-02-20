@@ -21,7 +21,8 @@ static sfVector2f project_iso_point(int x, int y, int z, sfVector2i pos)
 
 sfVector2f **create_twod_map(int **three_d_map, my_world_t *my_world)
 {
-    sfVector2f **my_map = malloc(sizeof(sfVector2f *) * (my_world->scale.y + 1));
+    sfVector2f **my_map = malloc(sizeof(sfVector2f *)
+                                * (my_world->scale.y + 1));
 
     if (!my_map)
         return NULL;
@@ -56,14 +57,7 @@ void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world)
 
     for (int y = 0; y < my_world->scale.y; y++) {
         for (int x = 0; x < my_world->scale.x; x++) {
-            if (y < my_world->scale.y - 1 && x < my_world->scale.x - 1) {
-                line = display_texture(&map[y][x], &map[y + 1][x], &map[y][x + 1]);
-                sfRenderWindow_drawVertexArray(assets->window, line, get_map_texture(my_world->map[y][x], &my_world->textures));
-                sfVertexArray_destroy(line);
-                line = display_texture(&map[y + 1][x + 1], &map[y + 1][x], &map[y][x + 1]);
-                sfRenderWindow_drawVertexArray(assets->window, line, get_map_texture(my_world->map[y][x], &my_world->textures));
-                sfVertexArray_destroy(line);
-            }
+            calc_textures(my_world, map, (sfVector2i) {x, y}, assets->window);
             if (y < my_world->scale.y - 1) {
                 line = create_line(&map[y][x], &map[y + 1][x]);
                 sfRenderWindow_drawVertexArray(assets->window, line, NULL);
