@@ -29,12 +29,27 @@
 #define MOVE_SPEED 50
 #define MOUSE_SENSI 10.f
 
+#define SNOW_LEVEL 100
+#define STONE_LEVEL 40
+#define GRASS_LEVEL 0
+#define DIRT_LEVEL -25
+
+typedef struct textures_s
+{
+    sfRenderStates grass;
+    sfRenderStates dirt;
+    sfRenderStates stone;
+    sfRenderStates snow;
+    sfRenderStates water;
+} textures_t;
+
 typedef struct my_world_s {
     int **map;
     float zoom;
     sfVector2f scale;
     sfVector2i pos;
     sfVector2i pres_pos;
+    textures_t textures;
 } my_world_t;
 
 int usage(int exit_value, char *binary_name);
