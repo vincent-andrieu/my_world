@@ -30,7 +30,7 @@ int **dup_map(my_world_t *my_world, int size_x, int size_y)
     return temp;
 }
 
-static void free_my_tab(int **tab)
+void free_my_tab(int **tab)
 {
     for (int i = 0; tab[i]; i++)
         free(tab[i]);

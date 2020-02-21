@@ -41,6 +41,7 @@ void destroy_struct(button_manage_t *button)
     button_shape_destroy(button->down);
     button_shape_destroy(button->left);
     button_shape_destroy(button->right);
+    free(button);
 }
 
 void refresh_struct(button_manage_t *button, assets_t *assets)

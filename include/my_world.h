@@ -103,5 +103,7 @@ void water_textures(my_world_t *my_world, sfVector2f **map,
                     sfVector2i coord, sfRenderWindow *window);
 sfVector2f **water_gest(my_world_t *my_world);
 void draw_water(assets_t *assets, sfVector2f **map, my_world_t *my_world);
+void free_my_tab(int **tab);
+void free_my_map(sfVector2f **map);
 
 #endif

@@ -11,7 +11,7 @@
 #include "my_world.h"
 #include "my_button.h"
 
-static void free_my_map(sfVector2f **map)
+void free_my_map(sfVector2f **map)
 {
     if (map == NULL)
         return;
