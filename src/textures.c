@@ -53,3 +53,20 @@ sfRenderStates *get_map_texture(int level, textures_t *textures)
         return &textures->stone;
     return &textures->snow;
 }
+
+void water_textures(my_world_t *my_world, sfVector2f **map,
+                    sfVector2i coord, sfRenderWindow *window)
+{
+    sfVertexArray *line;
+
+    if (coord.y < my_world->scale.y - 1 && coord.x < my_world->scale.x - 1) {
+        line = display_texture(&map[coord.y][coord.x],
+            &map[coord.y + 1][coord.x], &map[coord.y][coord.x + 1]);
+        sfRenderWindow_drawVertexArray(window, line, &my_world->textures.water);
+        sfVertexArray_destroy(line);
+        line = display_texture(&map[coord.y + 1][coord.x + 1],
+            &map[coord.y + 1][coord.x], &map[coord.y][coord.x + 1]);
+        sfRenderWindow_drawVertexArray(window, line, &my_world->textures.water);
+        sfVertexArray_destroy(line);
+    }
+}

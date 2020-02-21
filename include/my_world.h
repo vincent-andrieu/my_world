@@ -34,6 +34,27 @@
 #define STONE_LEVEL 40
 #define GRASS_LEVEL 0
 #define DIRT_LEVEL -25
+#define WATER_LEVEL -20
+
+#define TOOLS_X 1700
+#define FONT_PATH "./ressources/ChunkfiveEx.ttf"
+#define SIZE_CHAR 20
+
+typedef struct button_manage_s
+{
+    my_button_shape_t *exit;
+    my_button_shape_t *restart;
+    my_button_shape_t *zoom_in;
+    my_button_shape_t *zoom_out;
+    my_button_shape_t *size_x_plus;
+    my_button_shape_t *size_x_min;
+    my_button_shape_t *size_y_plus;
+    my_button_shape_t *size_y_min;
+    my_button_shape_t *up;
+    my_button_shape_t *down;
+    my_button_shape_t *left;
+    my_button_shape_t *right;
+} button_manage_t;
 
 typedef struct textures_s
 {
@@ -71,31 +92,16 @@ void song_destroy(sfMusic *song);
 void reset_map(my_world_t *my_world);
 int get_resize_map(my_world_t *my_world, int size_x, int size_y);
 
-#define TOOLS_X 1700
-#define FONT_PATH "./ressources/ChunkfiveEx.ttf"
-#define SIZE_CHAR 20
-
-typedef struct button_manage_s
-{
-    my_button_shape_t *exit;
-    my_button_shape_t *restart;
-    my_button_shape_t *zoom_in;
-    my_button_shape_t *zoom_out;
-    my_button_shape_t *size_x_plus;
-    my_button_shape_t *size_x_min;
-    my_button_shape_t *size_y_plus;
-    my_button_shape_t *size_y_min;
-    my_button_shape_t *up;
-    my_button_shape_t *down;
-    my_button_shape_t *left;
-    my_button_shape_t *right;
-} button_manage_t;
-
 button_manage_t *get_button_manage(void);
 void refresh_struct(button_manage_t *button, assets_t *assets);
 void destroy_struct(button_manage_t *button);
 void display_struct(button_manage_t *button, assets_t *assets);
 void button_effect(my_world_t *my_world, button_manage_t *button,
     assets_t *assets);
+int **dup_map(my_world_t *my_world, int size_x, int size_y);
+void water_textures(my_world_t *my_world, sfVector2f **map,
+                    sfVector2i coord, sfRenderWindow *window);
+sfVector2f **water_gest(my_world_t *my_world);
+void draw_water(assets_t *assets, sfVector2f **map, my_world_t *my_world);
 
 #endif

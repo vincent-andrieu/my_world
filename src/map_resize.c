@@ -7,7 +7,7 @@
 
 #include "my_world.h"
 
-static int **dup_map(my_world_t *my_world, int size_x, int size_y)
+int **dup_map(my_world_t *my_world, int size_x, int size_y)
 {
     int **temp = malloc(sizeof(int *) * ((int) my_world->scale.y + size_y + 1));
 

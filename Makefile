@@ -19,6 +19,7 @@ SRC	=	src/button/shape_button.c 	\
 		src/struct_init.c 	\
 		src/edit_map.c 	\
 		src/map_resize.c 	\
+		src/draw_water.c 	\
 		src/move_map.c
 
 OBJ	=	$(SRC:.c=.o)
