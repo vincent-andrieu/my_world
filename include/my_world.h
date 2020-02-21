@@ -46,7 +46,7 @@ typedef struct textures_s
 typedef struct my_world_s {
     int **map;
     float zoom;
-    sfVector2f scale;
+    sfVector2i scale;
     sfVector2i pos;
     sfVector2i pres_pos;
     textures_t textures;
@@ -69,5 +69,10 @@ sfMusic *start_song(void);
 void song_destroy(sfMusic *song);
 void reset_map(my_world_t *my_world);
 int get_resize_map(my_world_t *my_world, int size_x, int size_y);
+void put_float(int fd, double nbr);
+void my_put_fdnbr(int fd, int nb);
+int save_map(char *filepath, my_world_t *my_world);
+my_world_t *load_map(char *filepath);
+textures_t get_textures(void);
 
 #endif

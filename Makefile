@@ -16,7 +16,10 @@ SRC	=	src/button/my_button.c 	\
 		src/struct_init.c 	\
 		src/edit_map.c 	\
 		src/map_resize.c 	\
-		src/move_map.c
+		src/move_map.c 	\
+		src/manage_floats.c 	\
+		src/my_put_fdnbr.c 	\
+		src/load_save.c
 
 OBJ	=	$(SRC:.c=.o)
 

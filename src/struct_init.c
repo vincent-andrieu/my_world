@@ -7,7 +7,7 @@
 
 #include "my_world.h"
 
-static textures_t get_textures(void)
+textures_t get_textures(void)
 {
     textures_t textures;
     sfRenderStates *states[5] = {&textures.grass, &textures.dirt, &textures.stone,
@@ -31,7 +31,7 @@ my_world_t *get_my_world(void)
 
     if (!my_world)
         return NULL;
-    my_world->scale = (sfVector2f) {MAP_X, MAP_Y};
+    my_world->scale = (sfVector2i) {MAP_X, MAP_Y};
     my_world->pos = (sfVector2i) {WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4};
     my_world->textures = get_textures();
     my_world->zoom = 1;
