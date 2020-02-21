@@ -23,5 +23,7 @@ void button_status(int temp, my_button_shape_t *my_button)
     }
     else
         my_button->toggle = temp;
+    if (my_button->toggle == 2)
+        my_button->is_activate = true;
     sfClock_restart(my_button->clock_start);
 }

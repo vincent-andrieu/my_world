@@ -89,6 +89,19 @@ static void set_clock(button_manage_t *button)
     button->down->is_pressed = false;
     button->left->is_pressed = false;
     button->right->is_pressed = false;
+
+    button->exit->is_activate = false;
+    button->restart->is_activate = false;
+    button->zoom_in->is_activate = false;
+    button->zoom_out->is_activate = false;
+    button->size_x_plus->is_activate = false;
+    button->size_x_min->is_activate = false;
+    button->size_y_plus->is_activate = false;
+    button->size_y_min->is_activate = false;
+    button->up->is_activate = false;
+    button->down->is_activate = false;
+    button->left->is_activate = false;
+    button->right->is_activate = false;
 }
 
 button_manage_t *get_button_manage(void)

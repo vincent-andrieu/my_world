@@ -13,7 +13,7 @@
 #ifndef MY_BUTTON_H
 #define MY_BUTTON_H
 
-#define TIME_BUT 2.0f
+#define TIME_BUT 0.3f
 #define NB_TEXTURE 3
 #define HIT_X 216
 #define HIT_Y 90
@@ -28,6 +28,7 @@ typedef struct my_button_shape_s {
     sfTexture **texture;
     sfClock *clock_start;
     bool is_pressed;
+    bool is_activate;
 } my_button_shape_t;
 
 my_button_shape_t *get_button_shape(sfVector2f pos, sfVector2f scale);
