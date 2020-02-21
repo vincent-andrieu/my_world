@@ -19,7 +19,7 @@ static void zoom(my_world_t *my_world, button_manage_t *button)
 {
     if (button_ispressed(button->zoom_in))
         my_world->zoom += ZOOM_EFFECT;
-    if (button_ispressed(button->zoom_out))
+    if (button_ispressed(button->zoom_out) && my_world->zoom - ZOOM_EFFECT > 0)
         my_world->zoom -= ZOOM_EFFECT;
 }
 
