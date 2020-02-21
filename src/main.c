@@ -39,6 +39,8 @@ bool does_kill_prog(assets_t *assets, my_world_t *my_world)
 {
     sfEvent event;
 
+    if (!sfRenderWindow_isOpen(assets->window))
+        return true;
     while (sfRenderWindow_pollEvent(assets->window, &event)) {
         if (event.type == sfEvtClosed || (event.type == sfEvtKeyReleased
         && event.key.code == sfKeyEscape)) {

@@ -28,7 +28,7 @@ sfVector2f **create_twod_map(int **three_d_map, my_world_t *my_world)
         return NULL;
     my_map[(int) my_world->scale.y] = NULL;
     for (int y = 0; y < my_world->scale.y; y++) {
-        my_map[y] = malloc(sizeof(sfVector2f) * MAP_X);
+        my_map[y] = malloc(sizeof(sfVector2f) * my_world->scale.x);
         if (!my_map[y])
             return NULL;
         for (int x = 0; x < my_world->scale.x; x++)
@@ -70,6 +70,7 @@ void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world)
             }
         }
     }
+    draw_water(assets, water_gest(my_world), my_world);
     refresh_screen(assets);
     sfRenderWindow_clear(assets->window, sfBlack);
 }

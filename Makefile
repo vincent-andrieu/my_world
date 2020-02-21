@@ -5,8 +5,11 @@
 ## project makefile
 ##
 
-SRC	=	src/button/my_button.c 	\
-		src/button/set_button_design.c 	\
+SRC	=	src/button/shape_button.c 	\
+		src/button/button_manage.c 	\
+		src/button/button_init.c 	\
+		src/button/button_action.c 	\
+		src/button/button_time.c 	\
 		src/main.c 	\
 		src/usage.c 	\
 		src/my_world.c 	\
@@ -19,7 +22,8 @@ SRC	=	src/button/my_button.c 	\
 		src/move_map.c 	\
 		src/manage_floats.c 	\
 		src/my_put_fdnbr.c 	\
-		src/load_save.c
+		src/load_save.c 	\
+		src/draw_water.c
 
 OBJ	=	$(SRC:.c=.o)
 
