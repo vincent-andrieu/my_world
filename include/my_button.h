@@ -29,7 +29,7 @@ typedef struct my_button_shape_s {
     sfClock *clock_start;
     bool is_pressed;
     bool is_activate;
-} my_button_shape_t;
+} __attribute__((packed)) my_button_shape_t;
 
 my_button_shape_t *get_button_shape(sfVector2f pos, sfVector2f scale);
 int set_texture_button(my_button_shape_t *my_button, char *path_one,

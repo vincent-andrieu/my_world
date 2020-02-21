@@ -24,7 +24,10 @@ static int my_fill_struct(button_manage_t *but)
     but->down = get_button_shape((sfVector2f) {TOOLS_X, 910}, hit_box);
     but->left = get_button_shape((sfVector2f) {TOOLS_X - 250, 10}, hit_box);
     but->right = get_button_shape((sfVector2f) {TOOLS_X - 250, 110}, hit_box);
-
+    if (!but->exit || !but->restart || !but->zoom_in || !but->zoom_out ||
+        !but->size_x_plus || !but->size_x_min || !but->size_y_plus ||
+        !but->size_y_min || !but->up || !but->down || !but->left || !but->right)
+        return EXIT_ERROR;
     return EXIT_SUCCESS;
 }
 
@@ -46,62 +49,33 @@ static void texture_set(sfTexture **texture, button_manage_t *button)
 
 static int set_name_struct(button_manage_t *button)
 {
-    set_button_id(button->exit, "EXIT", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->restart, "RESTART", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->zoom_in, " ZOOM +", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->zoom_out, "ZOOM -", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->size_x_plus, "X +", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->size_x_min, "X -", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->size_y_plus, "Y +", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->size_y_min, "Y -", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->up, "UP", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->down, "DOWN", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->left, "LEFT", FONT_PATH, SIZE_CHAR);
-    set_button_id(button->right, "RIGHT", FONT_PATH, SIZE_CHAR);
+    char *name[]= { "EXIT", "RESTART", "ZOOM +", "ZOOM -", "X +", "X -", "Y +",
+                    "Y -", "UP", "DOWN", "LEFT", "RIGHT"};
+    button_manage_t *manage = button;
+    my_button_shape_t *tmp;
 
+    for (int i = 0; i < 12; i++) {
+        tmp = *(void **)manage;
+        if (set_button_id(tmp, name[i], FONT_PATH, SIZE_CHAR) == 84)
+            return EXIT_ERROR;
+        manage = (void *)manage + 8;
+    }
     return EXIT_SUCCESS;
 }
 
 static void set_clock(button_manage_t *button)
 {
-    button->exit->clock_start = sfClock_create();
-    button->restart->clock_start = sfClock_create();
-    button->zoom_in->clock_start = sfClock_create();
-    button->zoom_out->clock_start = sfClock_create();
-    button->size_x_plus->clock_start = sfClock_create();
-    button->size_x_min->clock_start = sfClock_create();
-    button->size_y_plus->clock_start = sfClock_create();
-    button->size_y_min->clock_start = sfClock_create();
-    button->up->clock_start = sfClock_create();
-    button->down->clock_start = sfClock_create();
-    button->left->clock_start = sfClock_create();
-    button->right->clock_start = sfClock_create();
+    button_manage_t *manage = button;
+    my_button_shape_t *tmp;
 
-    button->exit->is_pressed = false;
-    button->restart->is_pressed = false;
-    button->zoom_in->is_pressed = false;
-    button->zoom_out->is_pressed = false;
-    button->size_x_plus->is_pressed = false;
-    button->size_x_min->is_pressed = false;
-    button->size_y_plus->is_pressed = false;
-    button->size_y_min->is_pressed = false;
-    button->up->is_pressed = false;
-    button->down->is_pressed = false;
-    button->left->is_pressed = false;
-    button->right->is_pressed = false;
+    for (int i = 0; i < 12; i++) {
+        tmp = *(void **)manage;
+        tmp->clock_start = sfClock_create();
+        tmp->is_pressed = false;
+        tmp->is_activate = false;
+        manage = (void *)manage + 8;
+    }
 
-    button->exit->is_activate = false;
-    button->restart->is_activate = false;
-    button->zoom_in->is_activate = false;
-    button->zoom_out->is_activate = false;
-    button->size_x_plus->is_activate = false;
-    button->size_x_min->is_activate = false;
-    button->size_y_plus->is_activate = false;
-    button->size_y_min->is_activate = false;
-    button->up->is_activate = false;
-    button->down->is_activate = false;
-    button->left->is_activate = false;
-    button->right->is_activate = false;
 }
 
 button_manage_t *get_button_manage(void)

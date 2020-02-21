@@ -54,7 +54,7 @@ typedef struct button_manage_s
     my_button_shape_t *down;
     my_button_shape_t *left;
     my_button_shape_t *right;
-} button_manage_t;
+} __attribute__((packed)) button_manage_t;
 
 typedef struct textures_s
 {
