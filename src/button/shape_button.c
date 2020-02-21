@@ -72,15 +72,6 @@ void button_refresh_stat(my_button_shape_t *my_button, sfRenderWindow *window)
     else
         temp = 0;
     button_status(temp, my_button);
-    /*if (as_seconds(sfClock_getElapsedTime(my_button->clock_start)) < TIME_BUT)
-        return;
-    if (my_button->is_pressed) {
-        my_button->is_pressed = false;
-        my_button->toggle = 2;
-    }
-    else
-        my_button->toggle = temp;
-    sfClock_restart(my_button->clock_start);*/
 }
 
 void button_display(my_button_shape_t *my_button, sfRenderWindow *window)
