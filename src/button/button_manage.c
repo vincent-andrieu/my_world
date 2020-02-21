@@ -69,7 +69,7 @@ bool button_ispressed(my_button_shape_t *my_button)
 int set_button_id(my_button_shape_t *my_button, char *str, char *font_path,
     float size_char)
 {
-    sfVector2f pos = {my_button->pos.x + 75, my_button->pos.y + 50};
+    sfVector2f pos = {my_button->pos.x + 55, my_button->pos.y + 30};
     my_button->text = sfText_create();
     my_button->font = sfFont_createFromFile(font_path);
 

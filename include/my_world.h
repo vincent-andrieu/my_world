@@ -73,7 +73,7 @@ int get_resize_map(my_world_t *my_world, int size_x, int size_y);
 
 #define TOOLS_X 1700
 #define FONT_PATH "./ressources/ChunkfiveEx.ttf"
-#define SIZE_CHAR 10
+#define SIZE_CHAR 20
 
 typedef struct button_manage_s
 {
