@@ -44,7 +44,7 @@ static void texture_set(sfTexture **texture, button_manage_t *button)
     button->right->texture = texture;
 }
 
-static void set_name_struct(button_manage_t *button)
+static int set_name_struct(button_manage_t *button)
 {
     set_button_id(button->exit, "EXIT", FONT_PATH, SIZE_CHAR);
     set_button_id(button->restart, "RESTART", FONT_PATH, SIZE_CHAR);
@@ -58,24 +58,57 @@ static void set_name_struct(button_manage_t *button)
     set_button_id(button->down, "DOWN", FONT_PATH, SIZE_CHAR);
     set_button_id(button->left, "LEFT", FONT_PATH, SIZE_CHAR);
     set_button_id(button->right, "RIGHT", FONT_PATH, SIZE_CHAR);
+
+    return EXIT_SUCCESS;
+}
+
+static void set_clock(button_manage_t *button)
+{
+    button->exit->clock_start = sfClock_create();
+    button->restart->clock_start = sfClock_create();
+    button->zoom_in->clock_start = sfClock_create();
+    button->zoom_out->clock_start = sfClock_create();
+    button->size_x_plus->clock_start = sfClock_create();
+    button->size_x_min->clock_start = sfClock_create();
+    button->size_y_plus->clock_start = sfClock_create();
+    button->size_y_min->clock_start = sfClock_create();
+    button->up->clock_start = sfClock_create();
+    button->down->clock_start = sfClock_create();
+    button->left->clock_start = sfClock_create();
+    button->right->clock_start = sfClock_create();
+
+    button->exit->is_pressed = false;
+    button->restart->is_pressed = false;
+    button->zoom_in->is_pressed = false;
+    button->zoom_out->is_pressed = false;
+    button->size_x_plus->is_pressed = false;
+    button->size_x_min->is_pressed = false;
+    button->size_y_plus->is_pressed = false;
+    button->size_y_min->is_pressed = false;
+    button->up->is_pressed = false;
+    button->down->is_pressed = false;
+    button->left->is_pressed = false;
+    button->right->is_pressed = false;
 }
 
 button_manage_t *get_button_manage(void)
 {
     button_manage_t *button = malloc(sizeof(button_manage_t));
-    sfTexture **texture;
+    sfTexture **tex;
 
     if (!button)
         return NULL;
-    texture = malloc(sizeof(sfTexture *) * NB_TEXTURE);
-    if (!texture)
+    tex = malloc(sizeof(sfTexture *) * NB_TEXTURE);
+    if (!tex)
         return NULL;
     if (my_fill_struct(button) == EXIT_ERROR)
         return NULL;
-    texture[0] = sfTexture_createFromFile("./ressources/button_pressed.png", NULL);
-    texture[1] = sfTexture_createFromFile("./ressources/button_over.png", NULL);
-    texture[2] = sfTexture_createFromFile("./ressources/button.png", NULL);
-    texture_set(texture, button);
-    set_name_struct(button);
+    tex[0] = sfTexture_createFromFile("./ressources/button_pressed.png", NULL);
+    tex[1] = sfTexture_createFromFile("./ressources/button_over.png", NULL);
+    tex[2] = sfTexture_createFromFile("./ressources/button.png", NULL);
+    texture_set(tex, button);
+    if (set_name_struct(button) == EXIT_ERROR)
+        return NULL;
+    set_clock(button);
     return button;
 }

@@ -48,25 +48,39 @@ void button_shape_destroy(my_button_shape_t *my_button)
         sfFont_destroy(my_button->font);
         sfText_destroy(my_button->text);
     }
+    sfClock_destroy(my_button->clock_start);
     free(my_button);
 }
 
 void button_refresh_stat(my_button_shape_t *my_button, sfRenderWindow *window)
 {
     sfVector2i mouse_pos = sfMouse_getPositionRenderWindow(window);
+    int temp = my_button->toggle;
 
     if (mouse_pos.x >= my_button->pos.x &&
         mouse_pos.x <= my_button->pos.x + my_button->scale.x) {
         if (mouse_pos.y >= my_button->pos.y &&
             mouse_pos.y <= my_button->pos.y + my_button->scale.y) {
-            if (sfMouse_isButtonPressed(sfMouseLeft))
-                my_button->toggle = 2;
+            if (sfMouse_isButtonPressed(sfMouseLeft)) {
+                my_button->is_pressed = true;
+                temp = 2;
+            }
             else
-                my_button->toggle = 1;
+                temp = 1;
         }
     }
     else
-        my_button->toggle = 0;
+        temp = 0;
+    button_status(temp, my_button);
+    /*if (as_seconds(sfClock_getElapsedTime(my_button->clock_start)) < TIME_BUT)
+        return;
+    if (my_button->is_pressed) {
+        my_button->is_pressed = false;
+        my_button->toggle = 2;
+    }
+    else
+        my_button->toggle = temp;
+    sfClock_restart(my_button->clock_start);*/
 }
 
 void button_display(my_button_shape_t *my_button, sfRenderWindow *window)

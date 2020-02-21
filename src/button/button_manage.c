@@ -66,7 +66,7 @@ bool button_ispressed(my_button_shape_t *my_button)
     return false;
 }
 
-void set_button_id(my_button_shape_t *my_button, char *str, char *font_path,
+int set_button_id(my_button_shape_t *my_button, char *str, char *font_path,
     float size_char)
 {
     sfVector2f pos = {my_button->pos.x + 75, my_button->pos.y + 50};
@@ -74,10 +74,13 @@ void set_button_id(my_button_shape_t *my_button, char *str, char *font_path,
     my_button->font = sfFont_createFromFile(font_path);
 
     if (!str || !my_button->font)
-        return;
+        return EXIT_ERROR;
     my_button->name = my_strdup(str);
+    if (!my_button->name)
+        return EXIT_ERROR;
     sfText_setString(my_button->text, str);
     sfText_setFont(my_button->text, my_button->font);
     sfText_setCharacterSize(my_button->text, size_char);
     sfText_setPosition(my_button->text, pos);
+    return EXIT_SUCCESS;
 }
