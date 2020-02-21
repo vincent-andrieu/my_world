@@ -62,10 +62,12 @@ void refresh_struct(button_manage_t *button, assets_t *assets)
 bool button_ispressed(my_button_shape_t *my_button)
 {
     if (my_button->toggle == 2) {
-        sfText_setPosition(my_button->text, (sfVector2f) {my_button->pos.x + 55, my_button->pos.y + 40});
+        sfText_setPosition(my_button->text, (sfVector2f)
+            {my_button->pos.x + 55, my_button->pos.y + 40});
         return true;
     }
-    sfText_setPosition(my_button->text, (sfVector2f) {my_button->pos.x + 55, my_button->pos.y + 30});
+    sfText_setPosition(my_button->text, (sfVector2f)
+        {my_button->pos.x + 55, my_button->pos.y + 30});
     return false;
 }
 
