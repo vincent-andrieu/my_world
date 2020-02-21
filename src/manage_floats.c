@@ -1,12 +1,14 @@
 /*
 ** EPITECH PROJECT, 2019
-** PROJECT_NAME
+** my_world
 ** File description:
-** DESCRIPTION
+** manage floats
 */
 
+#include <unistd.h>
 #include <stdbool.h>
 #include "my.h"
+#include "my_world.h"
 
 float my_get_float(char *str)
 {
@@ -20,4 +22,16 @@ float my_get_float(char *str)
             nb /= 10;
     }
     return nb;
+}
+
+void put_float(int fd, double nbr)
+{
+    int ent = (int) nbr;
+
+    my_put_fdnbr(fd, ent);
+    write(fd, ".", 1);
+    nbr -= ent;
+    for (int i = 0; i < 6; i++)
+        nbr *= 10;
+    my_put_fdnbr(fd, nbr);
 }
