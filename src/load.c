@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2019
 ** my_world
 ** File description:
-** save and load map
+** load the map
 */
 
 #include <stdio.h>
@@ -10,7 +10,6 @@
 
 static int load_map_array(FILE *file, my_world_t *my_world)
 {
-    printf("%d\n", my_world->scale.y);
     my_world->map = malloc(sizeof(int *) * (my_world->scale.y + 1));
     if (my_world->map == NULL)
         return EXIT_ERROR;
@@ -24,7 +23,7 @@ static int load_map_array(FILE *file, my_world_t *my_world)
     return EXIT_SUCCESS;
 }
 
-my_world_t *load_map(char *filepath)
+static my_world_t *load_map(char *filepath)
 {
     my_world_t *my_world = malloc(sizeof(my_world_t));
     FILE *file = fopen(filepath, "r");
@@ -44,24 +43,18 @@ my_world_t *load_map(char *filepath)
     return my_world;
 }
 
-static int save_map_array(FILE *file, int **map, sfVector2i scale)
+int button_load(my_world_t **my_world, button_manage_t *button)
 {
-    for (int y = 0; y < scale.y; y++)
-        if (fwrite(map[y], sizeof(int), scale.x, file) <= 0)
+    char *filepath;
+
+    if (button_ispressed(button->load) && button->load->is_activate) {
+        my_world_destroy(*my_world);
+        filepath = get_input();
+        *my_world = load_map(filepath);
+        if (*my_world == NULL)
             return EXIT_ERROR;
-    return EXIT_SUCCESS;
-}
-
-int save_map(char *filepath, my_world_t *my_world)
-{
-    FILE *file = fopen(filepath, "w");
-
-    if (file == NULL)
-        return EXIT_ERROR;
-    if (fwrite(my_world, sizeof(my_world_t), 1, file) <= 0)
-        return EXIT_ERROR;
-    if (save_map_array(file, my_world->map, my_world->scale) != EXIT_SUCCESS)
-        return EXIT_ERROR;
-    fclose(file);
+        free(filepath);
+        button->load->is_activate = false;
+    }
     return EXIT_SUCCESS;
 }

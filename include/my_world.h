@@ -29,6 +29,7 @@
 #define EDIT_SPEED 2
 #define MOVE_SPEED 50
 #define MOUSE_SENSI 10.f
+#define ZOOM_EFFECT 0.1
 
 #define SNOW_LEVEL 100
 #define STONE_LEVEL 40
@@ -54,6 +55,8 @@ typedef struct button_manage_s
     my_button_shape_t *down;
     my_button_shape_t *left;
     my_button_shape_t *right;
+    my_button_shape_t *load;
+    my_button_shape_t *save;
 } __attribute__((packed)) button_manage_t;
 
 typedef struct textures_s
@@ -90,19 +93,20 @@ void edit_map(sfRenderWindow *window,
 sfMusic *start_song(void);
 void song_destroy(sfMusic *song);
 void reset_map(my_world_t *my_world);
-int get_resize_map(my_world_t *my_world, int size_x, int size_y);
+void resize(my_world_t *my_world, button_manage_t *button);
 void put_float(int fd, double nbr);
 void my_put_fdnbr(int fd, int nb);
-int save_map(char *filepath, my_world_t *my_world);
-my_world_t *load_map(char *filepath);
 textures_t get_textures(void);
 
 button_manage_t *get_button_manage(void);
 void refresh_struct(button_manage_t *button, assets_t *assets);
 void destroy_struct(button_manage_t *button);
 void display_struct(button_manage_t *button, assets_t *assets);
-void button_effect(my_world_t *my_world, button_manage_t *button,
+char *get_input(void);
+int button_effect(my_world_t **my_world, button_manage_t *button,
     assets_t *assets);
+int button_load(my_world_t **my_world, button_manage_t *button);
+int button_save(my_world_t *my_world, button_manage_t *button);
 int **dup_map(my_world_t *my_world, int size_x, int size_y);
 void water_textures(my_world_t *my_world, sfVector2f **map,
                     sfVector2i coord, sfRenderWindow *window);

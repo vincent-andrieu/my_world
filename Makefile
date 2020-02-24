@@ -22,7 +22,9 @@ SRC	=	src/button/shape_button.c 	\
 		src/move_map.c 	\
 		src/manage_floats.c 	\
 		src/my_put_fdnbr.c 	\
-		src/load_save.c 	\
+		src/input.c 	\
+		src/load.c 	\
+		src/save.c 	\
 		src/draw_water.c
 
 OBJ	=	$(SRC:.c=.o)

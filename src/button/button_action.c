@@ -7,8 +7,6 @@
 
 #include "my_world.h"
 
-#define ZOOM_EFFECT 0.1
-
 static void exit_button(button_manage_t *button, assets_t *assets)
 {
     if (button_ispressed(button->exit) && button->exit->is_activate) {
@@ -24,33 +22,9 @@ static void zoom(my_world_t *my_world, button_manage_t *button)
         button->zoom_in->is_activate = false;
     }
     if (button_ispressed(button->zoom_out) && my_world->zoom - ZOOM_EFFECT > 0
-        && button->zoom_out->is_activate) {
+    && button->zoom_out->is_activate) {
         button->zoom_out->is_activate = false;
         my_world->zoom -= ZOOM_EFFECT;
-    }
-}
-
-static void resize(my_world_t *my_world, button_manage_t *button)
-{
-    if (button_ispressed(button->size_y_min) && my_world->scale.y > 2 &&
-        button->size_y_min->is_activate) {
-        get_resize_map(my_world, 0, -1);
-        button->size_y_min->is_activate = false;
-    }
-    if (button_ispressed(button->size_y_plus) &&
-        button->size_y_plus->is_activate) {
-        get_resize_map(my_world, 0, 1);
-        button->size_y_plus->is_activate = false;
-    }
-    if (button_ispressed(button->size_x_min) && my_world->scale.x > 2 &&
-        button->size_x_min->is_activate) {
-        get_resize_map(my_world, -1, 0);
-        button->size_x_min->is_activate = false;
-    }
-    if (button_ispressed(button->size_x_plus) &&
-        button->size_x_plus->is_activate) {
-        get_resize_map(my_world, 1, 0);
-        button->size_x_plus->is_activate = false;
     }
 }
 
@@ -82,12 +56,17 @@ static void move(my_world_t *my_world, button_manage_t *button)
     }
 }
 
-void button_effect(my_world_t *my_world, button_manage_t *button,
+int button_effect(my_world_t **my_world, button_manage_t *button,
     assets_t *assets)
 {
     exit_button(button, assets);
-    zoom(my_world, button);
-    resize(my_world, button);
-    reset(my_world, button);
-    move(my_world, button);
+    zoom(*my_world, button);
+    resize(*my_world, button);
+    reset(*my_world, button);
+    move(*my_world, button);
+    if (button_load(my_world, button) != EXIT_SUCCESS)
+        return EXIT_ERROR;
+    if (button_save(*my_world, button) != EXIT_SUCCESS)
+        return EXIT_ERROR;
+    return EXIT_SUCCESS;
 }

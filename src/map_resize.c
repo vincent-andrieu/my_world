@@ -37,7 +37,7 @@ void free_my_tab(int **tab)
     free(tab);
 }
 
-int get_resize_map(my_world_t *my_world, int size_x, int size_y)
+static int get_resize_map(my_world_t *my_world, int size_x, int size_y)
 {
     int **temp;
 
@@ -51,4 +51,28 @@ int get_resize_map(my_world_t *my_world, int size_x, int size_y)
     my_world->scale.y += size_y;
     my_world->scale.x += size_x;
     return EXIT_SUCCESS;
+}
+
+void resize(my_world_t *my_world, button_manage_t *button)
+{
+    if (button_ispressed(button->size_y_min) && my_world->scale.y > 2 &&
+        button->size_y_min->is_activate) {
+        get_resize_map(my_world, 0, -1);
+        button->size_y_min->is_activate = false;
+    }
+    if (button_ispressed(button->size_y_plus) &&
+        button->size_y_plus->is_activate) {
+        get_resize_map(my_world, 0, 1);
+        button->size_y_plus->is_activate = false;
+    }
+    if (button_ispressed(button->size_x_min) && my_world->scale.x > 2 &&
+        button->size_x_min->is_activate) {
+        get_resize_map(my_world, -1, 0);
+        button->size_x_min->is_activate = false;
+    }
+    if (button_ispressed(button->size_x_plus) &&
+        button->size_x_plus->is_activate) {
+        get_resize_map(my_world, 1, 0);
+        button->size_x_plus->is_activate = false;
+    }
 }
