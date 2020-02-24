@@ -84,6 +84,7 @@ typedef struct my_world_s {
     sfVector2i pres_pos;
     textures_t textures;
     sfClock *clock;
+    bool tools;
 } my_world_t;
 
 int usage(int exit_value, char *binary_name);
@@ -123,5 +124,7 @@ sfVector2f **water_gest(my_world_t *my_world);
 void draw_water(assets_t *assets, sfVector2f **map, my_world_t *my_world);
 void free_my_tab(int **tab);
 void free_my_map(sfVector2f **map);
+bool is_in_triangle(sfVector2f p_one, sfVector2f p_two, sfVector2f p_three,
+    sfVector2f p_x);
 
 #endif

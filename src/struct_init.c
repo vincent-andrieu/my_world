@@ -33,6 +33,7 @@ static void init_struct_var(my_world_t *my_world)
     my_world->textures = get_textures();
     my_world->zoom = 1;
     my_world->clock = sfClock_create();
+    my_world->tools = false;
 }
 
 my_world_t *get_my_world(void)
