@@ -61,5 +61,7 @@ int my_world(assets_t *assets, char *filepath)
     while (!does_kill_prog(assets, my_world))
         if (game(assets, &my_world, button) != EXIT_SUCCESS)
             return EXIT_ERROR;
+    if (final_save(my_world, START_SAVE_NBR) == EXIT_ERROR)
+        return EXIT_ERROR;
     return end_of_world(song, my_world, button);
 }

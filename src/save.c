@@ -6,6 +6,8 @@
 */
 
 #include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include "my_world.h"
 
 static int save_map_array(FILE *file, int **map, sfVector2i scale)
@@ -44,4 +46,26 @@ int button_save(my_world_t *my_world, button_manage_t *button)
         button->save->is_activate = false;
     }
     return EXIT_SUCCESS;
+}
+
+int final_save(my_world_t *my_world, int nbr)
+{
+    char *index = my_nbr_get_str(nbr);
+    char *filepath = my_strndup(FILE_PREFIX"-",
+                                my_strlen(FILE_PREFIX"-") + my_strlen(index));
+    int fd;
+
+    my_strcat(filepath, index);
+    fd = open(filepath, O_RDONLY);
+    if (fd == -1) {
+        if (save_map(filepath, my_world) == EXIT_ERROR)
+            return EXIT_ERROR;
+        free(index);
+        free(filepath);
+        return EXIT_SUCCESS;
+    }
+    close(fd);
+    free(index);
+    free(filepath);
+    return final_save(my_world, nbr + 1);
 }

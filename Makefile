@@ -42,7 +42,7 @@ all:	$(NAME)
 $(NAME):	$(OBJ)
 	make -C lib/my/
 	make -C lib/graph/
-	$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
+	mkdir -p SAVES;$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJ)

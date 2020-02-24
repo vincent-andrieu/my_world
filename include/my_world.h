@@ -42,6 +42,8 @@
 #define SIZE_CHAR 20
 
 #define SIZE_LIST 42
+#define FILE_PREFIX "./SAVES/MYWORLD"
+#define START_SAVE_NBR 0
 
 typedef struct event_input_t
 {
@@ -120,6 +122,7 @@ int button_effect(my_world_t **my_world, button_manage_t *button,
 int button_load(my_world_t **my_world, button_manage_t *button);
 int load_map(my_world_t **my_world, char *filepath);
 int button_save(my_world_t *my_world, button_manage_t *button);
+int final_save(my_world_t *my_world, int nbr);
 int **dup_map(my_world_t *my_world, int size_x, int size_y);
 void water_textures(my_world_t *my_world, sfVector2f **map,
                     sfVector2i coord, sfRenderWindow *window);
