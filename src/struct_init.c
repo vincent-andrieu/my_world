@@ -33,6 +33,7 @@ my_world_t *get_my_world(void)
         return NULL;
     my_world->scale = (sfVector2i) {MAP_X, MAP_Y};
     my_world->pos = (sfVector2i) {WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4};
+    my_world->pres_pos = (sfVector2i) {WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4};
     my_world->textures = get_textures();
     my_world->zoom = 1;
     my_world->map = malloc(sizeof(int *) * (MAP_Y + 1));
@@ -43,8 +44,7 @@ my_world_t *get_my_world(void)
         my_world->map[y] = malloc(sizeof(int) * MAP_X);
         if (!my_world->map[y])
             return NULL;
-        for (int x = 0; x < MAP_X; x++)
-            my_world->map[y][x] = 0;
+        for (int x = 0; x < MAP_X; my_world->map[y][x] = 0, x++);
     }
     return my_world;
 }
