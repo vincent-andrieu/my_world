@@ -41,7 +41,7 @@
 #define FONT_PATH "./ressources/ChunkfiveEx.ttf"
 #define SIZE_CHAR 20
 
-#define SIZE_LIST 36
+#define SIZE_LIST 42
 
 typedef struct event_input_t
 {

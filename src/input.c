@@ -44,7 +44,13 @@ event_input_s const key_tab[] = {
     (event_input_s) {sfKeyNum6, '6'},
     (event_input_s) {sfKeyNum7, '7'},
     (event_input_s) {sfKeyNum8, '8'},
-    (event_input_s) {sfKeyNum9, '9'}
+    (event_input_s) {sfKeyNum9, '9'},
+    (event_input_s) {sfKeySlash, '/'},
+    (event_input_s) {sfKeyBackslash, '\\'},
+    (event_input_s) {sfKeySpace, ' '},
+    (event_input_s) {sfKeyHyphen, '-'},
+    (event_input_s) {sfKeyTilde, '~'},
+    (event_input_s) {sfKeyQuote, '\''}
 };
 
 static void text_display(sfRenderWindow *window, sfVector2f position, char *str)
@@ -77,14 +83,26 @@ static char *add_char(char *str, char c)
     return ret;
 }
 
+static void remove_char(char *str)
+{
+    int i;
+
+    for (i = 0; str[i + 1] != '\0'; i++);
+    str[i] = '\0';
+}
+
 static char *text_input(sfRenderWindow *window, sfEvent event, char *str)
 {
     if (event.type == sfEvtClosed || (event.type == sfEvtKeyReleased
-        && event.key.code == sfKeyEscape)) {
+        && (event.key.code == sfKeyEscape || event.key.code == sfKeyEnter))) {
         sfRenderWindow_close(window);
         return str;
     }
     if (event.type == sfEvtKeyPressed) {
+        if (event.key.code == sfKeyBackspace) {
+            remove_char(str);
+            return str;
+        }
         for (int i = 0; i < SIZE_LIST; i++) {
             if (event.key.code == key_tab[i].code)
                 str = add_char(str, key_tab[i].key);
@@ -93,18 +111,17 @@ static char *text_input(sfRenderWindow *window, sfEvent event, char *str)
     return str;
 }
 
-char *get_input(void)
+char *get_input(char *title)
 {
     sfEvent event;
-    sfRenderWindow *window = sfRenderWindow_create((sfVideoMode) {800, 600, 32},
-        "input", sfResize | sfClose, NULL);
+    sfRenderWindow *window = sfRenderWindow_create((sfVideoMode) {1920, 100, 32},
+        title, sfResize | sfClose, NULL);
     char *str = malloc(sizeof(char) * 1);
 
     if (!str)
         return NULL;
     str[0] = '\0';
     while (sfRenderWindow_isOpen(window)) {
-        sfRenderWindow_display(window);
         while (sfRenderWindow_pollEvent(window, &event)) {
             str = text_input(window, event, str);
             if (!str)
@@ -112,6 +129,8 @@ char *get_input(void)
         }
         if (str[0])
             text_display(window, (sfVector2f) {0, 0}, str);
+        sfRenderWindow_display(window);
+        sfRenderWindow_clear(window, sfBlack);
     }
     sfRenderWindow_destroy(window);
     return str;
