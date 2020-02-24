@@ -49,8 +49,10 @@ int button_load(my_world_t **my_world, button_manage_t *button)
         filepath = get_input("Loading filepath");
         file = fopen(filepath, "r");
         free(filepath);
-        if (file == NULL)
+        if (file == NULL) {
+            my_put_error_str("Bad loading filepath\n");
             return EXIT_FAILURE;
+        }
         my_world_destroy(*my_world);
         *my_world = load_map(file);
         if (*my_world == NULL)
