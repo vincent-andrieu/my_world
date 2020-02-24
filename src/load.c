@@ -49,7 +49,7 @@ int button_load(my_world_t **my_world, button_manage_t *button)
 
     if (button_ispressed(button->load) && button->load->is_activate) {
         my_world_destroy(*my_world);
-        filepath = get_input();
+        filepath = get_input("Loading file name");
         *my_world = load_map(filepath);
         if (*my_world == NULL)
             return EXIT_ERROR;

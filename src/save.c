@@ -35,7 +35,7 @@ int button_save(my_world_t *my_world, button_manage_t *button)
     char *filepath;
 
     if (button_ispressed(button->save) && button->save->is_activate) {
-        filepath = get_input();
+        filepath = get_input("Saving file name");
         if (filepath == NULL)
             return EXIT_ERROR;
         if (save_map(filepath, my_world) != EXIT_SUCCESS)

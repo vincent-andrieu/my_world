@@ -111,7 +111,7 @@ button_manage_t *get_button_manage(void);
 void refresh_struct(button_manage_t *button, assets_t *assets);
 void destroy_struct(button_manage_t *button);
 void display_struct(button_manage_t *button, assets_t *assets);
-char *get_input(void);
+char *get_input(char *title);
 int button_effect(my_world_t **my_world, button_manage_t *button,
     assets_t *assets);
 int button_load(my_world_t **my_world, button_manage_t *button);
