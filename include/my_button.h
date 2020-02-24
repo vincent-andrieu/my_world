@@ -13,7 +13,7 @@
 #ifndef MY_BUTTON_H
 #define MY_BUTTON_H
 
-#define TIME_BUT 0.8f
+#define TIME_BUT 0.3f
 #define NB_TEXTURE 3
 #define HIT_X 216
 #define HIT_Y 90

@@ -80,6 +80,7 @@ typedef struct my_world_s {
     sfVector2i pos;
     sfVector2i pres_pos;
     textures_t textures;
+    sfClock *clock;
 } my_world_t;
 
 int usage(int exit_value, char *binary_name);
