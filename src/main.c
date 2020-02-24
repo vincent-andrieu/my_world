@@ -53,13 +53,13 @@ bool does_kill_prog(assets_t *assets, my_world_t *my_world)
     return false;
 }
 
-static int show_window(assets_t *assets)
+static int show_window(assets_t *assets, char *filepath)
 {
     sfEvent event;
     int exit_value;
 
     srand(time(NULL));
-    exit_value = my_world(assets);
+    exit_value = my_world(assets, filepath);
     while (sfRenderWindow_pollEvent(assets->window, &event))
         if (event.type == sfEvtClosed
         || event.key.code == sfKeyEscape)
@@ -72,7 +72,7 @@ static int show_window(assets_t *assets)
     return exit_value;
 }
 
-static int prepare_window(sfVideoMode mde, assets_t *assets)
+static int prepare_window(sfVideoMode mde, assets_t *assets, char *filepath)
 {
     int exit_value = -1;
 
@@ -87,7 +87,7 @@ static int prepare_window(sfVideoMode mde, assets_t *assets)
     sfSprite_setTexture(assets->sprite, assets->texture, sfTrue);
     sfRenderWindow_setFramerateLimit(assets->window, 30);
     if (sfRenderWindow_isOpen(assets->window))
-        exit_value = show_window(assets);
+        exit_value = show_window(assets, filepath);
     framebuffer_destroy(assets->framebuffer);
     sfSprite_destroy(assets->sprite);
     sfTexture_destroy(assets->texture);
@@ -98,12 +98,12 @@ static int prepare_window(sfVideoMode mde, assets_t *assets)
 
 int main(int argc, char **argv)
 {
-    if (argc == 2 && !my_strcmp(argv[1], "-h"))
+    if (argc >= 2 && !my_strcmp(argv[1], "-h"))
         return usage(EXIT_SUCCESS, argv[0]);
-    if (argc != 1) {
+    if (argc > 2) {
         my_put_error_str(MSG_INVALID_ARG_NBR);
         return EXIT_INVALID_ARG_NBR;
     }
-    return prepare_window((sfVideoMode)
-                {WINDOW_WIDTH, WINDOW_HEIGHT, 32}, malloc(sizeof(assets_t)));
+    return prepare_window((sfVideoMode) {WINDOW_WIDTH, WINDOW_HEIGHT, 32},
+                        malloc(sizeof(assets_t)), argc == 2 ? argv[1] : NULL);
 }

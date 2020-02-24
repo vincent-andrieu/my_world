@@ -41,9 +41,8 @@ static my_world_t *read_map(FILE *file)
     return my_world;
 }
 
-int load_map(my_world_t **my_world)
+int load_map(my_world_t **my_world, char *filepath)
 {
-    char *filepath = get_input("Loading filepath");
     FILE *file = fopen(filepath, "r");
 
     free(filepath);
@@ -63,7 +62,7 @@ int button_load(my_world_t **my_world, button_manage_t *button)
     int exit_value = EXIT_SUCCESS;
 
     if (button_ispressed(button->load) && button->load->is_activate) {
-        exit_value = load_map(my_world);
+        exit_value = load_map(my_world, get_input("Loading filepath"));
         button->load->is_activate = false;
     }
     return exit_value;

@@ -89,7 +89,7 @@ typedef struct my_world_s {
 
 int usage(int exit_value, char *binary_name);
 bool does_kill_prog(assets_t *assets, my_world_t *my_world);
-int my_world(assets_t *assets);
+int my_world(assets_t *assets, char *filepath);
 my_world_t *get_my_world(void);
 void my_world_destroy(my_world_t *my_world);
 sfVector2f **create_twod_map(int **three_d_map, my_world_t *my_world);
@@ -116,7 +116,7 @@ char *get_input(char *title);
 int button_effect(my_world_t **my_world, button_manage_t *button,
     assets_t *assets);
 int button_load(my_world_t **my_world, button_manage_t *button);
-int load_map(my_world_t **my_world);
+int load_map(my_world_t **my_world, char *filepath);
 int button_save(my_world_t *my_world, button_manage_t *button);
 int **dup_map(my_world_t *my_world, int size_x, int size_y);
 void water_textures(my_world_t *my_world, sfVector2f **map,
