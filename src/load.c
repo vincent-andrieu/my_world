@@ -23,7 +23,7 @@ static int load_map_array(FILE *file, my_world_t *my_world)
     return EXIT_SUCCESS;
 }
 
-static my_world_t *load_map(FILE *file)
+static my_world_t *read_map(FILE *file)
 {
     my_world_t *my_world = malloc(sizeof(my_world_t));
 
@@ -37,27 +37,34 @@ static my_world_t *load_map(FILE *file)
     }
     fclose(file);
     my_world->textures = get_textures();
+    my_world->clock = sfClock_create();
     return my_world;
+}
+
+int load_map(my_world_t **my_world)
+{
+    char *filepath = get_input("Loading filepath");
+    FILE *file = fopen(filepath, "r");
+
+    free(filepath);
+    if (file == NULL) {
+        my_put_error_str("Bad loading filepath\n");
+        return EXIT_FAILURE;
+    }
+    my_world_destroy(*my_world);
+    *my_world = read_map(file);
+    if (*my_world == NULL)
+        return EXIT_ERROR;
+    return EXIT_SUCCESS;
 }
 
 int button_load(my_world_t **my_world, button_manage_t *button)
 {
-    char *filepath;
-    FILE *file;
+    int exit_value = EXIT_SUCCESS;
 
     if (button_ispressed(button->load) && button->load->is_activate) {
-        filepath = get_input("Loading filepath");
-        file = fopen(filepath, "r");
-        free(filepath);
-        if (file == NULL) {
-            my_put_error_str("Bad loading filepath\n");
-            return EXIT_FAILURE;
-        }
-        my_world_destroy(*my_world);
-        *my_world = load_map(file);
-        if (*my_world == NULL)
-            return EXIT_ERROR;
+        exit_value = load_map(my_world);
         button->load->is_activate = false;
     }
-    return EXIT_SUCCESS;
+    return exit_value;
 }

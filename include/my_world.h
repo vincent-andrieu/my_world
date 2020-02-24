@@ -116,6 +116,7 @@ char *get_input(char *title);
 int button_effect(my_world_t **my_world, button_manage_t *button,
     assets_t *assets);
 int button_load(my_world_t **my_world, button_manage_t *button);
+int load_map(my_world_t **my_world);
 int button_save(my_world_t *my_world, button_manage_t *button);
 int **dup_map(my_world_t *my_world, int size_x, int size_y);
 void water_textures(my_world_t *my_world, sfVector2f **map,
