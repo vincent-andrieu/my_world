@@ -24,6 +24,7 @@ void display_struct(button_manage_t *button, assets_t *assets)
     button_display(button->right, assets->window);
     button_display(button->load, assets->window);
     button_display(button->save, assets->window);
+    button_display(button->tools, assets->window);
 }
 
 void destroy_struct(button_manage_t *button)
@@ -45,6 +46,7 @@ void destroy_struct(button_manage_t *button)
     button_shape_destroy(button->right);
     button_shape_destroy(button->load);
     button_shape_destroy(button->save);
+    button_shape_destroy(button->tools);
     free(button);
 }
 
@@ -64,6 +66,7 @@ void refresh_struct(button_manage_t *button, assets_t *assets)
     button_refresh_stat(button->right, assets->window);
     button_refresh_stat(button->load, assets->window);
     button_refresh_stat(button->save, assets->window);
+    button_refresh_stat(button->tools, assets->window);
 }
 
 bool button_ispressed(my_button_shape_t *my_button)

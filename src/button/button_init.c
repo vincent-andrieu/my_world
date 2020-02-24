@@ -10,18 +10,19 @@
 
 static int my_fill_struct(button_manage_t *button)
 {
-    sfVector2f coords[14] = {(sfVector2f) {TOOLS_X, 10}, (sfVector2f)
+    sfVector2f coords[15] = {(sfVector2f) {TOOLS_X, 10}, (sfVector2f)
         {TOOLS_X, 110}, (sfVector2f) {TOOLS_X, 210}, (sfVector2f) {TOOLS_X,
             310}, (sfVector2f) {TOOLS_X, 410}, (sfVector2f) {TOOLS_X, 510},
         (sfVector2f) {TOOLS_X, 610}, (sfVector2f) {TOOLS_X, 710},
         (sfVector2f) {TOOLS_X, 810}, (sfVector2f) {TOOLS_X, 910},
         (sfVector2f) {TOOLS_X - 250, 10}, (sfVector2f) {TOOLS_X - 250, 110},
-        (sfVector2f) {TOOLS_X - 250, 210}, (sfVector2f) {TOOLS_X - 250, 310}
+        (sfVector2f) {TOOLS_X - 250, 210}, (sfVector2f) {TOOLS_X - 250, 310},
+        (sfVector2f) {TOOLS_X - 250, 410}
     };
     button_manage_t *manage = button;
     my_button_shape_t *tmp;
 
-    for (int i = 0; i < 14; i++) {
+    for (int i = 0; i < 15; i++) {
         tmp = get_button_shape(coords[i], (sfVector2f) {HIT_X, HIT_Y});
         if (tmp == NULL)
             return EXIT_ERROR;
@@ -47,16 +48,18 @@ static void texture_set(sfTexture **texture, button_manage_t *button)
     button->right->texture = texture;
     button->load->texture = texture;
     button->save->texture = texture;
+    button->tools->texture = texture;
 }
 
 static int set_name_struct(button_manage_t *button)
 {
     char *name[]= { "EXIT", "RESTART", "ZOOM +", "ZOOM -", "X +", "X -", "Y +",
-                    "Y -", "UP", "DOWN", "LEFT", "RIGHT", "LOAD", "SAVE"};
+                    "Y -", "UP", "DOWN", "LEFT", "RIGHT", "LOAD", "SAVE",
+                    "TOOLS"};
     button_manage_t *manage = button;
     my_button_shape_t *tmp;
 
-    for (int i = 0; i < 14; i++) {
+    for (int i = 0; i < 15; i++) {
         tmp = *(void **)manage;
         if (set_button_id(tmp, name[i], FONT_PATH, SIZE_CHAR) != EXIT_SUCCESS)
             return EXIT_ERROR;
@@ -70,7 +73,7 @@ static void set_clock(button_manage_t *button)
     button_manage_t *manage = button;
     my_button_shape_t *tmp;
 
-    for (int i = 0; i < 14; i++) {
+    for (int i = 0; i < 15; i++) {
         tmp = *(void **)manage;
         tmp->clock_start = sfClock_create();
         tmp->is_pressed = false;

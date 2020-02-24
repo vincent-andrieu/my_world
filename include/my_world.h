@@ -65,6 +65,7 @@ typedef struct button_manage_s
     my_button_shape_t *right;
     my_button_shape_t *load;
     my_button_shape_t *save;
+    my_button_shape_t *tools;
 } __attribute__((packed)) button_manage_t;
 
 typedef struct textures_s
@@ -128,5 +129,6 @@ void free_my_tab(int **tab);
 void free_my_map(sfVector2f **map);
 bool is_in_triangle(sfVector2f p_one, sfVector2f p_two, sfVector2f p_three,
     sfVector2f p_x);
+void tools_select(my_world_t *my_world, button_manage_t *button);
 
 #endif
