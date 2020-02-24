@@ -10,13 +10,13 @@
 textures_t get_textures(void)
 {
     textures_t textures;
-    sfRenderStates *states[5] = {&textures.grass, &textures.dirt, &textures.stone,
-                        &textures.snow, &textures.water};
-    char const *paths[5] = {"./ressources/grass.png", "./ressources/dirt.png",
+    sfRenderStates *states[6] = {&textures.grass, &textures.dirt,
+        &textures.stone, &textures.snow, &textures.water, &textures.sand};
+    char const *paths[6] = {"./ressources/grass.png", "./ressources/dirt.png",
                             "./ressources/stone.png", "./ressources/snow.png",
-                            "./ressources/water.png"};
+                            "./ressources/water.png", "./ressources/sand.png"};
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         states[i]->texture = sfTexture_createFromFile(paths[i], NULL);
         states[i]->blendMode = sfBlendAlpha;
         states[i]->transform = sfTransform_Identity;
@@ -69,5 +69,6 @@ void my_world_destroy(my_world_t *my_world)
     sfTexture_destroy((sfTexture *) my_world->textures.stone.texture);
     sfTexture_destroy((sfTexture *) my_world->textures.snow.texture);
     sfTexture_destroy((sfTexture *) my_world->textures.water.texture);
+    sfTexture_destroy((sfTexture *) my_world->textures.sand.texture);
     free(my_world);
 }

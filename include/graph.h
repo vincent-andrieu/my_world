@@ -10,7 +10,7 @@
 #ifndef GRAPH_H_
 #define GRAPH_H_
 
-#define NAME "MyWorld"
+#define NAME "World Edit"
 #define WINDOW_HEIGHT 1080
 #define WINDOW_WIDTH 1920
 #define BACKGROUND_COLOR sfBlack

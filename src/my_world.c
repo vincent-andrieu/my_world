@@ -48,13 +48,15 @@ static int game(assets_t *assets, my_world_t **my_world,
     return EXIT_SUCCESS;
 }
 
-int my_world(assets_t *assets)
+int my_world(assets_t *assets, char *filepath)
 {
     my_world_t *my_world = get_my_world();
     sfMusic *song = start_song();
     button_manage_t *button = get_button_manage();
 
-    if (!my_world)
+    if (!my_world || load_map(&my_world,
+    filepath == NULL ? get_input("Loading filepath")
+    : my_strdup(filepath)) == EXIT_ERROR)
         return EXIT_ERROR;
     while (!does_kill_prog(assets, my_world))
         if (game(assets, &my_world, button) != EXIT_SUCCESS)

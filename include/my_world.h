@@ -41,7 +41,7 @@
 #define FONT_PATH "./ressources/ChunkfiveEx.ttf"
 #define SIZE_CHAR 20
 
-#define SIZE_LIST 36
+#define SIZE_LIST 42
 
 typedef struct event_input_t
 {
@@ -74,6 +74,7 @@ typedef struct textures_s
     sfRenderStates stone;
     sfRenderStates snow;
     sfRenderStates water;
+    sfRenderStates sand;
 } textures_t;
 
 typedef struct my_world_s {
@@ -89,7 +90,7 @@ typedef struct my_world_s {
 
 int usage(int exit_value, char *binary_name);
 bool does_kill_prog(assets_t *assets, my_world_t *my_world);
-int my_world(assets_t *assets);
+int my_world(assets_t *assets, char *filepath);
 my_world_t *get_my_world(void);
 void my_world_destroy(my_world_t *my_world);
 sfVector2f **create_twod_map(int **three_d_map, my_world_t *my_world);
@@ -112,10 +113,11 @@ button_manage_t *get_button_manage(void);
 void refresh_struct(button_manage_t *button, assets_t *assets);
 void destroy_struct(button_manage_t *button);
 void display_struct(button_manage_t *button, assets_t *assets);
-char *get_input(void);
+char *get_input(char *title);
 int button_effect(my_world_t **my_world, button_manage_t *button,
     assets_t *assets);
 int button_load(my_world_t **my_world, button_manage_t *button);
+int load_map(my_world_t **my_world, char *filepath);
 int button_save(my_world_t *my_world, button_manage_t *button);
 int **dup_map(my_world_t *my_world, int size_x, int size_y);
 void water_textures(my_world_t *my_world, sfVector2f **map,

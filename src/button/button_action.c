@@ -64,9 +64,9 @@ int button_effect(my_world_t **my_world, button_manage_t *button,
     resize(*my_world, button);
     reset(*my_world, button);
     move(*my_world, button);
-    if (button_load(my_world, button) != EXIT_SUCCESS)
+    if (button_load(my_world, button) == EXIT_ERROR)
         return EXIT_ERROR;
-    if (button_save(*my_world, button) != EXIT_SUCCESS)
+    if (button_save(*my_world, button) == EXIT_ERROR)
         return EXIT_ERROR;
     return EXIT_SUCCESS;
 }
