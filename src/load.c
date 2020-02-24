@@ -23,18 +23,15 @@ static int load_map_array(FILE *file, my_world_t *my_world)
     return EXIT_SUCCESS;
 }
 
-static my_world_t *load_map(char *filepath)
+static my_world_t *load_map(FILE *file)
 {
     my_world_t *my_world = malloc(sizeof(my_world_t));
-    FILE *file = fopen(filepath, "r");
 
-    if (file == NULL || my_world == NULL)
-        return NULL;
-    if (fread(my_world, sizeof(my_world_t), 1, file) <= 0) {
+    if (my_world == NULL || fread(my_world, sizeof(my_world_t), 1, file) <= 0) {
         fclose(file);
         return NULL;
     }
-    if (load_map_array(file, my_world) != EXIT_SUCCESS) {
+    if (load_map_array(file, my_world) == EXIT_ERROR) {
         fclose(file);
         return NULL;
     }
@@ -46,14 +43,18 @@ static my_world_t *load_map(char *filepath)
 int button_load(my_world_t **my_world, button_manage_t *button)
 {
     char *filepath;
+    FILE *file;
 
     if (button_ispressed(button->load) && button->load->is_activate) {
+        filepath = get_input("Loading filepath");
+        file = fopen(filepath, "r");
+        free(filepath);
+        if (file == NULL)
+            return EXIT_FAILURE;
         my_world_destroy(*my_world);
-        filepath = get_input("Loading file name");
-        *my_world = load_map(filepath);
+        *my_world = load_map(file);
         if (*my_world == NULL)
             return EXIT_ERROR;
-        free(filepath);
         button->load->is_activate = false;
     }
     return EXIT_SUCCESS;
