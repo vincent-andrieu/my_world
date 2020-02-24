@@ -8,12 +8,6 @@
 #include "my.h"
 #include "my_world.h"
 
-typedef struct event_input_t
-{
-    sfKeyCode code;
-    char key;
-} event_input_s;
-
 event_input_s const key_tab[] = {
     (event_input_s) {sfKeyA, 'A'},
     (event_input_s) {sfKeyB, 'B'},
@@ -52,8 +46,6 @@ event_input_s const key_tab[] = {
     (event_input_s) {sfKeyNum8, '8'},
     (event_input_s) {sfKeyNum9, '9'}
 };
-
-#define SIZE_LIST 36
 
 static void text_display(sfRenderWindow *window, sfVector2f position, char *str)
 {

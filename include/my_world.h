@@ -41,6 +41,14 @@
 #define FONT_PATH "./ressources/ChunkfiveEx.ttf"
 #define SIZE_CHAR 20
 
+#define SIZE_LIST 36
+
+typedef struct event_input_t
+{
+    sfKeyCode code;
+    char key;
+} event_input_s;
+
 typedef struct button_manage_s
 {
     my_button_shape_t *exit;
@@ -75,6 +83,7 @@ typedef struct my_world_s {
     sfVector2i pos;
     sfVector2i pres_pos;
     textures_t textures;
+    sfClock *clock;
 } my_world_t;
 
 int usage(int exit_value, char *binary_name);
