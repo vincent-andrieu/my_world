@@ -58,16 +58,15 @@ void button_refresh_stat(my_button_shape_t *my_button, sfRenderWindow *window)
     int temp = my_button->toggle;
 
     if (mouse_pos.x >= my_button->pos.x &&
-        mouse_pos.x <= my_button->pos.x + my_button->scale.x) {
-        if (mouse_pos.y >= my_button->pos.y &&
-            mouse_pos.y <= my_button->pos.y + my_button->scale.y) {
+        mouse_pos.x <= my_button->pos.x + my_button->scale.x &&
+        mouse_pos.y >= my_button->pos.y &&
+        mouse_pos.y <= my_button->pos.y + my_button->scale.y) {
             if (sfMouse_isButtonPressed(sfMouseLeft)) {
                 my_button->is_pressed = true;
                 temp = 2;
             }
             else
                 temp = 1;
-        }
     }
     else
         temp = 0;
