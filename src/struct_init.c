@@ -10,8 +10,8 @@
 textures_t get_textures(void)
 {
     textures_t textures;
-    sfRenderStates *states[6] = {&textures.grass, &textures.dirt, &textures.stone,
-                        &textures.snow, &textures.water, &textures.sand};
+    sfRenderStates *states[6] = {&textures.grass, &textures.dirt,
+        &textures.stone, &textures.snow, &textures.water, &textures.sand};
     char const *paths[6] = {"./ressources/grass.png", "./ressources/dirt.png",
                             "./ressources/stone.png", "./ressources/snow.png",
                             "./ressources/water.png", "./ressources/sand.png"};
