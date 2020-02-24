@@ -44,7 +44,7 @@ void calc_textures(my_world_t *my_world, sfVector2f **map,
 sfRenderStates *get_map_texture(int level, textures_t *textures)
 {
     if (level < DIRT_LEVEL)
-        return &textures->water;
+        return &textures->sand;
     if (level < GRASS_LEVEL)
         return &textures->dirt;
     if (level < STONE_LEVEL)

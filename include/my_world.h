@@ -74,6 +74,7 @@ typedef struct textures_s
     sfRenderStates stone;
     sfRenderStates snow;
     sfRenderStates water;
+    sfRenderStates sand;
 } textures_t;
 
 typedef struct my_world_s {
