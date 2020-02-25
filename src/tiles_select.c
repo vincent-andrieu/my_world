@@ -31,7 +31,6 @@ void tools_select(my_world_t *my_world, button_manage_t *button)
 bool is_in_triangle(sfVector2f p_one, sfVector2f p_two, sfVector2f p_three,
     sfVector2f p_x)
 {
-    int i;
     bool tab[3];
 
     tab[0] = get_vector(p_one, p_two, p_x);

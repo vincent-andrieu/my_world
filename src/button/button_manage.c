@@ -32,6 +32,8 @@ void destroy_struct(button_manage_t *button)
     for (int i = 0; i < NB_TEXTURE; i++)
         sfTexture_destroy(button->exit->texture[i]);
     free(button->exit->texture);
+    sfSound_destroy(button->exit->sound.sound);
+    sfSoundBuffer_destroy(button->exit->sound.buffer);
     button_shape_destroy(button->exit);
     button_shape_destroy(button->restart);
     button_shape_destroy(button->zoom_in);
