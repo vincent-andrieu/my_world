@@ -6,6 +6,7 @@
 */
 
 #include <SFML/Graphics.h>
+#include <SFML/Audio/Sound.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "my.h"
@@ -18,6 +19,12 @@
 #define HIT_X 216
 #define HIT_Y 90
 
+typedef struct sound_t
+{
+    sfSound *sound;
+    sfSoundBuffer *buffer;
+} sound_s;
+
 typedef struct my_button_shape_s {
     int toggle;
     char *name;
@@ -27,6 +34,7 @@ typedef struct my_button_shape_s {
     sfFont *font;
     sfTexture **texture;
     sfClock *clock_start;
+    sound_s sound;
     bool is_pressed;
     bool is_activate;
 } __attribute__((packed)) my_button_shape_t;
