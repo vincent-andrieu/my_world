@@ -85,6 +85,6 @@ void button_display(my_button_shape_t *my_button, sfRenderWindow *window)
     sfSprite_destroy(sprite);
     if (my_button->name)
         sfRenderWindow_drawText(window, my_button->text, NULL);
-    if (temp == 2)
+    if (my_button->is_activate)
         sfSound_play(my_button->sound.sound);
 }
