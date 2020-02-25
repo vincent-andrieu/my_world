@@ -38,12 +38,14 @@ int button_save(my_world_t *my_world, button_manage_t *button)
 
     if (button_ispressed(button->save) && button->save->is_activate) {
         filepath = get_input("Saving filepath");
-        if (filepath == NULL)
-            return EXIT_ERROR;
-        if (save_map(filepath, my_world) != EXIT_SUCCESS)
+        button->save->is_activate = false;
+        if (filepath[0] == '\0') {
+            my_put_error_str("Bad saving filepath\n");
+            return EXIT_FAILURE;
+        }
+        if (filepath == NULL || save_map(filepath, my_world) != EXIT_SUCCESS)
             return EXIT_ERROR;
         free(filepath);
-        button->save->is_activate = false;
     }
     return EXIT_SUCCESS;
 }
