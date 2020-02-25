@@ -29,26 +29,19 @@ void display_struct(button_manage_t *button, assets_t *assets)
 
 void destroy_struct(button_manage_t *button)
 {
+    button_manage_t *manage = button;
+    my_button_shape_t *tmp;
+
     for (int i = 0; i < NB_TEXTURE; i++)
         sfTexture_destroy(button->exit->texture[i]);
     free(button->exit->texture);
     sfSound_destroy(button->exit->sound.sound);
     sfSoundBuffer_destroy(button->exit->sound.buffer);
-    button_shape_destroy(button->exit);
-    button_shape_destroy(button->restart);
-    button_shape_destroy(button->zoom_in);
-    button_shape_destroy(button->zoom_out);
-    button_shape_destroy(button->size_x_plus);
-    button_shape_destroy(button->size_x_min);
-    button_shape_destroy(button->size_y_plus);
-    button_shape_destroy(button->size_y_min);
-    button_shape_destroy(button->up);
-    button_shape_destroy(button->down);
-    button_shape_destroy(button->left);
-    button_shape_destroy(button->right);
-    button_shape_destroy(button->load);
-    button_shape_destroy(button->save);
-    button_shape_destroy(button->tools);
+    for (int i = 0; i < 15; i++) {
+        tmp = *(void **)manage;
+        button_shape_destroy(tmp);
+        manage = (void *)manage + 8;
+    }
     free(button);
 }
 

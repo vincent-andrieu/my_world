@@ -80,7 +80,6 @@ static void set_clock(button_manage_t *button)
         tmp->is_activate = false;
         manage = (void *)manage + 8;
     }
-
 }
 
 button_manage_t *get_button_manage(void)
