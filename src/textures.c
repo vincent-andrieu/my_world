@@ -18,7 +18,6 @@ static sfVertexArray *display_texture(sfVector2f *point1, sfVector2f *point2,
     vertex1.texCoords = (sfVector2f) {0, 0};
     vertex2.texCoords = (sfVector2f) {32, 0};
     vertex3.texCoords = (sfVector2f) {0, 32};
-
     sfVertexArray_append(vertex_array, vertex1);
     sfVertexArray_append(vertex_array, vertex2);
     sfVertexArray_append(vertex_array, vertex3);
