@@ -12,3 +12,4 @@ test
 *.sublime-*
 unit_tests
 my_world
+SAVES/
