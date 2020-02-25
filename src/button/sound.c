@@ -33,7 +33,6 @@ sound_s create_sound(void)
     sound_s my_sound;
 
     my_sound.sound = sfSound_create();
-    my_sound.buffer = malloc(sizeof(sfSoundBuffer *));
     my_sound.buffer = sfSoundBuffer_createFromFile("./ressources/sound.ogg");
     sfSound_setBuffer(my_sound.sound, my_sound.buffer);
     return my_sound;
