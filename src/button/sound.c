@@ -9,9 +9,21 @@
 #include "my_world.h"
 #include "my_button.h"
 
-void sound_set(sound_s sound, button_manage_t *button)
+static sound_s create_sound(char *filepath)
 {
-    button->exit->sound = sound;
+    sound_s my_sound;
+
+    my_sound.sound = sfSound_create();
+    my_sound.buffer = sfSoundBuffer_createFromFile(filepath);
+    sfSound_setBuffer(my_sound.sound, my_sound.buffer);
+    return my_sound;
+}
+
+void sound_set(button_manage_t *button)
+{
+    sound_s sound = create_sound(BUTT_DEFAULT_SOUND);
+
+    button->exit->sound = create_sound(BUTT_EXIT_SOUND);
     button->restart->sound = sound;
     button->zoom_in->sound = sound;
     button->zoom_out->sound = sound;
@@ -26,14 +38,4 @@ void sound_set(sound_s sound, button_manage_t *button)
     button->load->sound = sound;
     button->save->sound = sound;
     button->tools->sound = sound;
-}
-
-sound_s create_sound(void)
-{
-    sound_s my_sound;
-
-    my_sound.sound = sfSound_create();
-    my_sound.buffer = sfSoundBuffer_createFromFile("./ressources/sound.ogg");
-    sfSound_setBuffer(my_sound.sound, my_sound.buffer);
-    return my_sound;
 }

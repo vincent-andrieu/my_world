@@ -10,8 +10,9 @@
 static void exit_button(button_manage_t *button, assets_t *assets)
 {
     if (button_ispressed(button->exit) && button->exit->is_activate) {
-        sfRenderWindow_close(assets->window);
         button->exit->is_activate = false;
+        while (sfSound_getStatus(button->exit->sound.sound) == sfPlaying);
+        sfRenderWindow_close(assets->window);
     }
 }
 
