@@ -25,8 +25,8 @@ sfVertexArray *shadow(sfVector2f *point1, sfVector2f *point2,
 sfColor get_color(int point1, int point2, int point3, int point4)
 {
     sfColor color;
-    int tmp = (point2 - point4) / 2;
-    int tmp2 = (point1 - point3) / 2;
+    int tmp = (point2 - point4);
+    int tmp2 = (point1 - point3);
 
     if (tmp < tmp2)
         tmp = tmp2;
