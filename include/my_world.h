@@ -138,4 +138,8 @@ bool is_in_triangle(sfVector2f p_one, sfVector2f p_two, sfVector2f p_three,
 void tools_select(my_world_t *my_world, button_manage_t *button);
 void sound_set(button_manage_t *button);
 
+sfVertexArray *shadow(sfVector2f *point1, sfVector2f *point2,
+    sfVector2f *point3, sfColor color);
+sfColor get_color(int point1, int point2, int point3, int point4);
+
 #endif

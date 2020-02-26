@@ -25,22 +25,41 @@ static sfVertexArray *display_texture(sfVector2f *point1, sfVector2f *point2,
     return vertex_array;
 }
 
-void calc_textures(my_world_t *my_world, sfVector2f **map,
-                    sfVector2i coord, sfRenderWindow *window)
+static void shadow_manage(my_world_t *world, sfVector2f **map,
+                    sfVector2i pos, sfRenderWindow *window)
+{
+    sfColor color = get_color(world->map[pos.y][pos.x + 1],
+        world->map[pos.y][pos.x], world->map[pos.y + 1][pos.x],
+        world->map[pos.y + 1][pos.x + 1]);
+    sfVertexArray *line;
+
+    line = shadow(&map[pos.y][pos.x], &map[pos.y + 1][pos.x],
+        &map[pos.y][pos.x + 1], color);
+    sfRenderWindow_drawVertexArray(window, line, NULL);
+    sfVertexArray_destroy(line);
+    line = shadow(&map[pos.y + 1][pos.x + 1], &map[pos.y + 1][pos.x],
+        &map[pos.y][pos.x + 1], color);
+    sfRenderWindow_drawVertexArray(window, line, NULL);
+    sfVertexArray_destroy(line);
+}
+
+void calc_textures(my_world_t *world, sfVector2f **map,
+                    sfVector2i pos, sfRenderWindow *window)
 {
     sfVertexArray *line;
 
-    if (coord.y < my_world->scale.y - 1 && coord.x < my_world->scale.x - 1) {
-        line = display_texture(&map[coord.y][coord.x],
-            &map[coord.y + 1][coord.x], &map[coord.y][coord.x + 1]);
-        sfRenderWindow_drawVertexArray(window, line, get_map_texture(
-                my_world->map[coord.y][coord.x], &my_world->textures));
+    if (pos.y < world->scale.y - 1 && pos.x < world->scale.x - 1) {
+        line = display_texture(&map[pos.y][pos.x], &map[pos.y + 1][pos.x],
+            &map[pos.y][pos.x + 1]);
+        sfRenderWindow_drawVertexArray(window, line,
+            get_map_texture(world->map[pos.y][pos.x], &world->textures));
         sfVertexArray_destroy(line);
-        line = display_texture(&map[coord.y + 1][coord.x + 1],
-            &map[coord.y + 1][coord.x], &map[coord.y][coord.x + 1]);
-        sfRenderWindow_drawVertexArray(window, line, get_map_texture(
-                my_world->map[coord.y][coord.x], &my_world->textures));
+        line = display_texture(&map[pos.y + 1][pos.x + 1],
+            &map[pos.y + 1][pos.x], &map[pos.y][pos.x + 1]);
+        sfRenderWindow_drawVertexArray(window, line,
+            get_map_texture(world->map[pos.y][pos.x], &world->textures));
         sfVertexArray_destroy(line);
+        shadow_manage(world, map, pos, window);
     }
 }
 
