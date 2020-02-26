@@ -28,6 +28,8 @@ SRC	=	src/button/shape_button.c 	\
 		src/load.c 	\
 		src/save.c 	\
 		src/tiles_select.c 	\
+		src/shadow.c 	\
+		src/generate_map.c 	\
 		src/draw_water.c
 
 OBJ	=	$(SRC:.c=.o)

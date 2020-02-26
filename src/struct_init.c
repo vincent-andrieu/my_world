@@ -31,14 +31,16 @@ static void init_struct_var(my_world_t *my_world)
     my_world->pos = (sfVector2i) {WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4};
     my_world->pres_pos = (sfVector2i) {WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4};
     my_world->textures = get_textures();
-    my_world->zoom = 1;
+    my_world->zoom = 0.3;
     my_world->clock = sfClock_create();
     my_world->tools = false;
 }
 
 my_world_t *get_my_world(void)
 {
+    int hash_tab[256];
     my_world_t *my_world = malloc(sizeof(my_world_t));
+    hash_generate(hash_tab);
 
     if (!my_world)
         return NULL;
@@ -51,7 +53,8 @@ my_world_t *get_my_world(void)
         my_world->map[y] = malloc(sizeof(int) * MAP_X);
         if (!my_world->map[y])
             return NULL;
-        for (int x = 0; x < MAP_X; my_world->map[y][x] = 0, x++);
+        for (int x = 0; x < MAP_X; x++)
+            my_world->map[y][x] = perlin_revenge(x, y, hash_tab);
     }
     return my_world;
 }

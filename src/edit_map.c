@@ -49,24 +49,23 @@ static bool tile_selec_neg(sfVector2i mouse, my_world_t *my_world,
     return false;
 }
 
-static void travel_map(sfVector2i mouse,
-                        my_world_t *my_world, sfVector2f **co_map, bool up)
+static void travel_map(sfVector2i pos,
+                        my_world_t *world, sfVector2f **co_map, bool up)
 {
     bool stat = false;
 
-    for (int y = my_world->scale.y - 1; y >= 0 ; y--) {
-        for (int x = my_world->scale.x - 1; x >= 0 ; x--) {
-            if (up && ! my_world->tools)
-                stat = tile_selec_pos(mouse, my_world, co_map,
+    for (int y = world->scale.y - 1; y >= 0 ; y--) {
+        for (int x = world->scale.x - 1; x >= 0 ; x--) {
+            if (up && ! world->tools)
+                stat = tile_selec_pos(pos, world, co_map, (sfVector2i) {x, y});
+            else if (!world->tools)
+                stat = tile_selec_neg(pos, world, co_map,
                     (sfVector2i) {x, y});
-            else if (!my_world->tools)
-                stat = tile_selec_neg(mouse, my_world, co_map,
-                    (sfVector2i) {x, y});
-            if (co_map[y][x].x - mouse.x > -MOUSE_ACC
-            && co_map[y][x].x - mouse.x < MOUSE_ACC
-            && co_map[y][x].y - mouse.y > -MOUSE_ACC
-            && co_map[y][x].y - mouse.y < MOUSE_ACC && my_world->tools) {
-                my_world->map[y][x] += up ? EDIT_SPEED : -EDIT_SPEED;
+            if (co_map[y][x].x - pos.x > -MOUSE_ACC
+            && co_map[y][x].x - pos.x < MOUSE_ACC
+            && co_map[y][x].y - pos.y > -MOUSE_ACC
+            && co_map[y][x].y - pos.y < MOUSE_ACC && world->tools) {
+                world->map[y][x] += up ? EDIT_SPEED : -EDIT_SPEED;
                 stat = true;
             }
             if (stat)
