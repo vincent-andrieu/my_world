@@ -21,8 +21,8 @@
 
 #define ANGLE_X 0.785398
 #define ANGLE_Y 0.610865
-#define MAP_X 10
-#define MAP_Y 10
+#define MAP_X 50
+#define MAP_Y 50
 #define DISPLAY_X 32
 #define DISPLAY_Y 32
 #define MOUSE_ACC 20
@@ -141,5 +141,7 @@ void sound_set(button_manage_t *button);
 sfVertexArray *shadow(sfVector2f *point1, sfVector2f *point2,
     sfVector2f *point3, sfColor color);
 sfColor get_color(int point1, int point2, int point3, int point4);
+int *hash_generate(int *tab);
+int perlin_revenge(int x, int y, int *hash_tab);
 
 #endif
