@@ -98,8 +98,8 @@ button_manage_t *get_button_manage(void)
     tex[1] = sfTexture_createFromFile("./ressources/button_over.png", NULL);
     tex[2] = sfTexture_createFromFile("./ressources/button.png", NULL);
     texture_set(tex, button);
-    sound_set(button);
-    if (set_name_struct(button) == EXIT_ERROR)
+    if (set_name_struct(button) == EXIT_ERROR || sound_set(button) == EXIT_ERROR
+    || set_help_box(button) == EXIT_ERROR)
         return NULL;
     set_clock(button);
     return button;

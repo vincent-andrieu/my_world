@@ -37,10 +37,6 @@
 #define DIRT_LEVEL -25
 #define WATER_LEVEL -20
 
-#define TOOLS_X 1700
-#define FONT_PATH "./ressources/ChunkfiveEx.ttf"
-#define SIZE_CHAR 20
-
 #define SIZE_LIST 42
 #define FILE_PREFIX "./SAVES/MYWORLD"
 #define START_SAVE_NBR 0
@@ -136,6 +132,8 @@ void free_my_map(sfVector2f **map);
 bool is_in_triangle(sfVector2f p_one, sfVector2f p_two, sfVector2f p_three,
     sfVector2f p_x);
 void tools_select(my_world_t *my_world, button_manage_t *button);
-void sound_set(button_manage_t *button);
+int sound_set(button_manage_t *button);
+int set_help_box(button_manage_t *buttons);
+void display_help_box(button_manage_t *buttons, sfRenderWindow *window);
 
 #endif

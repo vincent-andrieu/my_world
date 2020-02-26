@@ -28,12 +28,9 @@ int set_texture_button(my_button_shape_t *my_button, char *path_one,
     my_button->texture = malloc(sizeof(sfTexture *) * NB_TEXTURE);
     if (!my_button->texture)
         return EXIT_ERROR;
-    my_button->texture[0] =
-    sfTexture_createFromFile(path_one, NULL);
-    my_button->texture[1] =
-    sfTexture_createFromFile(path_two, NULL);
-    my_button->texture[2] =
-    sfTexture_createFromFile(path_three, NULL);
+    my_button->texture[0] = sfTexture_createFromFile(path_one, NULL);
+    my_button->texture[1] = sfTexture_createFromFile(path_two, NULL);
+    my_button->texture[2] = sfTexture_createFromFile(path_three, NULL);
 
     if (!my_button->texture[0] || !my_button->texture[1] ||
         !my_button->texture[3])
@@ -58,27 +55,25 @@ void button_refresh_stat(my_button_shape_t *my_button, sfRenderWindow *window)
     int temp = my_button->toggle;
 
     if (mouse_pos.x >= my_button->pos.x &&
-        mouse_pos.x <= my_button->pos.x + my_button->scale.x &&
-        mouse_pos.y >= my_button->pos.y &&
-        mouse_pos.y <= my_button->pos.y + my_button->scale.y) {
-            if (sfMouse_isButtonPressed(sfMouseLeft)) {
-                my_button->is_pressed = true;
-                temp = 2;
-            }
-            else
-                temp = 1;
-    }
-    else
+    mouse_pos.x <= my_button->pos.x + my_button->scale.x &&
+    mouse_pos.y >= my_button->pos.y &&
+    mouse_pos.y <= my_button->pos.y + my_button->scale.y) {
+        if (sfMouse_isButtonPressed(sfMouseLeft)) {
+            my_button->is_pressed = true;
+            temp = 2;
+        }
+        else
+            temp = 1;
+    } else
         temp = 0;
     button_status(temp, my_button);
 }
 
 void button_display(my_button_shape_t *my_button, sfRenderWindow *window)
 {
-    int temp = my_button->toggle;
     sfSprite* sprite = sfSprite_create();
 
-    sfSprite_setTexture(sprite, my_button->texture[temp], sfTrue);
+    sfSprite_setTexture(sprite, my_button->texture[my_button->toggle], sfTrue);
     sfSprite_setScale(sprite, (sfVector2f) {3, 3});
     sfSprite_setPosition(sprite, my_button->pos);
     sfRenderWindow_drawSprite(window, sprite, NULL);

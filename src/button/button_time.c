@@ -20,8 +20,7 @@ void button_status(int temp, my_button_shape_t *my_button)
     if (my_button->is_pressed) {
         my_button->is_pressed = false;
         my_button->toggle = 2;
-    }
-    else
+    } else
         my_button->toggle = temp;
     if (my_button->toggle == 2)
         my_button->is_activate = true;

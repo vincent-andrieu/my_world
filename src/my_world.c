@@ -36,6 +36,7 @@ static int game(assets_t *assets, my_world_t **my_world,
 
     refresh_struct(button, assets);
     display_struct(button, assets);
+    display_help_box(button, assets->window);
     if (button_effect(my_world, button, assets) != EXIT_SUCCESS)
         return EXIT_ERROR;
     map_stay_in_window(*my_world);
