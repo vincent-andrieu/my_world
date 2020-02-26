@@ -18,12 +18,26 @@
 #define NB_TEXTURE 3
 #define HIT_X 216
 #define HIT_Y 90
+#define TOOLS_X 1700
+#define FONT_PATH "./ressources/ChunkfiveEx.ttf"
+#define SIZE_CHAR 20
+#define HELP_BOX_CHAR_SIZE 25
+#define HELP_BOX_X 10
+#define HELP_BOX_Y 950
 
 typedef struct sound_t
 {
     sfSound *sound;
     sfSoundBuffer *buffer;
 } sound_s;
+
+typedef struct help_box_s
+{
+    sfFont *font;
+    sfText *text;
+    sfTexture *texture;
+    sfSprite *sprite;
+} help_box_t;
 
 typedef struct my_button_shape_s {
     int toggle;
@@ -35,6 +49,7 @@ typedef struct my_button_shape_s {
     sfTexture **texture;
     sfClock *clock_start;
     sound_s sound;
+    help_box_t help_box;
     bool is_pressed;
     bool is_activate;
 } __attribute__((packed)) my_button_shape_t;

@@ -11,19 +11,23 @@
 
 static sound_s create_sound(char *filepath)
 {
-    sound_s my_sound;
+    sound_s my_sound = {NULL, NULL};
 
     my_sound.sound = sfSound_create();
+    if (my_sound.sound == NULL)
+        return my_sound;
     my_sound.buffer = sfSoundBuffer_createFromFile(filepath);
     sfSound_setBuffer(my_sound.sound, my_sound.buffer);
     return my_sound;
 }
 
-void sound_set(button_manage_t *button)
+int sound_set(button_manage_t *button)
 {
     sound_s sound = create_sound(BUTT_DEFAULT_SOUND);
 
     button->exit->sound = create_sound(BUTT_EXIT_SOUND);
+    if (!sound.buffer || !button->exit->sound.buffer)
+        return EXIT_ERROR;
     button->restart->sound = sound;
     button->zoom_in->sound = sound;
     button->zoom_out->sound = sound;
@@ -38,4 +42,5 @@ void sound_set(button_manage_t *button)
     button->load->sound = sound;
     button->save->sound = sound;
     button->tools->sound = sound;
+    return EXIT_SUCCESS;
 }

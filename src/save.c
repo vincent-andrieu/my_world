@@ -22,9 +22,7 @@ static int save_map(char *filepath, my_world_t *my_world)
 {
     FILE *file = fopen(filepath, "w");
 
-    if (file == NULL)
-        return EXIT_ERROR;
-    if (fwrite(my_world, sizeof(my_world_t), 1, file) <= 0)
+    if (file == NULL || fwrite(my_world, sizeof(my_world_t), 1, file) <= 0)
         return EXIT_ERROR;
     if (save_map_array(file, my_world->map, my_world->scale) != EXIT_SUCCESS)
         return EXIT_ERROR;

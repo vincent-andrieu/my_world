@@ -39,8 +39,12 @@ void destroy_struct(button_manage_t *button)
     sfSoundBuffer_destroy(button->exit->sound.buffer);
     sfSound_destroy(button->restart->sound.sound);
     sfSoundBuffer_destroy(button->restart->sound.buffer);
+    sfTexture_destroy(button->exit->help_box.texture);
+    sfFont_destroy(button->exit->help_box.font);
     for (int i = 0; i < 15; i++) {
         tmp = *(void **)manage;
+        sfSprite_destroy(tmp->help_box.sprite);
+        sfText_destroy(tmp->help_box.text);
         button_shape_destroy(tmp);
         manage = (void *)manage + 8;
     }
