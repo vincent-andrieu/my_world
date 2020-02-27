@@ -53,7 +53,7 @@ static void texture_set(sfTexture **texture, button_manage_t *button)
 
 static int set_name_struct(button_manage_t *button)
 {
-    char *name[]= { "EXIT", "RESTART", "ZOOM +", "ZOOM -", "X +", "X -", "Y +",
+    char *name[] = { "EXIT", "RESTART", "ZOOM +", "ZOOM -", "X +", "X -", "Y +",
                     "Y -", "UP", "DOWN", "LEFT", "RIGHT", "LOAD", "SAVE",
                     "TOOLS"};
     button_manage_t *manage = button;
