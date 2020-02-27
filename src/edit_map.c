@@ -56,7 +56,7 @@ static void travel_map(sfVector2i pos,
 
     for (int y = world->scale.y - 1; y >= 0 ; y--) {
         for (int x = world->scale.x - 1; x >= 0 ; x--) {
-            if (up && ! world->tools)
+            if (up && !world->tools)
                 stat = tile_selec_pos(pos, world, co_map, (sfVector2i) {x, y});
             else if (!world->tools)
                 stat = tile_selec_neg(pos, world, co_map,
