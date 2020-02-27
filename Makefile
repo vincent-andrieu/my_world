@@ -31,13 +31,14 @@ SRC	=	src/button/shape_button.c 	\
 		src/shadow.c 	\
 		src/generate_map.c 	\
 		src/display_something.c 	\
-		src/draw_water.c
+		src/draw_water.c 	\
+		src/smooth_map.c
 
 OBJ	=	$(SRC:.c=.o)
 
 NAME	=	my_world
 
-CFLAGS	+=	-I include -Wall -Wextra -g
+CFLAGS	+=	-I include -Wall -Wextra
 LDFLAGS +=	-L lib/my -lmy -L lib/graph -lgraph -lm
 
 CC	=	gcc -l csfml-graphics -l csfml-system -l csfml-audio -l csfml-window

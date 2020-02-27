@@ -8,15 +8,16 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-#include "math.h"
+#include <math.h>
 #include "my_world.h"
 
-int *hash_generate(int *tab)
+void hash_generate(int *tab)
 {
     srand(time(NULL));
     for (int i = 0; i < 256; i++)
-        tab[i] = rand() % 256;
-    return tab;
+        do
+            tab[i] = rand() % 256;
+        while (already_exist(tab, tab[i], i));
 }
 
 static int get_vector(int x, int y, int *tab)
