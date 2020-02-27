@@ -34,6 +34,9 @@ static void init_struct_var(my_world_t *my_world)
     my_world->zoom = 0.3;
     my_world->clock = sfClock_create();
     my_world->tools = false;
+    my_world->tree = get_sprite();
+    my_world->tree.pos.x = 0;
+    my_world->tree.pos.y = 0;
 }
 
 my_world_t *get_my_world(void)
@@ -67,6 +70,8 @@ void my_world_destroy(my_world_t *my_world)
         free(my_world->map[i]);
     free(my_world->map);
     sfClock_destroy(my_world->clock);
+    sfTexture_destroy(my_world->tree.texture);
+    sfSprite_destroy(my_world->tree.sprite);
     sfTexture_destroy((sfTexture *) my_world->textures.grass.texture);
     sfTexture_destroy((sfTexture *) my_world->textures.dirt.texture);
     sfTexture_destroy((sfTexture *) my_world->textures.stone.texture);

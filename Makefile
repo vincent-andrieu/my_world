@@ -30,6 +30,7 @@ SRC	=	src/button/shape_button.c 	\
 		src/tiles_select.c 	\
 		src/shadow.c 	\
 		src/generate_map.c 	\
+		src/display_something.c 	\
 		src/draw_water.c
 
 OBJ	=	$(SRC:.c=.o)

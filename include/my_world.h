@@ -79,6 +79,13 @@ typedef struct textures_s
     sfRenderStates sand;
 } textures_t;
 
+typedef struct my_sprite_t
+{
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfVector2i pos;
+} my_sprite_s;
+
 typedef struct my_world_s {
     int **map;
     float zoom;
@@ -87,6 +94,7 @@ typedef struct my_world_s {
     sfVector2i pres_pos;
     textures_t textures;
     sfClock *clock;
+    my_sprite_s tree;
     bool tools;
 } my_world_t;
 
@@ -141,5 +149,9 @@ sfVertexArray *shadow(sfVector2f *point1, sfVector2f *point2,
 sfColor get_color(int point1, int point2, int point3, int point4);
 int *hash_generate(int *tab);
 int perlin_revenge(int x, int y, int *hash_tab);
+
+my_sprite_s get_sprite(void);
+void display_something(assets_t *assets, sfVector2f **map,
+    my_world_t *my_world);
 
 #endif

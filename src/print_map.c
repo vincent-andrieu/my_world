@@ -55,7 +55,7 @@ void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world)
 {
     sfVertexArray *line;
 
-    for (int y = 0; y < my_world->scale.y; y++) {
+    for (int y = 0; y < my_world->scale.y; y++)
         for (int x = 0; x < my_world->scale.x; x++) {
             calc_textures(my_world, map, (sfVector2i) {x, y}, assets->window);
             if (y < my_world->scale.y - 1) {
@@ -69,7 +69,7 @@ void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world)
                 sfVertexArray_destroy(line);
             }
         }
-    }
+    display_something(assets, map, my_world);
     draw_water(assets, water_gest(my_world), my_world);
     refresh_screen(assets);
     sfRenderWindow_clear(assets->window, sfBlack);
