@@ -16,7 +16,7 @@ my_sprite_s get_sprite(void)
     sfSprite_setTexture(my_struct.sprite, my_struct.texture, sfTrue);
     my_struct.sprite_jaaj = sfSprite_create();
     my_struct.texture_jaaj =
-    sfTexture_createFromFile("./ressources/tree.png", NULL);
+    sfTexture_createFromFile("./ressources/player.jpg", NULL);
     sfSprite_setTexture(my_struct.sprite_jaaj, my_struct.texture_jaaj, sfTrue);
     my_struct.list = make_list();
     my_struct.select = false;
