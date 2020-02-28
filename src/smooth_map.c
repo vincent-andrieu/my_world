@@ -19,7 +19,7 @@ static bool check_diff(int **map, sfVector2i from, sfVector2i to)
 {
     int diff = map[from.y][from.x] - map[to.y][to.x];
 
-    if ((diff < 0 ? -diff : diff) > 30) {
+    if ((diff < 0 ? -diff : diff) > 35) {
         map[from.y][from.x] = (map[from.y][from.x] + map[to.y][to.x]) / 2;
         map[to.y][to.x] = (map[from.y][from.x] + map[to.y][to.x]) / 2;
         smooth_map(map);
