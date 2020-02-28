@@ -19,7 +19,7 @@ void display_player(assets_t *assets, sfVector2f **map, my_world_t *my_world)
     pos.x -= my_world->zoom * DISPLAY_X * 0.5;
     pos.y -= my_world->zoom * DISPLAY_Y;
     sfSprite_setScale(my_world->tree.sprite_jaaj,
-        (sfVector2f) {my_world->zoom, my_world->zoom});
+        (sfVector2f) {my_world->zoom / 2, my_world->zoom / 2});
     sfSprite_setPosition(my_world->tree.sprite_jaaj, pos);
     sfRenderWindow_drawSprite(assets->window, my_world->tree.sprite_jaaj, NULL);
 }
