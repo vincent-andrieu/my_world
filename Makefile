@@ -34,6 +34,7 @@ SRC	=	src/button/shape_button.c 	\
 		src/display_something.c 	\
 		src/event_input.c 	\
 		src/draw_water.c 	\
+		src/display_entity.c 	\
 		src/smooth_map.c
 
 OBJ	=	$(SRC:.c=.o)
