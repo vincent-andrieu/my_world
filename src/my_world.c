@@ -55,14 +55,20 @@ int my_world(assets_t *assets, char *filepath)
     my_world_t *my_world = get_my_world();
     sfMusic *song = start_song();
     button_manage_t *button = get_button_manage();
+    sfSprite *back = sfSprite_create();
+    sfTexture *tex = sfTexture_createFromFile("./ressources/back.jpg", NULL);
 
+    sfSprite_setTexture(back, tex, sfTrue);
+    sfSprite_setScale(back, (sfVector2f) {1, 1.2});
     if (!my_world || load_map(&my_world,
     filepath == NULL ? get_input("Loading filepath")
     : my_strdup(filepath)) == EXIT_ERROR)
         return EXIT_ERROR;
-    while (!does_kill_prog(assets, my_world))
+    while (!does_kill_prog(assets, my_world)) {
         if (game(assets, &my_world, button) != EXIT_SUCCESS)
             return EXIT_ERROR;
+        sfRenderWindow_drawSprite(assets->window, back, NULL);
+    }
     if (final_save(my_world, START_SAVE_NBR) == EXIT_ERROR)
         return EXIT_ERROR;
     return end_of_world(song, my_world, button);
