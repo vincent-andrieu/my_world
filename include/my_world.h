@@ -67,6 +67,7 @@ typedef struct button_manage_s
     my_button_shape_t *load;
     my_button_shape_t *save;
     my_button_shape_t *tools;
+    my_button_shape_t *tree;
 } __attribute__((packed)) button_manage_t;
 
 typedef struct textures_s
@@ -79,11 +80,18 @@ typedef struct textures_s
     sfRenderStates sand;
 } textures_t;
 
+typedef struct list_s
+{
+    struct list_s *next;
+    sfVector2i pos;
+} list_t;
+
 typedef struct my_sprite_t
 {
     sfSprite *sprite;
     sfTexture *texture;
-    sfVector2i pos;
+    list_t *list;
+    bool select;
 } my_sprite_s;
 
 typedef struct my_world_s {
@@ -143,15 +151,17 @@ void tools_select(my_world_t *my_world, button_manage_t *button);
 int sound_set(button_manage_t *button);
 int set_help_box(button_manage_t *buttons);
 void display_help_box(button_manage_t *buttons, sfRenderWindow *window);
-
 sfVertexArray *shadow(sfVector2f *point1, sfVector2f *point2,
     sfVector2f *point3, sfColor color);
 sfColor get_color(int point1, int point2, int point3, int point4);
 int *hash_generate(int *tab);
 int perlin_revenge(int x, int y, int *hash_tab);
-
 my_sprite_s get_sprite(void);
 void display_something(assets_t *assets, sfVector2f **map,
     my_world_t *my_world);
+list_t *make_list(void);
+int add_one(list_t *list, sfVector2i coords);
+void distroy(list_t *list);
+void my_tree_gest(assets_t *assets, sfVector2f **map, my_world_t *my_world);
 
 #endif

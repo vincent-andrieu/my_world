@@ -35,6 +35,13 @@ static void reset(my_world_t *my_world, button_manage_t *button)
         reset_map(my_world);
         button->restart->is_activate = false;
     }
+    if (button_ispressed(button->tree) && button->tree->is_activate) {
+        if (my_world->tree.select)
+            my_world->tree.select = false;
+        else
+            my_world->tree.select = true;
+        button->tree->is_activate = false;
+    }
 }
 
 static void move(my_world_t *my_world, button_manage_t *button)

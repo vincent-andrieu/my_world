@@ -45,6 +45,7 @@ static int game(assets_t *assets, my_world_t **my_world,
         return EXIT_ERROR;
     edit_map(assets->window, *my_world, my_map);
     draw_twod_map(assets, my_map, *my_world);
+    my_tree_gest(assets, my_map, *my_world);
     free_my_map(my_map);
     return EXIT_SUCCESS;
 }

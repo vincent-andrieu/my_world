@@ -42,5 +42,6 @@ int sound_set(button_manage_t *button)
     button->load->sound = sound;
     button->save->sound = sound;
     button->tools->sound = sound;
+    button->tree->sound = sound;
     return EXIT_SUCCESS;
 }

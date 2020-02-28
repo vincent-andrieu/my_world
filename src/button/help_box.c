@@ -27,7 +27,7 @@ static sfText *get_help_box_text(sfFont *font, int i)
         "Increase the map size at the bottom", "Move the map to the top",
         "Move the map to the bottom", "Move the map to the left",
         "Move the map to the right", "Load a new map", "Save the current map",
-        "Change the edit mode"
+        "Change the edit mode", "Tree edit mode"
     };
     sfText *text = sfText_create();
 
@@ -50,7 +50,7 @@ int set_help_box(button_manage_t *buttons)
 
     if (font == NULL || texture == NULL)
         return EXIT_ERROR;
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 16; i++) {
         button = *(void **)manage;
         button->help_box.font = font;
         button->help_box.texture = texture;
@@ -68,7 +68,7 @@ void display_help_box(button_manage_t *buttons, sfRenderWindow *window)
     button_manage_t *manage = buttons;
     my_button_shape_t *button;
 
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 16; i++) {
         button = *(void **)manage;
         if (button->toggle == 1) {
             sfRenderWindow_drawSprite(window, button->help_box.sprite, NULL);
