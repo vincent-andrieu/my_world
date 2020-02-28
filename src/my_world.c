@@ -56,7 +56,7 @@ int my_world(assets_t *assets, char *filepath)
     sfMusic *song = start_song();
     button_manage_t *button = get_button_manage();
     sfSprite *back = sfSprite_create();
-    sfTexture *tex = sfTexture_createFromFile("./ressources/back.jpg", NULL);
+    sfTexture *tex = sfTexture_createFromFile("./ressources/background.jpg", NULL);
 
     sfSprite_setTexture(back, tex, sfTrue);
     sfSprite_setScale(back, (sfVector2f) {1, 1.2});
