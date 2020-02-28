@@ -14,6 +14,9 @@ my_sprite_s get_sprite(void)
     my_struct.sprite = sfSprite_create();
     my_struct.texture = sfTexture_createFromFile("./ressources/tree.png", NULL);
     sfSprite_setTexture(my_struct.sprite, my_struct.texture, sfTrue);
+    my_struct.sprite_jaaj = sfSprite_create();
+    my_struct.texture_jaaj = sfTexture_createFromFile("./ressources/tree.png", NULL);
+    sfSprite_setTexture(my_struct.sprite_jaaj, my_struct.texture_jaaj, sfTrue);
     my_struct.list = make_list();
     my_struct.select = false;
     return my_struct;
@@ -22,7 +25,7 @@ my_sprite_s get_sprite(void)
 void display_something(assets_t *assets, sfVector2f **map, my_world_t *my_world)
 {
     sfVector2f pos;
-    list_t *end = my_world->tree.list;
+    list_t *end = my_world->tree.list->next;
 
     while (end) {
         pos = map[end->pos.y][end->pos.x];
@@ -34,6 +37,13 @@ void display_something(assets_t *assets, sfVector2f **map, my_world_t *my_world)
         sfRenderWindow_drawSprite(assets->window, my_world->tree.sprite, NULL);
         end = end->next;
     }
+    pos = map[my_world->tree.list->pos.y][my_world->tree.list->pos.x];
+    pos.x -= my_world->zoom * DISPLAY_X * 0.5;
+    pos.y -= my_world->zoom * DISPLAY_Y;
+    sfSprite_setScale(my_world->tree.sprite_jaaj,
+        (sfVector2f) {my_world->zoom, my_world->zoom});
+    sfSprite_setPosition(my_world->tree.sprite_jaaj, pos);
+    sfRenderWindow_drawSprite(assets->window, my_world->tree.sprite_jaaj, NULL);
 }
 
 static sfVector2i get_tree_select(assets_t *assets, sfVector2f **map, my_world_t *world)
@@ -54,10 +64,11 @@ static sfVector2i get_tree_select(assets_t *assets, sfVector2f **map, my_world_t
 static void destroy_it(list_t *list, sfVector2i coords)
 {
     list_t *prev = list->next;
+    list_t *end;
+
     if (!prev)
         return;
-    list_t *end = prev->next;
-
+    end = prev->next;
     while (end) {
         if (end->pos.x == coords.x && end->pos.y == coords.y) {
             prev->next = end->next;

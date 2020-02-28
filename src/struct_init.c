@@ -70,6 +70,8 @@ void my_world_destroy(my_world_t *my_world)
     free(my_world->map);
     sfClock_destroy(my_world->clock);
     distroy(my_world->tree.list);
+    sfTexture_destroy(my_world->tree.texture_jaaj);
+    sfSprite_destroy(my_world->tree.sprite_jaaj);
     sfTexture_destroy(my_world->tree.texture);
     sfSprite_destroy(my_world->tree.sprite);
     sfTexture_destroy((sfTexture *) my_world->textures.grass.texture);

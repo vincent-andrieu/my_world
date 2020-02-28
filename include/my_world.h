@@ -92,6 +92,8 @@ typedef struct my_sprite_t
 {
     sfSprite *sprite;
     sfTexture *texture;
+    sfSprite *sprite_jaaj;
+    sfTexture *texture_jaaj;
     list_t *list;
     bool select;
 } my_sprite_s;
