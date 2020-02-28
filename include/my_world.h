@@ -167,5 +167,6 @@ list_t *make_list(void);
 int add_one(list_t *list, sfVector2i coords);
 void distroy(list_t *list);
 void my_tree_gest(assets_t *assets, sfVector2f **map, my_world_t *my_world);
+void event_set(sfEvent event, my_world_t *world);
 
 #endif

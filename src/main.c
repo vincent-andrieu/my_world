@@ -17,16 +17,7 @@ static void event_manage(sfEvent event, my_world_t *my_world)
     if (event.type == sfEvtKeyPressed &&
         as_seconds(sfClock_getElapsedTime(my_world->clock)) > TIME_BUT) {
         my_world->pres_pos = my_world->pos;
-        if (event.key.code == sfKeyUp)
-            my_world->pos.y = my_world->pos.y - MOVE_SPEED;
-        if (event.key.code == sfKeyDown)
-            my_world->pos.y = my_world->pos.y + MOVE_SPEED;
-        if (event.key.code == sfKeyLeft)
-            my_world->pos.x = my_world->pos.x - MOVE_SPEED;
-        if (event.key.code == sfKeyRight)
-            my_world->pos.x = my_world->pos.x + MOVE_SPEED;
-        if (event.key.code == sfKeyR)
-            reset_map(my_world);
+        event_set(event, my_world);
         sfClock_restart(my_world->clock);
     }
     if (event.type == sfEvtMouseWheelScrolled) {

@@ -32,6 +32,7 @@ SRC	=	src/button/shape_button.c 	\
 		src/shadow.c 	\
 		src/generate_map.c 	\
 		src/display_something.c 	\
+		src/event_input.c 	\
 		src/draw_water.c 	\
 		src/smooth_map.c
 
