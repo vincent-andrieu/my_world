@@ -62,5 +62,5 @@ int perlin_revenge(int x, int y, int *hash_tab)
         my_x *= 2;
         my_y *= 2;
     }
-    return noise_val - 256;
+    return noise_val - 210;
 }
