@@ -114,8 +114,8 @@ static char *text_input(sfRenderWindow *window, sfEvent event, char *str)
 char *get_input(char *title)
 {
     sfEvent event;
-    sfRenderWindow *window = sfRenderWindow_create((sfVideoMode) {1920, 100, 32},
-        title, sfResize | sfClose, NULL);
+    sfRenderWindow *window = sfRenderWindow_create((sfVideoMode)
+        {INPUT_WIN_X, INPUT_WIN_Y, 32}, title, sfResize | sfClose, NULL);
     char *str = malloc(sizeof(char) * 1);
 
     if (!str)

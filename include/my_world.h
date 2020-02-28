@@ -40,6 +40,8 @@
 #define SIZE_LIST 42
 #define FILE_PREFIX "./SAVES/MYWORLD"
 #define START_SAVE_NBR 0
+#define INPUT_WIN_X 1920
+#define INPUT_WIN_Y 100
 
 #define BUTT_DEFAULT_SOUND "./ressources/sound.ogg"
 #define BUTT_EXIT_SOUND "./ressources/exit.ogg"
@@ -154,8 +156,10 @@ void display_help_box(button_manage_t *buttons, sfRenderWindow *window);
 sfVertexArray *shadow(sfVector2f *point1, sfVector2f *point2,
     sfVector2f *point3, sfColor color);
 sfColor get_color(int point1, int point2, int point3, int point4);
-int *hash_generate(int *tab);
+void hash_generate(int *tab);
 int perlin_revenge(int x, int y, int *hash_tab);
+void smooth_map(int **map);
+bool already_exist(int *tab, int value, int max);
 my_sprite_s get_sprite(void);
 void display_something(assets_t *assets, sfVector2f **map,
     my_world_t *my_world);

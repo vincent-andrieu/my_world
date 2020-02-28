@@ -41,8 +41,8 @@ my_world_t *get_my_world(void)
 {
     int hash_tab[256];
     my_world_t *my_world = malloc(sizeof(my_world_t));
-    hash_generate(hash_tab);
 
+    hash_generate(hash_tab);
     if (!my_world)
         return NULL;
     init_struct_var(my_world);
@@ -57,6 +57,7 @@ my_world_t *get_my_world(void)
         for (int x = 0; x < MAP_X; x++)
             my_world->map[y][x] = perlin_revenge(x, y, hash_tab);
     }
+    smooth_map(my_world->map);
     return my_world;
 }
 
