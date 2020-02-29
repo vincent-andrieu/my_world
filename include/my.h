@@ -11,6 +11,7 @@
 #define MY_H
 
 #define READ_SIZE 11
+#define ABS(nbr) (nbr < 0 ? -nbr : nbr)
 
 int my_putchar(char c);
 int my_put_error_str(char const *str);
