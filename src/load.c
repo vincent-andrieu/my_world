@@ -47,7 +47,7 @@ int load_map(my_world_t **my_world, char *filepath)
 
     free(filepath);
     if (file == NULL) {
-        my_put_error_str("Bad loading filepath\n");
+        my_put_error_str("Invalid loading filepath\n");
         return EXIT_FAILURE;
     }
     my_world_destroy(*my_world);
