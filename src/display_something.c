@@ -30,10 +30,10 @@ static sfVector2i get_tree_select(assets_t *assets, sfVector2f **map,
 
     for (int y = 0; y < world->scale.y; y++)
         for (int x = 0; x < world->scale.x; x++)
-            if (map[y][x].x - mouse.x > -MOUSE_ACC
-            && map[y][x].x - mouse.x < MOUSE_ACC
-            && map[y][x].y - mouse.y > -MOUSE_ACC
-            && map[y][x].y - mouse.y < MOUSE_ACC) {
+            if (map[y][x].x - mouse.x > -DEF_MOUSE_ACC
+            && map[y][x].x - mouse.x < DEF_MOUSE_ACC
+            && map[y][x].y - mouse.y > -DEF_MOUSE_ACC
+            && map[y][x].y - mouse.y < DEF_MOUSE_ACC) {
                 return (sfVector2i) {x, y};
             }
     return (sfVector2i) {-1, -1};

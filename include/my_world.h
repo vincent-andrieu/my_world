@@ -25,7 +25,6 @@
 #define MAP_Y 50
 #define DISPLAY_X 32
 #define DISPLAY_Y 32
-#define MOUSE_ACC 20
 #define EDIT_SPEED 2
 #define MOVE_SPEED 50
 #define MOUSE_SENSI 10.f
@@ -45,6 +44,11 @@
 
 #define BUTT_DEFAULT_SOUND "./ressources/sound.ogg"
 #define BUTT_EXIT_SOUND "./ressources/exit.ogg"
+
+#define DEF_MOUSE_ACC 10
+#define PREC_COLOR sfRed
+static const sfVector2i acc_pos_from = {50, 900};
+static const sfVector2i acc_pos_to = {150, 900};
 
 typedef struct event_input_t
 {
@@ -101,6 +105,7 @@ typedef struct my_sprite_t
 typedef struct my_world_s {
     int **map;
     float zoom;
+    float accuracy;
     sfVector2i scale;
     sfVector2i pos;
     sfVector2i pres_pos;
@@ -169,9 +174,11 @@ list_t *make_list(void);
 int add_one(list_t *list, sfVector2i coords);
 void distroy(list_t *list);
 void my_tree_gest(assets_t *assets, sfVector2f **map, my_world_t *my_world);
-void event_set(sfEvent event, my_world_t *world);
+void event_set(sfEvent event, my_world_t *world, assets_t *assets);
 void display_player(assets_t *assets, sfVector2f **map, my_world_t *my_world);
 void display_something(assets_t *assets, sfVector2f **map,
     my_world_t *my_world);
+void display_precision(float accuracy, assets_t *assets);
+void my_precision(my_world_t *my_world, assets_t *assets);
 
 #endif

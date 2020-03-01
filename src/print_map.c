@@ -71,6 +71,4 @@ void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world)
         }
     display_something(assets, map, my_world);
     draw_water(assets, water_gest(my_world), my_world);
-    refresh_screen(assets);
-    sfRenderWindow_clear(assets->window, sfBlack);
 }

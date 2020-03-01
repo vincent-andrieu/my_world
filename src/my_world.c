@@ -30,13 +30,12 @@ static int end_of_world(sfMusic *song, my_world_t *my_world,
 }
 
 static int game(assets_t *assets, my_world_t **my_world,
-                button_manage_t *button)
+                button_manage_t *button, sfSprite *background)
 {
     sfVector2f **my_map;
 
+    sfRenderWindow_drawSprite(assets->window, background, NULL);
     refresh_struct(button, assets);
-    display_struct(button, assets);
-    display_help_box(button, assets->window);
     if (button_effect(my_world, button, assets) != EXIT_SUCCESS)
         return EXIT_ERROR;
     map_stay_in_window(*my_world);
@@ -46,7 +45,12 @@ static int game(assets_t *assets, my_world_t **my_world,
     edit_map(assets->window, *my_world, my_map);
     draw_twod_map(assets, my_map, *my_world);
     my_tree_gest(assets, my_map, *my_world);
+    display_struct(button, assets);
+    display_help_box(button, assets->window);
+    display_precision((*my_world)->accuracy, assets);
     free_my_map(my_map);
+    refresh_screen(assets);
+    sfRenderWindow_clear(assets->window, sfBlack);
     return EXIT_SUCCESS;
 }
 
@@ -55,20 +59,19 @@ int my_world(assets_t *assets, char *filepath)
     my_world_t *my_world = get_my_world();
     sfMusic *song = start_song();
     button_manage_t *button = get_button_manage();
-    sfSprite *back = sfSprite_create();
-    sfTexture *tex = sfTexture_createFromFile("./ressources/background.jpg",
-                                                NULL);
+    sfSprite *background = sfSprite_create();
 
-    sfSprite_setTexture(back, tex, sfTrue);
-    sfSprite_setScale(back, (sfVector2f) {1, 1.2});
+    sfSprite_setTexture(background,
+        sfTexture_createFromFile("./ressources/background.jpg", NULL), sfTrue);
+    sfSprite_setScale(background, (sfVector2f) {1, 1.2});
     if (!my_world || load_map(&my_world, filepath == NULL ?
     get_input("Loading filepath") : my_strdup(filepath)) == EXIT_ERROR)
         return EXIT_ERROR;
-    while (!does_kill_prog(assets, my_world)) {
-        if (game(assets, &my_world, button) != EXIT_SUCCESS)
+    display_precision(my_world->accuracy, assets);
+    while (!does_kill_prog(assets, my_world))
+        if (game(assets, &my_world, button, background) != EXIT_SUCCESS)
             return EXIT_ERROR;
-        sfRenderWindow_drawSprite(assets->window, back, NULL);
-    }
+    sfSprite_destroy(background);
     if (final_save(my_world, START_SAVE_NBR) == EXIT_ERROR)
         return EXIT_ERROR;
     return end_of_world(song, my_world, button);

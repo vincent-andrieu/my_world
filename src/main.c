@@ -12,12 +12,13 @@
 #include "graph.h"
 #include "my_world.h"
 
-static void event_manage(sfEvent event, my_world_t *my_world)
+static void event_manage(sfEvent event, my_world_t *my_world,
+                        assets_t *assets)
 {
-    if (event.type == sfEvtKeyPressed &&
-        as_seconds(sfClock_getElapsedTime(my_world->clock)) > TIME_BUT) {
+    if ((event.type == sfEvtKeyPressed || sfMouse_isButtonPressed(sfMouseLeft))
+    && as_seconds(sfClock_getElapsedTime(my_world->clock)) > TIME_BUT) {
         my_world->pres_pos = my_world->pos;
-        event_set(event, my_world);
+        event_set(event, my_world, assets);
         sfClock_restart(my_world->clock);
     }
     if (event.type == sfEvtMouseWheelScrolled) {
@@ -39,7 +40,7 @@ bool does_kill_prog(assets_t *assets, my_world_t *my_world)
             sfRenderWindow_close(assets->window);
             return true;
         }
-        event_manage(event, my_world);
+        event_manage(event, my_world, assets);
     }
     return false;
 }

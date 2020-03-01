@@ -35,6 +35,7 @@ static void init_struct_var(my_world_t *my_world)
     my_world->clock = sfClock_create();
     my_world->tools = false;
     my_world->tree = get_sprite();
+    my_world->accuracy = DEF_MOUSE_ACC;
 }
 
 my_world_t *get_my_world(void)
