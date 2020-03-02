@@ -36,8 +36,6 @@ static int game(assets_t *assets, my_world_t **my_world,
 
     sfRenderWindow_drawSprite(assets->window, background, NULL);
     refresh_struct(button, assets);
-    if (button_effect(my_world, button, assets) != EXIT_SUCCESS)
-        return EXIT_ERROR;
     map_stay_in_window(*my_world);
     my_map = create_twod_map((*my_world)->map, *my_world);
     if (!my_map)
@@ -49,6 +47,8 @@ static int game(assets_t *assets, my_world_t **my_world,
     display_help_box(button, assets->window);
     display_precision((*my_world)->accuracy, assets);
     free_my_map(my_map);
+    if (button_effect(my_world, button, assets) != EXIT_SUCCESS)
+        return EXIT_ERROR;
     refresh_screen(assets);
     sfRenderWindow_clear(assets->window, sfBlack);
     return EXIT_SUCCESS;
