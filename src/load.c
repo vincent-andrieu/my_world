@@ -31,6 +31,11 @@ static my_world_t *read_map(FILE *file)
         fclose(file);
         return NULL;
     }
+    if (my_world->scale.y <= 0 || my_world->scale.y >= 200
+        || my_world->scale.x <= 0 || my_world->scale.x >= 200) {
+        fclose(file);
+        return NULL;
+    }
     if (load_map_array(file, my_world) == EXIT_ERROR) {
         fclose(file);
         return NULL;
