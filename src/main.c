@@ -90,6 +90,7 @@ static int prepare_window(sfVideoMode mde, assets_t *assets, char *filepath)
 
 int main(int argc, char **argv)
 {
+    if (MAP_X <= 0 || MAP_X >= 200 || MAP_Y <= 0 || MAP_Y >= 200)
     if (argc >= 2 && !my_strcmp(argv[1], "-h"))
         return usage(EXIT_SUCCESS, argv[0]);
     if (argc > 2) {
