@@ -23,54 +23,45 @@ my_sprite_s get_sprite(void)
     return my_struct;
 }
 
-static sfVector2i get_tree_select(assets_t *assets, sfVector2f **map,
-    my_world_t *world)
+static void get_tree_select(assets_t *assets, sfVector2f **map,
+    my_world_t *world, int (*my_func)(my_world_t *world, sfVector2i coords))
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(assets->window);
 
     for (int y = 0; y < world->scale.y; y++)
         for (int x = 0; x < world->scale.x; x++)
-            if (map[y][x].x - mouse.x > -DEF_MOUSE_ACC
-            && map[y][x].x - mouse.x < DEF_MOUSE_ACC
-            && map[y][x].y - mouse.y > -DEF_MOUSE_ACC
-            && map[y][x].y - mouse.y < DEF_MOUSE_ACC) {
-                return (sfVector2i) {x, y};
+            if (map[y][x].x - mouse.x > -world->accuracy
+            && map[y][x].x - mouse.x < world->accuracy
+            && map[y][x].y - mouse.y > -world->accuracy
+            && map[y][x].y - mouse.y < world->accuracy) {
+                my_func(world, (sfVector2i) {x, y});
             }
-    return (sfVector2i) {-1, -1};
 }
 
-static void destroy_it(list_t *list, sfVector2i coords)
+static int destroy_it(my_world_t *world, sfVector2i coords)
 {
-    list_t *prev = list->next;
+    list_t *prev = world->tree.list;
     list_t *end;
 
     if (!prev)
-        return;
+        return 1;
     end = prev->next;
     while (end) {
         if (end->pos.x == coords.x && end->pos.y == coords.y) {
             prev->next = end->next;
             free(end);
-            return;
+            return 0;
         }
         prev = end;
         end = end->next;
     }
+    return 1;
 }
 
 void my_tree_gest(assets_t *assets, sfVector2f **map, my_world_t *my_world)
 {
-    sfVector2i tree;
-
-    if (sfMouse_isButtonPressed(sfMouseLeft) && my_world->tree.select) {
-        tree = get_tree_select(assets, map, my_world);
-        if (tree.x != -1 && tree.y != -1)
-            if (my_world->map[tree.y][tree.x] > WATER_LEVEL)
-                add_one(my_world->tree.list, tree);
-    }
-    else if (sfMouse_isButtonPressed(sfMouseRight)) {
-        tree = get_tree_select(assets, map, my_world);
-        if (tree.x != -1 && tree.y != -1)
-            destroy_it(my_world->tree.list, tree);
-    }
+    if (sfMouse_isButtonPressed(sfMouseLeft) && my_world->tree.select)
+        get_tree_select(assets, map, my_world, add_one);
+    else if (sfMouse_isButtonPressed(sfMouseRight) && my_world->tree.select)
+        get_tree_select(assets, map, my_world, destroy_it);
 }
