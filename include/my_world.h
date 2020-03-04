@@ -118,7 +118,6 @@ typedef struct my_world_s {
     sfVector2i pos;
     sfVector2i pres_pos;
     textures_t textures;
-    sfClock *clock;
     my_sprite_s tree;
     bool tools;
 } my_world_t;
