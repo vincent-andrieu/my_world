@@ -18,9 +18,9 @@ list_t *make_list(void)
     return start;
 }
 
-int add_one(list_t *list, sfVector2i coords)
+int add_one(my_world_t *my_world, sfVector2i coords)
 {
-    list_t *end = list;
+    list_t *end = my_world->tree.list;
 
     while (end->next)
         end = end->next;

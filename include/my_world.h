@@ -46,7 +46,7 @@
 #define BUTT_DEFAULT_SOUND "./ressources/sound.ogg"
 #define BUTT_EXIT_SOUND "./ressources/exit.ogg"
 
-#define DEF_MOUSE_ACC 10
+#define DEF_MOUSE_ACC 20
 #define PREC_COLOR sfRed
 static const sfVector2i acc_pos_from = {50, 900};
 static const sfVector2i acc_pos_to = {150, 900};
@@ -176,7 +176,7 @@ my_sprite_s get_sprite(void);
 void display_something(assets_t *assets, sfVector2f **map,
     my_world_t *my_world);
 list_t *make_list(void);
-int add_one(list_t *list, sfVector2i coords);
+int add_one(my_world_t *world, sfVector2i coords);
 void distroy(list_t *list);
 void my_tree_gest(assets_t *assets, sfVector2f **map, my_world_t *my_world);
 void event_set(sfEvent event, my_world_t *world, assets_t *assets);
