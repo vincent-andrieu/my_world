@@ -78,7 +78,5 @@ int button_effect(my_world_t **my_world, button_manage_t *button,
         return EXIT_ERROR;
     if (button_save(*my_world, button) == EXIT_ERROR)
         return EXIT_ERROR;
-    refresh_screen(assets);
-    sfRenderWindow_clear(assets->window, sfBlack);
     return EXIT_SUCCESS;
 }
