@@ -131,7 +131,6 @@ void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world);
 void calc_textures(my_world_t *my_world, sfVector2f **map,
                     sfVector2i coord, sfRenderWindow *window);
 sfRenderStates *get_map_texture(int level, textures_t *textures);
-void map_stay_in_window(my_world_t *my_world);
 void edit_map(sfRenderWindow *window,
             my_world_t *my_world, sfVector2f **coords_map);
 sfMusic *start_song(void);
