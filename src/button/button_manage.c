@@ -26,6 +26,10 @@ void display_struct(button_manage_t *button, assets_t *assets)
     button_display(button->save, assets->window);
     button_display(button->tools, assets->window);
     button_display(button->tree, assets->window);
+    button_display(button->angle_x_plus, assets->window);
+    button_display(button->angle_y_plus, assets->window);
+    button_display(button->angle_x_min, assets->window);
+    button_display(button->angle_y_min, assets->window);
 }
 
 void destroy_struct(button_manage_t *button)
@@ -42,7 +46,7 @@ void destroy_struct(button_manage_t *button)
     sfSoundBuffer_destroy(button->restart->sound.buffer);
     sfTexture_destroy(button->exit->help_box.texture);
     sfFont_destroy(button->exit->help_box.font);
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 20; i++) {
         tmp = *(void **)manage;
         sfSprite_destroy(tmp->help_box.sprite);
         sfText_destroy(tmp->help_box.text);
@@ -70,6 +74,10 @@ void refresh_struct(button_manage_t *button, assets_t *assets)
     button_refresh_stat(button->save, assets->window);
     button_refresh_stat(button->tools, assets->window);
     button_refresh_stat(button->tree, assets->window);
+    button_refresh_stat(button->angle_x_plus, assets->window);
+    button_refresh_stat(button->angle_y_plus, assets->window);
+    button_refresh_stat(button->angle_x_min, assets->window);
+    button_refresh_stat(button->angle_y_min, assets->window);
 }
 
 bool button_ispressed(my_button_shape_t *my_button)

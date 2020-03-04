@@ -21,13 +21,8 @@ static sound_s create_sound(char *filepath)
     return my_sound;
 }
 
-int sound_set(button_manage_t *button)
+static void sound_filler(button_manage_t *button, sound_s sound)
 {
-    sound_s sound = create_sound(BUTT_DEFAULT_SOUND);
-
-    button->exit->sound = create_sound(BUTT_EXIT_SOUND);
-    if (!sound.buffer || !button->exit->sound.buffer)
-        return EXIT_ERROR;
     button->restart->sound = sound;
     button->zoom_in->sound = sound;
     button->zoom_out->sound = sound;
@@ -43,5 +38,19 @@ int sound_set(button_manage_t *button)
     button->save->sound = sound;
     button->tools->sound = sound;
     button->tree->sound = sound;
+    button->angle_x_plus->sound = sound;
+    button->angle_y_plus->sound = sound;
+    button->angle_x_min->sound = sound;
+    button->angle_y_min->sound = sound;
+}
+
+int sound_set(button_manage_t *button)
+{
+    sound_s sound = create_sound(BUTT_DEFAULT_SOUND);
+
+    button->exit->sound = create_sound(BUTT_EXIT_SOUND);
+    if (!sound.buffer || !button->exit->sound.buffer)
+        return EXIT_ERROR;
+    sound_filler(button, sound);
     return EXIT_SUCCESS;
 }

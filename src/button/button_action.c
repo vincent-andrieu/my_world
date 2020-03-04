@@ -67,6 +67,7 @@ static void move(my_world_t *my_world, button_manage_t *button)
 int button_effect(my_world_t **my_world, button_manage_t *button,
     assets_t *assets)
 {
+    map_angle_gest(*my_world, button);
     exit_button(button, assets);
     zoom(*my_world, button);
     resize(*my_world, button);

@@ -29,6 +29,7 @@
 #define MOVE_SPEED 50
 #define MOUSE_SENSI 10.f
 #define ZOOM_EFFECT 0.1
+#define SPEED_ANGLE 0.1
 
 #define SNOW_LEVEL 100
 #define STONE_LEVEL 40
@@ -74,6 +75,10 @@ typedef struct button_manage_s
     my_button_shape_t *save;
     my_button_shape_t *tools;
     my_button_shape_t *tree;
+    my_button_shape_t *angle_x_plus;
+    my_button_shape_t *angle_y_plus;
+    my_button_shape_t *angle_x_min;
+    my_button_shape_t *angle_y_min;
 } __attribute__((packed)) button_manage_t;
 
 typedef struct textures_s
@@ -106,6 +111,7 @@ typedef struct my_world_s {
     int **map;
     float zoom;
     float accuracy;
+    sfVector2f angle;
     sfVector2i scale;
     sfVector2i pos;
     sfVector2i pres_pos;
@@ -180,5 +186,6 @@ void display_something(assets_t *assets, sfVector2f **map,
     my_world_t *my_world);
 void display_precision(float accuracy, assets_t *assets);
 void my_precision(my_world_t *my_world, assets_t *assets);
+void map_angle_gest(my_world_t *my_world, button_manage_t *button);
 
 #endif
