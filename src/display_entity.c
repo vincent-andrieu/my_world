@@ -24,6 +24,24 @@ void display_player(assets_t *assets, sfVector2f **map, my_world_t *my_world)
     sfRenderWindow_drawSprite(assets->window, my_world->tree.sprite_jaaj, NULL);
 }
 
+static void display_select(assets_t *assets, sfVector2i pos_map,
+    my_world_t *my_world, sfVector2f pos)
+{
+    if (my_world->map[pos_map.y][pos_map.x] > WATER_LEVEL) {
+        sfSprite_setScale(my_world->tree.sprite,
+            (sfVector2f) {my_world->zoom, my_world->zoom});
+        sfSprite_setPosition(my_world->tree.sprite, pos);
+        sfRenderWindow_drawSprite(assets->window, my_world->tree.sprite, NULL);
+    }
+    else {
+        sfSprite_setScale(my_world->tree.sprite_kelp,
+            (sfVector2f) {my_world->zoom, my_world->zoom});
+        sfSprite_setPosition(my_world->tree.sprite_kelp, pos);
+        sfRenderWindow_drawSprite(assets->window, my_world->tree.sprite_kelp,
+            NULL);
+    }
+}
+
 void display_something(assets_t *assets, sfVector2f **map, my_world_t *my_world)
 {
     sfVector2f pos;
@@ -35,11 +53,7 @@ void display_something(assets_t *assets, sfVector2f **map, my_world_t *my_world)
             pos = map[end->pos.y][end->pos.x];
             pos.x -= my_world->zoom * DISPLAY_X * 0.5;
             pos.y -= my_world->zoom * DISPLAY_Y;
-            sfSprite_setScale(my_world->tree.sprite,
-                (sfVector2f) {my_world->zoom, my_world->zoom});
-            sfSprite_setPosition(my_world->tree.sprite, pos);
-            sfRenderWindow_drawSprite(assets->window, my_world->tree.sprite,
-                NULL);
+            display_select(assets, end->pos, my_world, pos);
         }
         end = end->next;
     }

@@ -101,6 +101,8 @@ typedef struct my_sprite_t
 {
     sfSprite *sprite;
     sfTexture *texture;
+    sfSprite *sprite_kelp;
+    sfTexture *texture_kelp;
     sfSprite *sprite_jaaj;
     sfTexture *texture_jaaj;
     list_t *list;

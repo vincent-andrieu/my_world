@@ -11,6 +11,9 @@ my_sprite_s get_sprite(void)
 {
     my_sprite_s my_struct = {0};
 
+    my_struct.sprite_kelp = sfSprite_create();
+    my_struct.texture_kelp = sfTexture_createFromFile("./ressources/kelp.png", NULL);
+    sfSprite_setTexture(my_struct.sprite_kelp, my_struct.texture_kelp, sfTrue);
     my_struct.sprite = sfSprite_create();
     my_struct.texture = sfTexture_createFromFile("./ressources/tree.png", NULL);
     sfSprite_setTexture(my_struct.sprite, my_struct.texture, sfTrue);
