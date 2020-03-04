@@ -42,15 +42,15 @@ static int game(assets_t *assets, my_world_t **my_world,
         return EXIT_ERROR;
     edit_map(assets->window, *my_world, my_map);
     draw_twod_map(assets, my_map, *my_world);
-    my_tree_gest(assets, my_map, *my_world);
-    display_struct(button, assets);
-    display_help_box(button, assets->window);
-    display_precision((*my_world)->accuracy, assets);
-    free_my_map(my_map);
-    if (button_effect(my_world, button, assets) != EXIT_SUCCESS)
-        return EXIT_ERROR;
-    refresh_screen(assets);
-    sfRenderWindow_clear(assets->window, sfBlack);
+    if (as_seconds(sfClock_getElapsedTime((*my_world)->clock)) > TIME_BUT) {
+        my_tree_gest(assets, my_map, *my_world);
+        display_struct(button, assets);
+        display_help_box(button, assets->window);
+        display_precision((*my_world)->accuracy, assets);
+        free_my_map(my_map);
+        if (button_effect(my_world, button, assets) != EXIT_SUCCESS)
+            return EXIT_ERROR;
+    }
     return EXIT_SUCCESS;
 }
 
