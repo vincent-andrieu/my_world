@@ -42,7 +42,6 @@ static my_world_t *read_map(FILE *file)
     }
     fclose(file);
     my_world->textures = get_textures();
-    my_world->clock = sfClock_create();
     my_world->tree = get_sprite();
     return my_world;
 }

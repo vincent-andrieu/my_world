@@ -32,7 +32,6 @@ static void init_struct_var(my_world_t *my_world)
     my_world->pres_pos = (sfVector2i) {WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4};
     my_world->textures = get_textures();
     my_world->zoom = 0.3;
-    my_world->clock = sfClock_create();
     my_world->tools = false;
     my_world->tree = get_sprite();
     my_world->accuracy = DEF_MOUSE_ACC;
@@ -71,7 +70,6 @@ void my_world_destroy(my_world_t *my_world)
         free(my_world->map[i]);
     free(my_world->map);
     dog_destroy(my_world->dog);
-    sfClock_destroy(my_world->clock);
     distroy(my_world->tree.list);
     sfTexture_destroy(my_world->tree.texture_jaaj);
     sfSprite_destroy(my_world->tree.sprite_jaaj);

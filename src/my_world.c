@@ -39,9 +39,13 @@ static sfSprite *init_background(void)
     return background;
 }
 
-static sfVector2f **game(assets_t *assets, my_world_t **my_world,
-                button_manage_t *button, sfVector2f **my_map)
+static int game(assets_t *assets, my_world_t **my_world,
+                button_manage_t *button)
 {
+    sfVector2f **my_map = create_twod_map((*my_world)->map, *my_world);
+
+    if (my_map == NULL)
+        return EXIT_ERROR;
     refresh_struct(button, assets);
     edit_map(assets->window, *my_world, my_map);
     draw_twod_map(assets, my_map, *my_world);
@@ -50,15 +54,11 @@ static sfVector2f **game(assets_t *assets, my_world_t **my_world,
     display_help_box(button, assets->window);
     display_precision((*my_world)->accuracy, assets);
     if (button_effect(my_world, button, assets) == EXIT_ERROR)
-        return NULL;
-    if (as_seconds(sfClock_getElapsedTime((*my_world)->clock)) > TIME_BUT) {
-        free_my_map(my_map);
-        my_map = create_twod_map((*my_world)->map, *my_world);
-        refresh_screen(assets);
-        sfRenderWindow_clear(assets->window, sfBlack);
-        sfClock_restart((*my_world)->clock);
-    }
-    return my_map;
+        return EXIT_ERROR;
+    refresh_screen(assets);
+    sfRenderWindow_clear(assets->window, sfBlack);
+    free_my_map(my_map);
+    return EXIT_SUCCESS;
 }
 
 int my_world(assets_t *assets, char *filepath)
@@ -67,16 +67,14 @@ int my_world(assets_t *assets, char *filepath)
     sfMusic *song = start_song();
     button_manage_t *button = get_button_manage();
     sfSprite *background = init_background();
-    sfVector2f **my_map = create_twod_map(my_world->map, my_world);
 
-    if (!my_map || !my_world || load_map(&my_world, filepath == NULL ?
+    if (!my_world || load_map(&my_world, filepath == NULL ?
     get_input("Loading filepath") : my_strdup(filepath)) == EXIT_ERROR)
         return EXIT_ERROR;
     display_precision(my_world->accuracy, assets);
     while (!does_kill_prog(assets, my_world)) {
         sfRenderWindow_drawSprite(assets->window, background, NULL);
-        my_map = game(assets, &my_world, button, my_map);
-        if (my_map == NULL)
+        if (game(assets, &my_world, button) == EXIT_ERROR)
             return EXIT_ERROR;
     }
     sfSprite_destroy(background);
