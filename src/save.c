@@ -30,13 +30,14 @@ static int save_map(char *filepath, my_world_t *my_world)
     return EXIT_SUCCESS;
 }
 
-int button_save(my_world_t *my_world, button_manage_t *button)
+int button_save(my_world_t *my_world, button_manage_t *button, bool force)
 {
     char *filepath;
 
-    if (button_ispressed(button->save) && button->save->is_activate) {
+    if (force || (button_ispressed(button->save) && button->save->is_activate)) {
         filepath = get_input("Saving filepath");
-        button->save->is_activate = false;
+        if (button != NULL)
+            button->save->is_activate = false;
         if (filepath[0] == '\0') {
             my_put_error_str("Invalid saving filepath\n");
             return EXIT_FAILURE;

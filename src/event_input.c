@@ -10,7 +10,7 @@
 static void my_combinated(sfEvent event, my_world_t *my_world)
 {
     if (event.key.control && event.key.code == sfKeyS)
-        final_save(my_world, START_SAVE_NBR);
+        button_save(my_world, NULL, true);
     if (event.key.control && event.key.code == sfKeyR)
         reset_map(my_world);
     if (event.key.control && event.key.code == sfKeyUp)
@@ -36,10 +36,10 @@ void event_set(sfEvent evt, my_world_t *wrd, assets_t *assets)
     if (!evt.key.control && evt.key.code == sfKeyZ && wrd->tree.list->pos.x > 0)
         wrd->tree.list->pos.x--;
     if (!evt.key.control && evt.key.code == sfKeyS &&
-        wrd->tree.list->pos.x < wrd->scale.x)
+    wrd->tree.list->pos.x < wrd->scale.x)
         wrd->tree.list->pos.x++;
     if (!evt.key.control && evt.key.code == sfKeyQ &&
-        wrd->tree.list->pos.y < wrd->scale.y)
+    wrd->tree.list->pos.y < wrd->scale.y)
         wrd->tree.list->pos.y++;
     if (!evt.key.control && evt.key.code == sfKeyD && wrd->tree.list->pos.y > 0)
         wrd->tree.list->pos.y--;

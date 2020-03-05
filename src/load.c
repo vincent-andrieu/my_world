@@ -43,6 +43,7 @@ static my_world_t *read_map(FILE *file)
     fclose(file);
     my_world->textures = get_textures();
     my_world->tree = get_sprite();
+    my_world->dog = get_dog();
     return my_world;
 }
 
