@@ -38,6 +38,7 @@ static void init_struct_var(my_world_t *my_world)
     my_world->accuracy = DEF_MOUSE_ACC;
     my_world->angle.x = ANGLE_X;
     my_world->angle.y = ANGLE_Y;
+    my_world->dog = get_dog();
 }
 
 my_world_t *get_my_world(void)
@@ -66,11 +67,10 @@ my_world_t *get_my_world(void)
 
 void my_world_destroy(my_world_t *my_world)
 {
-    if (my_world == NULL || my_world->map == NULL)
-        return;
     for (int i = 0; my_world->map[i]; i++)
         free(my_world->map[i]);
     free(my_world->map);
+    dog_destroy(my_world->dog);
     sfClock_destroy(my_world->clock);
     distroy(my_world->tree.list);
     sfTexture_destroy(my_world->tree.texture_jaaj);

@@ -7,27 +7,44 @@
 
 #include "my_world.h"
 
-void event_set(sfEvent event, my_world_t *world, assets_t *assets)
+static void my_combinated(sfEvent event, my_world_t *my_world)
 {
-    if (event.key.code == sfKeyUp)
-        world->pos.y = world->pos.y - MOVE_SPEED;
-    if (event.key.code == sfKeyDown)
-        world->pos.y = world->pos.y + MOVE_SPEED;
-    if (event.key.code == sfKeyLeft)
-        world->pos.x = world->pos.x - MOVE_SPEED;
-    if (event.key.code == sfKeyRight)
-        world->pos.x = world->pos.x + MOVE_SPEED;
-    if (event.key.code == sfKeyR)
-        reset_map(world);
-    if (event.key.code == sfKeyZ && world->tree.list->pos.x > 0)
-        world->tree.list->pos.x--;
-    if (event.key.code == sfKeyS && world->tree.list->pos.x < world->scale.x)
-        world->tree.list->pos.x++;
-    if (event.key.code == sfKeyQ && world->tree.list->pos.y < world->scale.y)
-        world->tree.list->pos.y++;
-    if (event.key.code == sfKeyD && world->tree.list->pos.y > 0)
-        world->tree.list->pos.y--;
-    my_precision(world, assets);
+    if (event.key.control && event.key.code == sfKeyS)
+        final_save(my_world, START_SAVE_NBR);
+    if (event.key.control && event.key.code == sfKeyR)
+        reset_map(my_world);
+    if (event.key.control && event.key.code == sfKeyUp)
+        my_world->angle.y -= SPEED_ANGLE;
+    if (event.key.control && event.key.code == sfKeyDown)
+        my_world->angle.y += SPEED_ANGLE;
+    if (event.key.control && event.key.code == sfKeyLeft)
+        my_world->angle.x -= SPEED_ANGLE;
+    if (event.key.control && event.key.code == sfKeyRight)
+        my_world->angle.x += SPEED_ANGLE;
+}
+
+void event_set(sfEvent evt, my_world_t *wrd, assets_t *assets)
+{
+    if (!evt.key.control && evt.key.code == sfKeyUp)
+        wrd->pos.y = wrd->pos.y - MOVE_SPEED;
+    if (!evt.key.control && evt.key.code == sfKeyDown)
+        wrd->pos.y = wrd->pos.y + MOVE_SPEED;
+    if (!evt.key.control && evt.key.code == sfKeyLeft)
+        wrd->pos.x = wrd->pos.x - MOVE_SPEED;
+    if (!evt.key.control && evt.key.code == sfKeyRight)
+        wrd->pos.x = wrd->pos.x + MOVE_SPEED;
+    if (!evt.key.control && evt.key.code == sfKeyZ && wrd->tree.list->pos.x > 0)
+        wrd->tree.list->pos.x--;
+    if (!evt.key.control && evt.key.code == sfKeyS &&
+        wrd->tree.list->pos.x < wrd->scale.x)
+        wrd->tree.list->pos.x++;
+    if (!evt.key.control && evt.key.code == sfKeyQ &&
+        wrd->tree.list->pos.y < wrd->scale.y)
+        wrd->tree.list->pos.y++;
+    if (!evt.key.control && evt.key.code == sfKeyD && wrd->tree.list->pos.y > 0)
+        wrd->tree.list->pos.y--;
+    my_precision(wrd, assets);
+    my_combinated(evt, wrd);
 }
 
 void display_precision(float accuracy, assets_t *assets)

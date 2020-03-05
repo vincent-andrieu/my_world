@@ -7,6 +7,25 @@
 
 #include "my_world.h"
 
+static void display_dog(assets_t *assets, sfVector2f **map,
+    my_world_t *my_world)
+{
+    sfVector2f pos = {0};
+
+    dog_finder(my_world);
+    while (!(my_world->dog.pos.y < my_world->scale.y - 1))
+        my_world->dog.pos.y--;
+    while (!(my_world->dog.pos.x < my_world->scale.x - 1))
+        my_world->dog.pos.x--;
+    pos = map[my_world->dog.pos.y][my_world->dog.pos.x];
+    pos.x -= my_world->zoom * DISPLAY_X;
+    pos.y -= my_world->zoom * DISPLAY_Y;
+    sfSprite_setScale(my_world->dog.sprite,
+        (sfVector2f) {my_world->zoom / 2, my_world->zoom / 2});
+    sfSprite_setPosition(my_world->dog.sprite, pos);
+    sfRenderWindow_drawSprite(assets->window, my_world->dog.sprite, NULL);
+}
+
 void display_player(assets_t *assets, sfVector2f **map, my_world_t *my_world)
 {
     sfVector2f pos;
@@ -58,4 +77,5 @@ void display_something(assets_t *assets, sfVector2f **map, my_world_t *my_world)
         end = end->next;
     }
     display_player(assets, map, my_world);
+    display_dog(assets, map, my_world);
 }

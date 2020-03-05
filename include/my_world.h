@@ -109,6 +109,15 @@ typedef struct my_sprite_t
     bool select;
 } my_sprite_s;
 
+typedef struct dog_s
+{
+    sfVector2i pos;
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfClock *clock;
+    bool status;
+} dog_t;
+
 typedef struct my_world_s {
     int **map;
     float zoom;
@@ -121,6 +130,7 @@ typedef struct my_world_s {
     sfClock *clock;
     my_sprite_s tree;
     bool tools;
+    dog_t dog;
 } my_world_t;
 
 int usage(int exit_value, char *binary_name);
@@ -188,5 +198,8 @@ void display_something(assets_t *assets, sfVector2f **map,
 void display_precision(float accuracy, assets_t *assets);
 void my_precision(my_world_t *my_world, assets_t *assets);
 void map_angle_gest(my_world_t *my_world, button_manage_t *button);
+dog_t get_dog(void);
+void dog_destroy(dog_t dog);
+void dog_finder(my_world_t *my_world);
 
 #endif
