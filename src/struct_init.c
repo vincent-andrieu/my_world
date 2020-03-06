@@ -73,6 +73,8 @@ void my_world_destroy(my_world_t *my_world)
     distroy(my_world->tree.list);
     sfTexture_destroy(my_world->tree.texture_jaaj);
     sfSprite_destroy(my_world->tree.sprite_jaaj);
+    sfTexture_destroy(my_world->tree.texture_fish);
+    sfSprite_destroy(my_world->tree.sprite_fish);
     sfTexture_destroy(my_world->tree.texture);
     sfSprite_destroy(my_world->tree.sprite);
     sfTexture_destroy(my_world->tree.texture_kelp);

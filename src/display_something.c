@@ -21,6 +21,10 @@ my_sprite_s get_sprite(void)
     my_struct.texture_jaaj =
     sfTexture_createFromFile("./ressources/player.jpg", NULL);
     sfSprite_setTexture(my_struct.sprite_jaaj, my_struct.texture_jaaj, sfTrue);
+    my_struct.sprite_fish = sfSprite_create();
+    my_struct.texture_fish =
+    sfTexture_createFromFile("./ressources/fish.png", NULL);
+    sfSprite_setTexture(my_struct.sprite_fish, my_struct.texture_fish, sfTrue);
     my_struct.list = make_list();
     my_struct.select = false;
     return my_struct;

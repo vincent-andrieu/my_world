@@ -105,6 +105,8 @@ typedef struct my_sprite_t
     sfTexture *texture_kelp;
     sfSprite *sprite_jaaj;
     sfTexture *texture_jaaj;
+    sfSprite *sprite_fish;
+    sfTexture *texture_fish;
     list_t *list;
     bool select;
 } my_sprite_s;
@@ -191,7 +193,8 @@ int add_one(my_world_t *world, sfVector2i coords);
 void distroy(list_t *list);
 void my_tree_gest(assets_t *assets, sfVector2f **map, my_world_t *my_world);
 void event_set(sfEvent event, my_world_t *world, assets_t *assets);
-void display_player(assets_t *assets, sfVector2f **map, my_world_t *my_world);
+void display_player(sfRenderWindow *window, sfVector2f **map,
+                    my_world_t *my_world);
 void display_something(assets_t *assets, sfVector2f **map,
     my_world_t *my_world);
 void display_precision(float accuracy, assets_t *assets);

@@ -26,7 +26,8 @@ static void display_dog(assets_t *assets, sfVector2f **map,
     sfRenderWindow_drawSprite(assets->window, my_world->dog.sprite, NULL);
 }
 
-void display_player(assets_t *assets, sfVector2f **map, my_world_t *my_world)
+void display_player(sfRenderWindow *window, sfVector2f **map,
+                    my_world_t *my_world)
 {
     sfVector2f pos;
 
@@ -40,7 +41,14 @@ void display_player(assets_t *assets, sfVector2f **map, my_world_t *my_world)
     sfSprite_setScale(my_world->tree.sprite_jaaj,
         (sfVector2f) {my_world->zoom / 2, my_world->zoom / 2});
     sfSprite_setPosition(my_world->tree.sprite_jaaj, pos);
-    sfRenderWindow_drawSprite(assets->window, my_world->tree.sprite_jaaj, NULL);
+    sfSprite_setScale(my_world->tree.sprite_fish,
+        (sfVector2f) {my_world->zoom / 2, my_world->zoom / 2});
+    sfSprite_setPosition(my_world->tree.sprite_fish, pos);
+    if (my_world->map[my_world->tree.list->pos.y][my_world->tree.list->pos.x]
+    > WATER_LEVEL)
+        sfRenderWindow_drawSprite(window, my_world->tree.sprite_jaaj, NULL);
+    else
+        sfRenderWindow_drawSprite(window, my_world->tree.sprite_fish, NULL);
 }
 
 static void display_select(assets_t *assets, sfVector2i pos_map,
@@ -76,6 +84,6 @@ void display_something(assets_t *assets, sfVector2f **map, my_world_t *my_world)
         }
         end = end->next;
     }
-    display_player(assets, map, my_world);
+    display_player(assets->window, map, my_world);
     display_dog(assets, map, my_world);
 }
