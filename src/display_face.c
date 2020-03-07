@@ -8,25 +8,25 @@
 #include <math.h>
 #include "my_world.h"
 
-void display_end(proj_cube_t cube, assets_t *assets, my_world_t *world)
+void display_end(proj_cube_t cube, assets_t *tool, my_world_t *easy)
 {
-    sfVertexArray *line;
+    sfVertexArray *li;
 
-    if (sin(world->angle.y) > 0) {
-        line = display_texture(&cube.h, &cube.f, &cube.e);
-        sfRenderWindow_drawVertexArray(assets->window, line, &world->textures.grass);
-        sfVertexArray_destroy(line);
-        line = display_texture(&cube.h, &cube.g, &cube.e);
-        sfRenderWindow_drawVertexArray(assets->window, line, &world->textures.grass);
-        sfVertexArray_destroy(line);
+    if (sin(easy->angle.y) > 0) {
+        li = display_texture(&cube.h, &cube.f, &cube.e);
+        sfRenderWindow_drawVertexArray(tool->window, li, &easy->textures.grass);
+        sfVertexArray_destroy(li);
+        li = display_texture(&cube.h, &cube.g, &cube.e);
+        sfRenderWindow_drawVertexArray(tool->window, li, &easy->textures.grass);
+        sfVertexArray_destroy(li);
     }
     else {
-        line = display_texture(&cube.a, &cube.b, &cube.c);
-        sfRenderWindow_drawVertexArray(assets->window, line, &world->textures.water);
-        sfVertexArray_destroy(line);
-        line = display_texture(&cube.a, &cube.d, &cube.c);
-        sfRenderWindow_drawVertexArray(assets->window, line, &world->textures.water);
-        sfVertexArray_destroy(line);
+        li = display_texture(&cube.a, &cube.b, &cube.c);
+        sfRenderWindow_drawVertexArray(tool->window, li, &easy->textures.water);
+        sfVertexArray_destroy(li);
+        li = display_texture(&cube.a, &cube.d, &cube.c);
+        sfRenderWindow_drawVertexArray(tool->window, li, &easy->textures.water);
+        sfVertexArray_destroy(li);
     }
 }
 
