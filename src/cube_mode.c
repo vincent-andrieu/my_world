@@ -38,93 +38,39 @@ static proj_cube_t get_cube_iso(cube_t cube, my_world_t *my_world)
     return my_cube;
 }
 
+static void draw_seg(assets_t *assets, sfVector2f one, sfVector2f two,
+    sfColor color)
+{
+    sfVertexArray *line = create_edge(&one, &two, color);
+
+    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
+    sfVertexArray_destroy(line);
+}
+
+static void print_cube(assets_t *assets, proj_cube_t cube)
+{
+    draw_seg(assets, cube.a, cube.b, sfWhite);
+    draw_seg(assets, cube.b, cube.c, sfWhite);
+    draw_seg(assets, cube.c, cube.d, sfWhite);
+    draw_seg(assets, cube.d, cube.a, sfWhite);
+    draw_seg(assets, cube.h, cube.g, sfWhite);
+    draw_seg(assets, cube.g, cube.e, sfWhite);
+    draw_seg(assets, cube.e, cube.f, sfWhite);
+    draw_seg(assets, cube.f, cube.h, sfWhite);
+    draw_seg(assets, cube.a, cube.e, sfWhite);
+    draw_seg(assets, cube.b, cube.f, sfWhite);
+    draw_seg(assets, cube.c, cube.h, sfWhite);
+    draw_seg(assets, cube.d, cube.g, sfWhite);
+}
+
 void display_my_entity(assets_t *assets, my_world_t *my_world)
 {
-    cube_t cube_coord = get_entity();
-    proj_cube_t cube = get_cube_iso(cube_coord, my_world);
-    sfVertexArray *line;
+    proj_cube_t cube = get_cube_iso(get_entity(), my_world);
 
-    line = create_edge(&cube.a, &cube.b, sfWhite);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-    line = create_edge(&cube.b, &cube.c, sfWhite);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-    line = create_edge(&cube.c, &cube.d, sfWhite);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-    line = create_edge(&cube.d, &cube.a, sfWhite);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-
-    line = create_edge(&cube.h, &cube.g, sfWhite);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-    line = create_edge(&cube.g, &cube.e, sfWhite);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-    line = create_edge(&cube.e, &cube.f, sfWhite);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-    line = create_edge(&cube.f, &cube.h, sfWhite);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-
-    line = create_edge(&cube.a, &cube.e, sfBlue);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-    line = create_edge(&cube.b, &cube.f, sfRed);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-    line = create_edge(&cube.c, &cube.h, sfGreen);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-    line = create_edge(&cube.d, &cube.g, sfMagenta);
-    sfRenderWindow_drawVertexArray(assets->window, line, NULL);
-    sfVertexArray_destroy(line);
-
-    if (cos(my_world->angle.x) > 0) {
-        line = display_texture(&cube.b, &cube.f, &cube.c);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.snow);
-        sfVertexArray_destroy(line);
-        line = display_texture(&cube.c, &cube.f, &cube.h);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.snow);
-        sfVertexArray_destroy(line);
-        line = display_texture(&cube.c, &cube.h, &cube.d);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.stone);
-        sfVertexArray_destroy(line);
-        line = display_texture(&cube.h, &cube.g, &cube.d);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.stone);
-        sfVertexArray_destroy(line);
-    }
-    else {
-        line = display_texture(&cube.d, &cube.g, &cube.h);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.dirt);
-        sfVertexArray_destroy(line);
-        line = display_texture(&cube.d, &cube.h, &cube.c);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.dirt);
-        sfVertexArray_destroy(line);
-        line = display_texture(&cube.f, &cube.c, &cube.b);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.sand);
-        sfVertexArray_destroy(line);
-        line = display_texture(&cube.f, &cube.c, &cube.h);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.sand);
-        sfVertexArray_destroy(line);
-    }
-    if (sin(my_world->angle.y) > 0) {
-        line = display_texture(&cube.h, &cube.f, &cube.e);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.grass);
-        sfVertexArray_destroy(line);
-        line = display_texture(&cube.h, &cube.g, &cube.e);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.grass);
-        sfVertexArray_destroy(line);
-    }
-    else {
-        line = display_texture(&cube.a, &cube.b, &cube.c);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.water);
-        sfVertexArray_destroy(line);
-        line = display_texture(&cube.a, &cube.d, &cube.c);
-        sfRenderWindow_drawVertexArray(assets->window, line, &my_world->textures.water);
-        sfVertexArray_destroy(line);
-    }
+    print_cube(assets, cube);
+    if (cos(my_world->angle.x) > 0)
+        display_face_one(cube, assets, my_world);
+    else
+        display_face_two(cube, assets, my_world);
+    display_end(cube, assets, my_world);
 }

@@ -38,6 +38,7 @@ SRC	=	src/button/shape_button.c 	\
 		src/dog.c 	\
 		src/cube.c 	\
 		src/cube_mode.c 	\
+		src/display_face.c 	\
 		src/smooth_map.c
 
 OBJ	=	$(SRC:.c=.o)
