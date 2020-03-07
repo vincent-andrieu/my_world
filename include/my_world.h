@@ -165,6 +165,7 @@ typedef struct my_world_s {
     textures_t textures;
     my_sprite_s tree;
     bool tools;
+    bool mode;
     dog_t dog;
 } my_world_t;
 
@@ -248,5 +249,7 @@ sfVertexArray *create_edge(sfVector2f *point1, sfVector2f *point2,
 void display_end(proj_cube_t cube, assets_t *assets, my_world_t *world);
 void display_face_one(proj_cube_t cube, assets_t *tools, my_world_t *world);
 void display_face_two(proj_cube_t cube, assets_t *assets, my_world_t *world);
+void display_my_entity(assets_t *assets, my_world_t *my_world);
+sfSprite *init_background(void);
 
 #endif

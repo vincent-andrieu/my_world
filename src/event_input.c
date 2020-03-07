@@ -21,6 +21,8 @@ static void my_combinated(sfEvent event, my_world_t *my_world)
         my_world->angle.x -= SPEED_ANGLE;
     if (event.key.control && event.key.code == sfKeyRight)
         my_world->angle.x += SPEED_ANGLE;
+    if (event.key.control && event.key.code == sfKeyM)
+        my_world->mode = (my_world->mode) ? false : true;
 }
 
 void event_set(sfEvent evt, my_world_t *wrd, assets_t *assets)

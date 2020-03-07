@@ -33,6 +33,7 @@ static void init_struct_var(my_world_t *my_world)
     my_world->textures = get_textures();
     my_world->zoom = 0.3;
     my_world->tools = false;
+    my_world->mode = true;
     my_world->tree = get_sprite();
     my_world->accuracy = DEF_MOUSE_ACC;
     my_world->angle.x = ANGLE_X;

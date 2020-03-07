@@ -29,37 +29,37 @@ static int end_of_world(sfMusic *song, my_world_t *my_world,
     return EXIT_SUCCESS;
 }
 
-static sfSprite *init_background(void)
-{
-    sfSprite *background = sfSprite_create();
-
-    sfSprite_setTexture(background,
-        sfTexture_createFromFile("./ressources/background.jpg", NULL), sfTrue);
-    sfSprite_setScale(background, (sfVector2f) {1, 1.2});
-    return background;
-}
-
-static int game(assets_t *assets, my_world_t **my_world,
-                button_manage_t *button)
+static int world_manage(assets_t *assets, my_world_t **my_world)
 {
     sfVector2f **my_map = create_twod_map((*my_world)->map, *my_world);
 
     if (my_map == NULL)
         return EXIT_ERROR;
-    refresh_struct(button, assets);
     edit_map(assets->window, *my_world, my_map);
     draw_twod_map(assets, my_map, *my_world);
     my_tree_gest(assets, my_map, *my_world);
-    display_struct(button, assets);
-    display_help_box(button, assets->window);
     display_precision((*my_world)->accuracy, assets);
-    display_my_cube(assets, *my_world);
-    //display_my_entity(assets, my_world);
+    free_my_map(my_map);
+    return 0;
+}
+
+static int game(assets_t *assets, my_world_t **my_world,
+                button_manage_t *button)
+{
+    refresh_struct(button, assets);
+    display_help_box(button, assets->window);
+    if ((*my_world)->mode) {
+        if (world_manage(assets, my_world) == EXIT_ERROR)
+            return EXIT_ERROR;
+    }
+    else
+        display_my_entity(assets, *my_world);
+    display_struct(button, assets);
     if (button_effect(my_world, button, assets) == EXIT_ERROR)
         return EXIT_ERROR;
+    display_my_cube(assets, *my_world);
     refresh_screen(assets);
     sfRenderWindow_clear(assets->window, sfBlack);
-    free_my_map(my_map);
     return EXIT_SUCCESS;
 }
 
