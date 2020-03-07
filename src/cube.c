@@ -23,33 +23,34 @@ static cube_t get_cube(void)
     return my_cube;
 }
 
-static sfVector2f project_cube(sfVector3i coord, my_world_t *my_world)
+sfVector2f project_cube(sfVector3i coord, my_world_t *my_world,
+    sfVector2i pos, float zoom)
 {
     sfVector2f my_2d_vector = {0};
 
-    my_2d_vector.x = cos(my_world->angle.x) * coord.x - cos(my_world->angle.x) *
-    coord.y + POS_X_AXES;
-    my_2d_vector.y = sin(my_world->angle.y) * coord.y + sin(my_world->angle.y) *
-    coord.x - coord.z + POS_Y_AXES;
+    my_2d_vector.x = cos(my_world->angle.x) * (coord.x * zoom) -
+    cos(my_world->angle.x) * (coord.y * zoom) + pos.x;
+    my_2d_vector.y = sin(my_world->angle.y) * (coord.y * zoom) +
+    sin(my_world->angle.y) * (coord.x * zoom) - (coord.z * zoom) + pos.y;
     return my_2d_vector;
 }
 
-static proj_cube_t get_cube_iso(cube_t cube, my_world_t *my_world)
+static proj_cube_t get_axes_iso(cube_t cube, my_world_t *world)
 {
     proj_cube_t my_cube = {0};
 
-    my_cube.a = project_cube(cube.a, my_world);
-    my_cube.b = project_cube(cube.b, my_world);
-    my_cube.c = project_cube(cube.c, my_world);
-    my_cube.d = project_cube(cube.d, my_world);
-    my_cube.e = project_cube(cube.e, my_world);
-    my_cube.f = project_cube(cube.f, my_world);
-    my_cube.g = project_cube(cube.g, my_world);
-    my_cube.h = project_cube(cube.h, my_world);
+    my_cube.a = project_cube(cube.a, world, (sfVector2i) {X_AXES, Y_AXES}, 1);
+    my_cube.b = project_cube(cube.b, world, (sfVector2i) {X_AXES, Y_AXES}, 1);
+    my_cube.c = project_cube(cube.c, world, (sfVector2i) {X_AXES, Y_AXES}, 1);
+    my_cube.d = project_cube(cube.d, world, (sfVector2i) {X_AXES, Y_AXES}, 1);
+    my_cube.e = project_cube(cube.e, world, (sfVector2i) {X_AXES, Y_AXES}, 1);
+    my_cube.f = project_cube(cube.f, world, (sfVector2i) {X_AXES, Y_AXES}, 1);
+    my_cube.g = project_cube(cube.g, world, (sfVector2i) {X_AXES, Y_AXES}, 1);
+    my_cube.h = project_cube(cube.h, world, (sfVector2i) {X_AXES, Y_AXES}, 1);
     return my_cube;
 }
 
-static sfVertexArray *create_edge(sfVector2f *point1, sfVector2f *point2,
+sfVertexArray *create_edge(sfVector2f *point1, sfVector2f *point2,
     sfColor color)
 {
     sfVertexArray *vertex_array = sfVertexArray_create();
@@ -65,7 +66,7 @@ static sfVertexArray *create_edge(sfVector2f *point1, sfVector2f *point2,
 void display_my_cube(assets_t *assets, my_world_t *my_world)
 {
     cube_t cube_coord = get_cube();
-    proj_cube_t cube = get_cube_iso(cube_coord, my_world);
+    proj_cube_t cube = get_axes_iso(cube_coord, my_world);
     sfVertexArray *line;
 
     line = create_edge(&cube.a, &cube.b, sfRed);

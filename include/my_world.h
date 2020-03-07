@@ -51,8 +51,8 @@
 static const sfVector2i acc_pos_from = {50, 900};
 static const sfVector2i acc_pos_to = {150, 900};
 
-#define POS_X_AXES 100
-#define POS_Y_AXES 120
+#define X_AXES 100
+#define Y_AXES 120
 
 typedef struct sfVector3i_s
 {
@@ -241,5 +241,9 @@ void dog_finder(my_world_t *my_world);
 sfVertexArray *display_texture(sfVector2f *point1, sfVector2f *point2,
     sfVector2f *point3);
 void display_my_cube(assets_t *assets, my_world_t *my_world);
+sfVector2f project_cube(sfVector3i coord, my_world_t *my_world,
+    sfVector2i pos, float zoom);
+sfVertexArray *create_edge(sfVector2f *point1, sfVector2f *point2,
+    sfColor color);
 
 #endif

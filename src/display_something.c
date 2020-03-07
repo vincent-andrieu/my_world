@@ -64,11 +64,12 @@ static int destroy_it(my_world_t *world, sfVector2i coords)
     }
     return 1;
 }
-
+void display_my_entity(assets_t *assets, my_world_t *my_world);
 void my_tree_gest(assets_t *assets, sfVector2f **map, my_world_t *my_world)
 {
     if (sfMouse_isButtonPressed(sfMouseLeft) && my_world->tree.select)
         get_tree_select(assets, map, my_world, add_one);
     else if (sfMouse_isButtonPressed(sfMouseRight) && my_world->tree.select)
         get_tree_select(assets, map, my_world, destroy_it);
+    display_my_entity(assets, my_world);
 }
