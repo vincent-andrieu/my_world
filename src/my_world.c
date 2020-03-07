@@ -53,6 +53,7 @@ static int game(assets_t *assets, my_world_t **my_world,
     display_struct(button, assets);
     display_help_box(button, assets->window);
     display_precision((*my_world)->accuracy, assets);
+    display_my_cube(assets, *my_world);
     if (button_effect(my_world, button, assets) == EXIT_ERROR)
         return EXIT_ERROR;
     refresh_screen(assets);

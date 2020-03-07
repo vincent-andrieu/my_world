@@ -7,7 +7,7 @@
 
 #include "my_world.h"
 
-static sfVertexArray *display_texture(sfVector2f *point1, sfVector2f *point2,
+sfVertexArray *display_texture(sfVector2f *point1, sfVector2f *point2,
     sfVector2f *point3)
 {
     sfVertexArray *vertex_array = sfVertexArray_create();

@@ -51,6 +51,40 @@
 static const sfVector2i acc_pos_from = {50, 900};
 static const sfVector2i acc_pos_to = {150, 900};
 
+#define POS_X_AXES 100
+#define POS_Y_AXES 120
+
+typedef struct sfVector3i_s
+{
+    int x;
+    int y;
+    int z;
+} sfVector3i;
+
+typedef struct cube_s
+{
+    sfVector3i a;
+    sfVector3i b;
+    sfVector3i c;
+    sfVector3i d;
+    sfVector3i e;
+    sfVector3i f;
+    sfVector3i g;
+    sfVector3i h;
+} cube_t;
+
+typedef struct proj_cube_s
+{
+    sfVector2f a;
+    sfVector2f b;
+    sfVector2f c;
+    sfVector2f d;
+    sfVector2f e;
+    sfVector2f f;
+    sfVector2f g;
+    sfVector2f h;
+} proj_cube_t;
+
 typedef struct event_input_t
 {
     sfKeyCode code;
@@ -203,5 +237,9 @@ void map_angle_gest(my_world_t *my_world, button_manage_t *button);
 dog_t get_dog(void);
 void dog_destroy(dog_t dog);
 void dog_finder(my_world_t *my_world);
+
+sfVertexArray *display_texture(sfVector2f *point1, sfVector2f *point2,
+    sfVector2f *point3);
+void display_my_cube(assets_t *assets, my_world_t *my_world);
 
 #endif
