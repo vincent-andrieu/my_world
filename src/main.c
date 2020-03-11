@@ -89,6 +89,16 @@ static int prepare_window(sfVideoMode mde, assets_t *assets, char *filepath)
 
 int main(int argc, char **argv)
 {
+    char *desc;
+
+    if (argc == 2 && my_strcmp(argv[1], "-h") == 0) {
+        desc = get_map("./my_world.description");
+        my_putstr(desc);
+        if (!desc)
+            return EXIT_ERROR;
+        free(desc);
+        return EXIT_SUCCESS;
+    }
     if (MAP_X <= 0 || MAP_X >= 200 || MAP_Y <= 0 || MAP_Y >= 200)
         return 84;
     if (argc >= 2 && !my_strcmp(argv[1], "-h"))

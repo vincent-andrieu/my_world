@@ -1,0 +1,20 @@
+my_world built by Vincent Andrieu and Sullivan Geslot.
+
+different input :
+up : move map up
+down : move map down
+left : move map left
+right : move map right
+ctrl + up : edit map angle
+ctrl + down : edit map angle
+ctrl + left : edit map angle
+ctrl + right : edit map angle
+ctrl + m : change mode
+ctrl + s : save map
+ctrl + r : map reset
+z : move player up
+q : move player left
+s : move player down
+d : move player right
+mouse click : map edit
+mouse scroll : zoom
