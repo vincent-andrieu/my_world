@@ -252,5 +252,6 @@ void display_face_two(proj_cube_t cube, assets_t *assets, my_world_t *world);
 void display_my_entity(assets_t *assets, my_world_t *my_world);
 sfSprite *init_background(void);
 char *get_map(const char *filepath);
+void map_gen(my_world_t *my_world);
 
 #endif

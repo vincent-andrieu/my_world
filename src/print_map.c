@@ -74,3 +74,14 @@ void draw_twod_map(assets_t *assets, sfVector2f **map, my_world_t *my_world)
     display_something(assets, map, my_world);
     draw_water(assets, water_gest(my_world), my_world);
 }
+
+void map_gen(my_world_t *my_world)
+{
+    int hash_tab[256];
+
+    hash_generate(hash_tab);
+    for (int y = 0; y < my_world->scale.y; y++)
+        for (int x = 0; x < my_world->scale.x; x++)
+            my_world->map[y][x] = perlin_revenge(x, y, hash_tab);
+    smooth_map(my_world->map);
+}
