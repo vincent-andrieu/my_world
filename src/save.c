@@ -34,7 +34,8 @@ int button_save(my_world_t *my_world, button_manage_t *button, bool force)
 {
     char *filepath;
 
-    if (force || (button_ispressed(button->save) && button->save->is_activate)) {
+    if (force
+    || (button_ispressed(button->save) && button->save->is_activate)) {
         filepath = get_input("Saving filepath");
         if (button != NULL)
             button->save->is_activate = false;
