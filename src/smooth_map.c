@@ -15,26 +15,30 @@ bool already_exist(int *tab, int value, int max)
     return false;
 }
 
-static bool check_diff(int **map, sfVector2i from, sfVector2i to)
+static bool check_diff(my_world_t *my_world, sfVector2i from, sfVector2i to)
 {
-    int diff = map[from.y][from.x] - map[to.y][to.x];
+    int diff = my_world->map[from.y][from.x] - my_world->map[to.y][to.x];
 
     if ((diff < 0 ? -diff : diff) > 35) {
-        map[from.y][from.x] = (map[from.y][from.x] + map[to.y][to.x]) / 2;
-        map[to.y][to.x] = (map[from.y][from.x] + map[to.y][to.x]) / 2;
-        smooth_map(map);
+        my_world->map[from.y][from.x]
+            = (my_world->map[from.y][from.x] + my_world->map[to.y][to.x]) / 2;
+        my_world->map[to.y][to.x]
+            = (my_world->map[from.y][from.x] + my_world->map[to.y][to.x]) / 2;
+        smooth_map(my_world);
         return true;
     }
     return false;
 }
 
-void smooth_map(int **map)
+void smooth_map(my_world_t *my_world)
 {
-    for (int y = 0; y < MAP_Y - 1; y++)
-        for (int x = 0; x < MAP_X - 1; x++)
-            if (check_diff(map, (sfVector2i) {y, x}, (sfVector2i) {y + 1, x})
-            || check_diff(map, (sfVector2i) {y, x}, (sfVector2i) {y, x + 1})) {
-                smooth_map(map);
+    for (int y = 0; y < my_world->scale.x - 1; y++)
+        for (int x = 0; x < my_world->scale.y - 1; x++)
+            if (check_diff(my_world, (sfVector2i) {y, x},
+                            (sfVector2i) {y + 1, x})
+            || check_diff(my_world, (sfVector2i) {y, x},
+                            (sfVector2i) {y, x + 1})) {
+                smooth_map(my_world);
                 return;
             }
 }

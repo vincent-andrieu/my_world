@@ -61,7 +61,7 @@ my_world_t *get_my_world(void)
         for (int x = 0; x < MAP_X; x++)
             my_world->map[y][x] = perlin_revenge(x, y, hash_tab);
     }
-    smooth_map(my_world->map);
+    smooth_map(my_world);
     return my_world;
 }
 

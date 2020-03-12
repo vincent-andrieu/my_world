@@ -83,5 +83,5 @@ void map_gen(my_world_t *my_world)
     for (int y = 0; y < my_world->scale.y; y++)
         for (int x = 0; x < my_world->scale.x; x++)
             my_world->map[y][x] = perlin_revenge(x, y, hash_tab);
-    smooth_map(my_world->map);
+    smooth_map(my_world);
 }
