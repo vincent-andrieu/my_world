@@ -49,7 +49,7 @@ static int show_window(assets_t *assets, char *filepath)
     sfEvent event;
     int exit_value;
 
-    srand(time(NULL));
+    srand(my_time());
     exit_value = my_world(assets, filepath);
     while (sfRenderWindow_pollEvent(assets->window, &event))
         if (event.type == sfEvtClosed
