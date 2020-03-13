@@ -7,13 +7,11 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include <time.h>
 #include <math.h>
 #include "my_world.h"
 
 void hash_generate(int *tab)
 {
-    srand(time(NULL));
     for (int i = 0; i < 256; i++)
         do
             tab[i] = rand() % 256;
