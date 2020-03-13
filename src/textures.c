@@ -76,16 +76,6 @@ sfRenderStates *get_map_texture(int level, textures_t *textures)
     return &textures->snow;
 }
 
-sfRenderStates *test(int level, textures_t *textures)
-{
-    return NULL;
-}
-
-void test_two(int level, textures_t *textures)
-{
-    return;
-}
-
 void water_textures(my_world_t *my_world, sfVector2f **map,
                     sfVector2i coord, sfRenderWindow *window)
 {
