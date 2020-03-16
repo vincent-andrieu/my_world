@@ -185,8 +185,6 @@ sfMusic *start_song(void);
 void song_destroy(sfMusic *song);
 void reset_map(my_world_t *my_world);
 void resize(my_world_t *my_world, button_manage_t *button);
-void put_float(int fd, double nbr);
-void my_put_fdnbr(int fd, int nb);
 textures_t get_textures(void);
 
 button_manage_t *get_button_manage(void);

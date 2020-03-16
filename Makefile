@@ -23,8 +23,6 @@ SRC	=	src/button/shape_button.c 	\
 		src/edit_map.c 	\
 		src/map_resize.c 	\
 		src/move_map.c 	\
-		src/manage_floats.c 	\
-		src/my_put_fdnbr.c 	\
 		src/input.c 	\
 		src/load.c 	\
 		src/save.c 	\
