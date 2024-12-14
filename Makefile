@@ -48,14 +48,14 @@ NAME	=	my_world
 CFLAGS	+=	-I include -Wall -Wextra
 LDFLAGS +=	-L lib/my -lmy -L lib/graph -lgraph -lm
 
-CC	=	gcc -l csfml-graphics -l csfml-system -l csfml-audio -l csfml-window
+CC	=	gcc
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
 	make -C lib/my/
 	make -C lib/graph/
-	mkdir -p SAVES;$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
+	mkdir -p SAVES;$(CC) $(OBJ) -o $(NAME) $(LDFLAGS) -l csfml-graphics -l csfml-system -l csfml-audio -l csfml-window
 
 clean:
 	rm -f $(OBJ)
